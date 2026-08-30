@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>QSBS Practical — Descriptive Data Analysis</title>
+<title>QSBS Practical 1a — Descriptive Data Analysis</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -85,17 +85,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#getting-started" id="toc-getting-started" class="nav-link active" data-scroll-target="#getting-started">Getting started</a></li>
-  <li><a href="#compact-command-reference" id="toc-compact-command-reference" class="nav-link" data-scroll-target="#compact-command-reference">Compact command reference</a>
-  <ul class="collapse">
-  <li><a href="#exercise-1" id="toc-exercise-1" class="nav-link" data-scroll-target="#exercise-1">exercise 1</a></li>
-  <li><a href="#exercise-2" id="toc-exercise-2" class="nav-link" data-scroll-target="#exercise-2">exercise 2</a></li>
-  <li><a href="#exercise-3" id="toc-exercise-3" class="nav-link" data-scroll-target="#exercise-3">exercise 3</a></li>
-  <li><a href="#exercise-4" id="toc-exercise-4" class="nav-link" data-scroll-target="#exercise-4">exercise 4</a></li>
-  <li><a href="#exercise-5" id="toc-exercise-5" class="nav-link" data-scroll-target="#exercise-5">exercise 5</a></li>
-  <li><a href="#exercise-6" id="toc-exercise-6" class="nav-link" data-scroll-target="#exercise-6">exercise 6</a></li>
-  <li><a href="#exercise-7" id="toc-exercise-7" class="nav-link" data-scroll-target="#exercise-7">exercise 7</a></li>
-  <li><a href="#exercise-8" id="toc-exercise-8" class="nav-link" data-scroll-target="#exercise-8">exercise 8</a></li>
-  </ul></li>
+  <li><a href="#compact-command-reference" id="toc-compact-command-reference" class="nav-link" data-scroll-target="#compact-command-reference">Compact command reference</a></li>
+  <li><a href="#exercise-1" id="toc-exercise-1" class="nav-link" data-scroll-target="#exercise-1">Exercise 1</a></li>
+  <li><a href="#exercise-2" id="toc-exercise-2" class="nav-link" data-scroll-target="#exercise-2">Exercise 2</a></li>
+  <li><a href="#exercise-3" id="toc-exercise-3" class="nav-link" data-scroll-target="#exercise-3">Exercise 3</a></li>
+  <li><a href="#exercise-4" id="toc-exercise-4" class="nav-link" data-scroll-target="#exercise-4">Exercise 4</a></li>
+  <li><a href="#exercise-5" id="toc-exercise-5" class="nav-link" data-scroll-target="#exercise-5">Exercise 5</a></li>
+  <li><a href="#exercise-6" id="toc-exercise-6" class="nav-link" data-scroll-target="#exercise-6">Exercise 6</a></li>
+  <li><a href="#exercise-7" id="toc-exercise-7" class="nav-link" data-scroll-target="#exercise-7">Exercise 7</a></li>
+  <li><a href="#exercise-8" id="toc-exercise-8" class="nav-link" data-scroll-target="#exercise-8">Exercise 8</a></li>
   </ul>
 </nav>
 </div>
@@ -103,7 +101,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">QSBS Practical — Descriptive Data Analysis</h1>
+<h1 class="title">QSBS Practical 1a — Descriptive Data Analysis</h1>
 </div>
 
 
@@ -120,8 +118,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="getting-started" class="level2">
-<h2 class="anchored" data-anchor-id="getting-started">Getting started</h2>
+<section id="getting-started" class="level1">
+<h1>Getting started</h1>
 <p>Make sure to keep your study-materials organized. It will e.g.&nbsp;be a good idea to store all the materials related to the QSBS-course in one folder on your computer with separate sub-folders for the practicals and the theoretical (reading) material.</p>
 <p>At the start of an R-session you should change your working directory to the sub-folder that contains the data-files for the relevant practical and in which you will also store your answers (R-scripts). You set your working directory with the command <code>setwd("your/folder/location")</code>.</p>
 <p>This practical only uses data that are part of the MASS package. So you first have load MASS to make the datasets available.</p>
@@ -193,38 +191,38 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a><span class="co"># Basic skewness</span></span>
 <span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>((x <span class="sc">-</span> <span class="fu">mean</span>(x))<span class="sc">^</span><span class="dv">3</span>) <span class="sc">/</span> <span class="fu">sd</span>(x)<span class="sc">^</span><span class="dv">3</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<section id="exercise-1" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-1">exercise 1</h2>
+</section>
+<section id="exercise-1" class="level1">
+<h1>Exercise 1</h1>
 <p>In the <code>cats</code> dataset, generate the following location statistics for the Bwt variable: mean, 10% trimmed mean, and median. Do the resistant and non-resistant statistics differ substantially? What does that suggest about your data?</p>
 </section>
-<section id="exercise-2" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-2">exercise 2</h2>
+<section id="exercise-2" class="level1">
+<h1>Exercise 2</h1>
 <p>In the <code>cats</code> dataset, find the mode of the Bwt variable. Generate a frequency table and determine if there are multiple modal values (other Bwt values that have nearly as many cases). Are those modal values close together, or separated by other values? If modes are separated by other values, what might that suggest about your data?</p>
 </section>
-<section id="exercise-3" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-3">exercise 3</h2>
+<section id="exercise-3" class="level1">
+<h1>Exercise 3</h1>
 <p>In the <code>cats</code> dataset, generate frequency and proportion tables to summarize cat sex. What proportion of cats are female?</p>
 </section>
-<section id="exercise-4" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-4">exercise 4</h2>
+<section id="exercise-4" class="level1">
+<h1>Exercise 4</h1>
 <p>In the <code>birthwt</code> dataset, find the standard deviation (SD) of mother’s age. Interpret it. Generate a boxplot of the age variable. Using the boxplot rule, identify any extreme values (outliers). Explain how deleting that value would affect the standard deviation. Next, remove the data values with an age below 45 years and calculate the SD again. How much did the SD change? Repeat this analysis with the IQR, and explain why the IQR is not affected by removal of the outlier.</p>
 </section>
-<section id="exercise-5" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-5">exercise 5</h2>
+<section id="exercise-5" class="level1">
+<h1>Exercise 5</h1>
 <p>In the <code>Melanoma</code> dataset, generate a histogram of survival time (let R decide on the bin interval). Use breaks = 5 and breaks = 20 to generate two more histograms of the survival time data. Which one oversmooths? Undersmooths? In terms of insights the plot provides into properties of survival time, what is lost between the first (default bin width) and the breaks = 5 histogram? Compare the default histogram to the breaks = 20 histogram: What are you seeing in the breaks = 20 plot that may detract from your learning about survival time?</p>
 </section>
-<section id="exercise-6" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-6">exercise 6</h2>
-<p>Generate a probability histogram of survival time from the <code>Melanoma</code> dataset (use the default bin interval) and add a rugplot and a density plot to the histo- gram. What does the density plot show you about the distribution of survival times in the population of melanoma patients?</p>
+<section id="exercise-6" class="level1">
+<h1>Exercise 6</h1>
+<p>Generate a probability histogram of survival time from the <code>Melanoma</code> dataset (use the default bin interval) and add a rugplot and a density plot to the histogram. What does the density plot show you about the distribution of survival times in the population of melanoma patients?</p>
 </section>
-<section id="exercise-7" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-7">exercise 7</h2>
+<section id="exercise-7" class="level1">
+<h1>Exercise 7</h1>
 <p>Generate a boxplot of survival time from the <code>Melanoma</code> dataset. Find and interpret the 5-number summary from the boxplot output. If there are boxplot-defined outliers in the data, find their values too. From the boxplot, does it appear that survival time data are skewed, and if so in what direction? Check that with a skew statistic.</p>
 </section>
-<section id="exercise-8" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-8">exercise 8</h2>
+<section id="exercise-8" class="level1">
+<h1>Exercise 8</h1>
 <p>Using the <code>UScereal</code> dataset, do a descriptive analysis of the calories variable. Generate location and variability statistics as well as a plot of the variable’s distribution. Summarize your findings in a few sentences.</p>
-</section>
 </section>
 
 </main>
