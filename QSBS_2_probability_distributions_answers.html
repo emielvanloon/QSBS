@@ -1,0 +1,1250 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>QSBS Practical 2 — Probability distributions Answers</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="QSBS_2_probability_distributions_answers_files/libs/clipboard/clipboard.min.js"></script>
+<script src="QSBS_2_probability_distributions_answers_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="QSBS_2_probability_distributions_answers_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="QSBS_2_probability_distributions_answers_files/libs/quarto-html/popper.min.js"></script>
+<script src="QSBS_2_probability_distributions_answers_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="QSBS_2_probability_distributions_answers_files/libs/quarto-html/anchor.min.js"></script>
+<link href="QSBS_2_probability_distributions_answers_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="QSBS_2_probability_distributions_answers_files/libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="QSBS_2_probability_distributions_answers_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="QSBS_2_probability_distributions_answers_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="QSBS_2_probability_distributions_answers_files/libs/bootstrap/bootstrap-94053d6e10daeb31c4957f2bd90b11ca.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#exercise-1" id="toc-exercise-1" class="nav-link" data-scroll-target="#exercise-1">Exercise 1</a>
+  <ul class="collapse">
+  <li><a href="#answer" id="toc-answer" class="nav-link" data-scroll-target="#answer">Answer</a></li>
+  </ul></li>
+  <li><a href="#exercise-2" id="toc-exercise-2" class="nav-link" data-scroll-target="#exercise-2">Exercise 2</a>
+  <ul class="collapse">
+  <li><a href="#answer-1" id="toc-answer-1" class="nav-link" data-scroll-target="#answer-1">Answer</a></li>
+  </ul></li>
+  <li><a href="#exercise-3" id="toc-exercise-3" class="nav-link" data-scroll-target="#exercise-3">Exercise 3</a>
+  <ul class="collapse">
+  <li><a href="#answer-2" id="toc-answer-2" class="nav-link" data-scroll-target="#answer-2">Answer</a></li>
+  </ul></li>
+  <li><a href="#exercise-4" id="toc-exercise-4" class="nav-link" data-scroll-target="#exercise-4">Exercise 4</a>
+  <ul class="collapse">
+  <li><a href="#answer-3" id="toc-answer-3" class="nav-link" data-scroll-target="#answer-3">Answer</a></li>
+  </ul></li>
+  <li><a href="#exercise-5" id="toc-exercise-5" class="nav-link" data-scroll-target="#exercise-5">Exercise 5</a>
+  <ul class="collapse">
+  <li><a href="#answer-4" id="toc-answer-4" class="nav-link" data-scroll-target="#answer-4">Answer</a></li>
+  </ul></li>
+  <li><a href="#exercise-6" id="toc-exercise-6" class="nav-link" data-scroll-target="#exercise-6">Exercise 6</a>
+  <ul class="collapse">
+  <li><a href="#answer-5" id="toc-answer-5" class="nav-link" data-scroll-target="#answer-5">Answer</a></li>
+  </ul></li>
+  <li><a href="#exercise-7" id="toc-exercise-7" class="nav-link" data-scroll-target="#exercise-7">Exercise 7</a>
+  <ul class="collapse">
+  <li><a href="#answer-6" id="toc-answer-6" class="nav-link" data-scroll-target="#answer-6">Answer</a></li>
+  </ul></li>
+  <li><a href="#exercise-8" id="toc-exercise-8" class="nav-link" data-scroll-target="#exercise-8">Exercise 8</a>
+  <ul class="collapse">
+  <li><a href="#answer-7" id="toc-answer-7" class="nav-link" data-scroll-target="#answer-7">Answer</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">QSBS Practical 2 — Probability distributions Answers</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>In this practical we work with <em>theoretical</em> probability distributions rather than with data. All distribution functions we need (<code>dnorm()</code>, <code>pbinom()</code>, <code>qpois()</code>, …) live in the <code>stats</code> package, which is always loaded in R. Only in the last exercise do we compare a distribution with real data, and for that we are again using data from the <code>MASS</code> package, so we make sure this package is loaded.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Every distribution in R comes with the same family of four functions, recognisable by their prefix: <code>d</code> (density), <code>p</code> (cumulative probability), <code>q</code> (quantile = inverse cumulative) and <code>r</code> (random numbers).</p>
+</section>
+<section id="exercise-1" class="level1">
+<h1>Exercise 1</h1>
+<p>A toxicological experiment (see Dormann, Sect. 3.4.3) places <code>n = 30</code> water fleas (<em>Daphnia</em>) in water with a certain salt concentration. Each flea dies independently with probability <code>p</code>, so the number of deaths <code>k</code> follows a binomial distribution.</p>
+<p>Plot the probability mass function of the binomial distribution for <code>n = 30</code> and <code>p = 0.8</code> for all possible outcomes <code>k = 0, 1, ..., 30</code>. Use a plot type that is appropriate for a <strong>discrete</strong> distribution. Add the mass functions for <code>p = 0.5</code> and <code>p = 0.2</code> to the same plot in a different colour.</p>
+<p>Describe in words what changes when <code>p</code> changes, and explain why the curve for <code>p = 0.5</code> is both wider and lower than the other two.</p>
+<section id="answer" class="level2">
+<h2 class="anchored" data-anchor-id="answer">Answer</h2>
+<p>The binomial distribution is <strong>discrete</strong>: only the whole numbers <span class="math inline">\(0, 1, \ldots, 30\)</span> can occur, and there is nothing in between. A smooth line would suggest that intermediate values exist, so we plot vertical spikes (<code>type = "h"</code>) with a dot on top (<code>points(..., pch = 19)</code>). The three sets of spikes are shifted slightly sideways so that they do not overlap.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">30</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(k <span class="sc">-</span> <span class="fl">0.15</span>, <span class="fu">dbinom</span>(k, <span class="at">size =</span> <span class="dv">30</span>, <span class="at">prob =</span> <span class="fl">0.2</span>), <span class="at">type =</span> <span class="st">"h"</span>, <span class="at">lwd =</span> <span class="dv">2</span>,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">"steelblue"</span>, <span class="at">las =</span> <span class="dv">1</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.2</span>),</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"k (number of dead water fleas)"</span>, <span class="at">ylab =</span> <span class="st">"probability P(X = k)"</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(k <span class="sc">+</span> <span class="fl">0.00</span>, <span class="fu">dbinom</span>(k, <span class="at">size =</span> <span class="dv">30</span>, <span class="at">prob =</span> <span class="fl">0.5</span>), <span class="at">type =</span> <span class="st">"h"</span>, <span class="at">lwd =</span> <span class="dv">2</span>,</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="st">"grey50"</span>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(k <span class="sc">+</span> <span class="fl">0.15</span>, <span class="fu">dbinom</span>(k, <span class="at">size =</span> <span class="dv">30</span>, <span class="at">prob =</span> <span class="fl">0.8</span>), <span class="at">type =</span> <span class="st">"h"</span>, <span class="at">lwd =</span> <span class="dv">2</span>,</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="st">"firebrick"</span>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>, <span class="at">bty =</span> <span class="st">"n"</span>, <span class="at">lwd =</span> <span class="dv">2</span>,</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"steelblue"</span>, <span class="st">"grey50"</span>, <span class="st">"firebrick"</span>),</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"p = 0.2"</span>, <span class="st">"p = 0.5"</span>, <span class="st">"p = 0.8"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="QSBS_2_probability_distributions_answers_files/figure-html/ex1-binomial-pmf-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Probability mass function of the binomial distribution with n = 30 and three values of p.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The parameter <code>p</code> moves the distribution along the x-axis: the bulk of the probability sits around <span class="math inline">\(n \cdot p\)</span>, so around 6, 15 and 24 respectively.</p>
+<p>The distribution for <code>p = 0.5</code> is clearly the widest and the lowest. The reason is that the total probability always has to add up to 1:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">p0.2 =</span> <span class="fu">sum</span>(<span class="fu">dbinom</span>(k, <span class="at">size =</span> <span class="dv">30</span>, <span class="at">prob =</span> <span class="fl">0.2</span>)),</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">p0.5 =</span> <span class="fu">sum</span>(<span class="fu">dbinom</span>(k, <span class="at">size =</span> <span class="dv">30</span>, <span class="at">prob =</span> <span class="fl">0.5</span>)),</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">p0.8 =</span> <span class="fu">sum</span>(<span class="fu">dbinom</span>(k, <span class="at">size =</span> <span class="dv">30</span>, <span class="at">prob =</span> <span class="fl">0.8</span>)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>p0.2 p0.5 p0.8 
+   1    1    1 </code></pre>
+</div>
+</div>
+<p>If a distribution is spread over more outcomes, each individual outcome must receive less probability. The binomial variance is largest at <span class="math inline">\(p = 0.5\)</span> (there the outcome is most uncertain) and shrinks as <code>p</code> approaches 0 or 1 (there the outcome is nearly certain), so the <code>p = 0.5</code> spikes are spread out and therefore low, while the <code>p = 0.2</code> and <code>p = 0.8</code> spikes are concentrated and therefore high. Note also that <code>p = 0.2</code> and <code>p = 0.8</code> are mirror images of each other.</p>
+</section>
+</section>
+<section id="exercise-2" class="level1">
+<h1>Exercise 2</h1>
+<p>Staying with the binomial distribution for <code>n = 30</code> and <code>p = 0.8</code>, calculate:</p>
+<ol type="a">
+<li>the probability that exactly 24 fleas die;</li>
+<li>the probability that at most 24 fleas die;</li>
+<li>the probability that more than 24 fleas die (do this <strong>without</strong> typing <code>1 -</code> anywhere);</li>
+<li>the probability that between 20 and 25 fleas die (both limits included).</li>
+</ol>
+<p>Then show, for part (b), that adding up the individual probabilities <code>dbinom()</code> gives you for <code>k = 0, 1, ..., 24</code> returns exactly the same number as the single call to <code>pbinom()</code>. Explain in one sentence what this demonstrates about the relationship between <code>d...()</code> and <code>p...()</code>.</p>
+<section id="answer-1" class="level2">
+<h2 class="anchored" data-anchor-id="answer-1">Answer</h2>
+<p>The prefix tells you what you get: <code>dbinom()</code> is the probability of one specific outcome, <code>pbinom()</code> is the accumulated probability of everything up to and including that outcome.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>ex2 <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">a_exactly_24     =</span> <span class="fu">dbinom</span>(<span class="dv">24</span>, <span class="at">size =</span> <span class="dv">30</span>, <span class="at">prob =</span> <span class="fl">0.8</span>),</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">b_at_most_24     =</span> <span class="fu">pbinom</span>(<span class="dv">24</span>, <span class="at">size =</span> <span class="dv">30</span>, <span class="at">prob =</span> <span class="fl">0.8</span>),</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">c_more_than_24   =</span> <span class="fu">pbinom</span>(<span class="dv">24</span>, <span class="at">size =</span> <span class="dv">30</span>, <span class="at">prob =</span> <span class="fl">0.8</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>),</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">d_between_20_25  =</span> <span class="fu">pbinom</span>(<span class="dv">25</span>, <span class="at">size =</span> <span class="dv">30</span>, <span class="at">prob =</span> <span class="fl">0.8</span>) <span class="sc">-</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>                     <span class="fu">pbinom</span>(<span class="dv">19</span>, <span class="at">size =</span> <span class="dv">30</span>, <span class="at">prob =</span> <span class="fl">0.8</span>)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(ex2, <span class="dv">4</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   a_exactly_24    b_at_most_24  c_more_than_24 d_between_20_25 
+         0.1795          0.5725          0.4275          0.7192 </code></pre>
+</div>
+</div>
+<p>Some points to note:</p>
+<ul>
+<li><ol start="3" type="a">
+<li><code>lower.tail = FALSE</code> switches <code>pbinom()</code> from <span class="math inline">\(P(X \le q)\)</span> to <span class="math inline">\(P(X &gt; q)\)</span>. This is the recommended way of getting an upper tail probability; it is also numerically more accurate than <code>1 - pbinom(...)</code> far out in the tail.</li>
+</ol></li>
+<li><ol start="4" type="a">
+<li>Because the distribution is discrete, “20 up to and including 25” is <span class="math inline">\(P(X \le 25) - P(X \le 19)\)</span>. Subtracting <code>pbinom(20, ...)</code> would wrongly also remove the outcome <span class="math inline">\(k = 20\)</span> itself. The same answer is obtained by summing the individual probabilities:</li>
+</ol></li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">dbinom</span>(<span class="dv">20</span><span class="sc">:</span><span class="dv">25</span>, <span class="at">size =</span> <span class="dv">30</span>, <span class="at">prob =</span> <span class="fl">0.8</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.7191505</code></pre>
+</div>
+</div>
+<p>The requested comparison for part (b):</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>sum_of_d <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">dbinom</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">24</span>, <span class="at">size =</span> <span class="dv">30</span>, <span class="at">prob =</span> <span class="fl">0.8</span>))</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>single_p <span class="ot">&lt;-</span> <span class="fu">pbinom</span>(<span class="dv">24</span>, <span class="at">size =</span> <span class="dv">30</span>, <span class="at">prob =</span> <span class="fl">0.8</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">sum_of_dbinom =</span> sum_of_d, <span class="at">pbinom =</span> single_p)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>sum_of_dbinom        pbinom 
+    0.5724876     0.5724876 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">all.equal</span>(sum_of_d, single_p)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+<p>This demonstrates that the cumulative distribution function is nothing else than the running total of the probability mass function: <code>p...()</code> accumulates what <code>d...()</code> produces. For a continuous distribution the same relationship holds, except that the sum becomes an integral, i.e.&nbsp;the <strong>area</strong> under the density curve (see Exercise 7).</p>
+</section>
+</section>
+<section id="exercise-3" class="level1">
+<h1>Exercise 3</h1>
+<p>The Poisson distribution describes count data and has a single parameter <span class="math inline">\(\lambda\)</span>.</p>
+<p>Plot the probability mass function of the Poisson distribution for <span class="math inline">\(\lambda = 1\)</span>, <span class="math inline">\(\lambda = 4\)</span> and <span class="math inline">\(\lambda = 10\)</span> in one figure, for <code>k = 0, 1, ..., 20</code>. Then make a second figure with the corresponding <strong>cumulative</strong> distribution functions. Describe what happens to the shape of the distribution as <span class="math inline">\(\lambda\)</span> increases, and relate this to the Central Limit Theorem (Dormann, Sect. 3.1.1).</p>
+<p>Next, suppose we observe the value <code>k = 2</code> while <span class="math inline">\(\lambda = 10\)</span>. Calculate <span class="math inline">\(P(X = 2 \mid \lambda = 10)\)</span> and <span class="math inline">\(P(X \le 2 \mid \lambda = 10)\)</span> and explain, using the two figures, where you can read each of these two numbers off the graphs.</p>
+<section id="answer-2" class="level2">
+<h2 class="anchored" data-anchor-id="answer-2">Answer</h2>
+<p>This reproduces Fig. 3.4 of Dormann.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">20</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(k, <span class="fu">dpois</span>(k, <span class="at">lambda =</span> <span class="dv">1</span>), <span class="at">type =</span> <span class="st">"h"</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">"black"</span>, <span class="at">las =</span> <span class="dv">1</span>,</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.4</span>),</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"k"</span>, <span class="at">ylab =</span> <span class="st">"probability P(X = k)"</span>)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(k, <span class="fu">dpois</span>(k, <span class="at">lambda =</span> <span class="dv">1</span>), <span class="at">pch =</span> <span class="dv">19</span>, <span class="at">col =</span> <span class="st">"black"</span>)</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(k, <span class="fu">dpois</span>(k, <span class="at">lambda =</span> <span class="dv">4</span>), <span class="at">type =</span> <span class="st">"h"</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">"steelblue"</span>)</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(k, <span class="fu">dpois</span>(k, <span class="at">lambda =</span> <span class="dv">4</span>), <span class="at">pch =</span> <span class="dv">19</span>, <span class="at">col =</span> <span class="st">"steelblue"</span>)</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(k, <span class="fu">dpois</span>(k, <span class="at">lambda =</span> <span class="dv">10</span>), <span class="at">type =</span> <span class="st">"h"</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">"firebrick"</span>)</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(k, <span class="fu">dpois</span>(k, <span class="at">lambda =</span> <span class="dv">10</span>), <span class="at">pch =</span> <span class="dv">19</span>, <span class="at">col =</span> <span class="st">"firebrick"</span>)</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>, <span class="at">bty =</span> <span class="st">"n"</span>, <span class="at">pch =</span> <span class="dv">19</span>,</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"black"</span>, <span class="st">"steelblue"</span>, <span class="st">"firebrick"</span>),</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"Pois(1)"</span>, <span class="st">"Pois(4)"</span>, <span class="st">"Pois(10)"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="QSBS_2_probability_distributions_answers_files/figure-html/ex3-poisson-pmf-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Probability mass function of three Poisson distributions.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The cumulative distribution functions are step functions: they jump at every integer by exactly the probability of that integer, and stay flat in between. Plotting them with <code>type = "s"</code> (steps) makes this visible.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(k, <span class="fu">ppois</span>(k, <span class="at">lambda =</span> <span class="dv">1</span>), <span class="at">type =</span> <span class="st">"s"</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">"black"</span>, <span class="at">las =</span> <span class="dv">1</span>,</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"k"</span>, <span class="at">ylab =</span> <span class="st">"cumulative probability P(X &lt;= k)"</span>)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(k, <span class="fu">ppois</span>(k, <span class="at">lambda =</span> <span class="dv">4</span>), <span class="at">type =</span> <span class="st">"s"</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">"steelblue"</span>)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(k, <span class="fu">ppois</span>(k, <span class="at">lambda =</span> <span class="dv">10</span>), <span class="at">type =</span> <span class="st">"s"</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">"firebrick"</span>)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">col =</span> <span class="st">"grey"</span>, <span class="at">lty =</span> <span class="dv">3</span>)</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"bottomright"</span>, <span class="at">bty =</span> <span class="st">"n"</span>, <span class="at">lwd =</span> <span class="dv">2</span>,</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"black"</span>, <span class="st">"steelblue"</span>, <span class="st">"firebrick"</span>),</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"Pois(1)"</span>, <span class="st">"Pois(4)"</span>, <span class="st">"Pois(10)"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="QSBS_2_probability_distributions_answers_files/figure-html/ex3-poisson-cdf-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Cumulative distribution function of the same three Poisson distributions.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Interpretation of the figures:</p>
+<ul>
+<li>As <span class="math inline">\(\lambda\)</span> increases the distribution moves to the right (<span class="math inline">\(\lambda\)</span> is the mean) and simultaneously becomes wider and flatter (for the Poisson distribution the variance equals the mean, so a larger mean automatically implies more spread).</li>
+<li>For <span class="math inline">\(\lambda = 1\)</span> the distribution is strongly right-skewed and is cut off on the left at <span class="math inline">\(k = 0\)</span>. For <span class="math inline">\(\lambda = 10\)</span> the skew has largely disappeared and the shape is almost symmetric: Pois(10) already looks very much like a normal distribution. This is the Central Limit Theorem at work: a Poisson variable with <span class="math inline">\(\lambda = 10\)</span> can be thought of as the sum of ten independent Pois(1) variables, and sums of many independent contributions tend towards a normal distribution.</li>
+<li>In the cumulative plot the same information appears as the steepness of the staircase: Pois(1) reaches 1 almost immediately, Pois(10) climbs slowly and needs about 20 steps.</li>
+</ul>
+<p>The two requested probabilities:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">P_equal_2 =</span> <span class="fu">dpois</span>(<span class="dv">2</span>, <span class="at">lambda =</span> <span class="dv">10</span>),</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">P_at_most_2 =</span> <span class="fu">ppois</span>(<span class="dv">2</span>, <span class="at">lambda =</span> <span class="dv">10</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  P_equal_2 P_at_most_2 
+0.002269996 0.002769396 </code></pre>
+</div>
+</div>
+<p><span class="math inline">\(P(X = 2 \mid \lambda = 10) = 0.0023\)</span> is the <strong>height of the single red spike above <span class="math inline">\(k = 2\)</span></strong> in the first figure. <span class="math inline">\(P(X \le 2 \mid \lambda = 10) = 0.0028\)</span> is the <strong>height of the red staircase at <span class="math inline">\(k = 2\)</span></strong> in the second figure, and it equals the sum of the heights of the three spikes at <span class="math inline">\(k = 0, 1, 2\)</span>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">dpois</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">2</span>, <span class="at">lambda =</span> <span class="dv">10</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.002769396</code></pre>
+</div>
+</div>
+<p>Both numbers are tiny: observing only 2 counts when 10 are expected is a very unusual result. Note that for a discrete distribution <code>dpois()</code> really is a probability, so it can be read directly as such — this is <em>not</em> true for continuous distributions (Exercise 4).</p>
+</section>
+</section>
+<section id="exercise-4" class="level1">
+<h1>Exercise 4</h1>
+<p>Reproduce Fig. 3.3 of Dormann: plot the probability density of three normal distributions in one figure, N(0, 1), N(-1, 1.5) and N(0, 2), over the range <span class="math inline">\(-6\)</span> to <span class="math inline">\(6\)</span>. Use <code>curve()</code> and label the axes properly. Make a second figure with the three corresponding cumulative distribution functions.</p>
+<p>Use the figures to answer the following questions:</p>
+<ol type="a">
+<li>Which parameter determines the position of the top of the curve, and which one the width?</li>
+<li>Why do all three density curves have a different height, even though each of them describes a complete distribution?</li>
+<li>In the cumulative plot, at which y-value do the three curves cross their own mean? Why?</li>
+</ol>
+<p>Finally, for the standard normal distribution N(0, 1), calculate <code>dnorm(2)</code> and <code>pnorm(2)</code>. Both numbers appear in the two figures, but they mean something very different. Explain the difference, and state which of the two is a probability.</p>
+<section id="answer-3" class="level2">
+<h2 class="anchored" data-anchor-id="answer-3">Answer</h2>
+<p>The normal distribution is continuous, so here we <em>do</em> draw a smooth line. <code>curve()</code> is the convenient function for this: it evaluates a function of <code>x</code> between <code>from</code> and <code>to</code>. Additional curves are added with <code>add = TRUE</code>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">dnorm</span>(x, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>), <span class="at">from =</span> <span class="sc">-</span><span class="dv">6</span>, <span class="at">to =</span> <span class="dv">6</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">las =</span> <span class="dv">1</span>,</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>      <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.42</span>),</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">xlab =</span> <span class="st">"x"</span>, <span class="at">ylab =</span> <span class="st">"probability density"</span>)</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">dnorm</span>(x, <span class="at">mean =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">sd =</span> <span class="fl">1.5</span>), <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">"steelblue"</span>)</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">dnorm</span>(x, <span class="at">mean =</span> <span class="dv">0</span>,  <span class="at">sd =</span> <span class="dv">2</span>),   <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">"firebrick"</span>)</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>, <span class="at">bty =</span> <span class="st">"n"</span>, <span class="at">lwd =</span> <span class="dv">2</span>,</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"black"</span>, <span class="st">"steelblue"</span>, <span class="st">"firebrick"</span>),</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"N(0, 1)"</span>, <span class="st">"N(-1, 1.5)"</span>, <span class="st">"N(0, 2)"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="QSBS_2_probability_distributions_answers_files/figure-html/ex4-normal-densities-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Probability density of three normal distributions.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">pnorm</span>(x, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>), <span class="at">from =</span> <span class="sc">-</span><span class="dv">6</span>, <span class="at">to =</span> <span class="dv">6</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">las =</span> <span class="dv">1</span>,</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>      <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">xlab =</span> <span class="st">"x"</span>, <span class="at">ylab =</span> <span class="st">"cumulative probability P(X &lt;= x)"</span>)</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">pnorm</span>(x, <span class="at">mean =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">sd =</span> <span class="fl">1.5</span>), <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">"steelblue"</span>)</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">pnorm</span>(x, <span class="at">mean =</span> <span class="dv">0</span>,  <span class="at">sd =</span> <span class="dv">2</span>),   <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">"firebrick"</span>)</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="fl">0.5</span>, <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">"grey40"</span>)</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"bottomright"</span>, <span class="at">bty =</span> <span class="st">"n"</span>, <span class="at">lwd =</span> <span class="dv">2</span>,</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"black"</span>, <span class="st">"steelblue"</span>, <span class="st">"firebrick"</span>),</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"N(0, 1)"</span>, <span class="st">"N(-1, 1.5)"</span>, <span class="st">"N(0, 2)"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="QSBS_2_probability_distributions_answers_files/figure-html/ex4-normal-cdfs-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Cumulative distribution function of the same three normal distributions.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>a.</strong> The mean <span class="math inline">\(\mu\)</span> determines where the top of the curve lies: the blue curve N(-1, 1.5) is shifted one unit to the left. The standard deviation <span class="math inline">\(\sigma\)</span> determines the width: N(0, 2) is visibly the widest, N(0, 1) the narrowest. <span class="math inline">\(\mu\)</span> is therefore a <em>location</em> parameter and <span class="math inline">\(\sigma\)</span> a <em>scale</em> parameter.</p>
+<p><strong>b.</strong> Because the area under every density curve has to be exactly 1. A wider curve must therefore be lower, and a narrower curve higher; height and width compensate each other. The height of a density curve on its own has no interpretation as a probability.</p>
+<p><strong>c.</strong> All three cumulative curves pass through <span class="math inline">\(y = 0.5\)</span> at their own mean (0, <span class="math inline">\(-1\)</span> and 0, respectively). The normal distribution is symmetric around <span class="math inline">\(\mu\)</span>, so exactly half of the probability lies to the left of the mean; for a symmetric distribution the mean and the median coincide.</p>
+<p>The two numbers for N(0, 1):</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">density_at_2 =</span> <span class="fu">dnorm</span>(<span class="dv">2</span>), <span class="at">cumulative_at_2 =</span> <span class="fu">pnorm</span>(<span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   density_at_2 cumulative_at_2 
+     0.05399097      0.97724987 </code></pre>
+</div>
+</div>
+<p><code>dnorm(2)</code> = 0.054 is the <strong>height of the black density curve at x = 2</strong> in the first figure. It is a probability <em>density</em>, not a probability. The probability that a continuous variable takes exactly the value 2 is 0, because a single point has no width and therefore encloses no area. Densities can even be larger than 1 (try <code>dnorm(0, mean = 0, sd = 0.1)</code>), which by itself already shows that they cannot be probabilities.</p>
+<p><code>pnorm(2)</code> = 0.977 is the <strong>height of the black cumulative curve at x = 2</strong> in the second figure, and this one <em>is</em> a probability: if a value comes from N(0, 1), then 97.7% of all values are smaller than or equal to 2. A measurement of 2 is therefore an unusually high value; the remaining <span class="math inline">\(100 - 97.7 = 2.3\%\)</span> of the values lie above it.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="dv">2</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.02275013</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="exercise-5" class="level1">
+<h1>Exercise 5</h1>
+<p>The <code>q...()</code> functions do the opposite of the <code>p...()</code> functions: you supply a probability and they return the value on the x-axis. This is why they are called quantile functions or inverse cumulative distribution functions.</p>
+<ol type="a">
+<li>For the standard normal distribution, calculate the values that cut off the lower 2.5%, the middle (50%) and the lower 97.5% of the distribution.</li>
+<li>Verify that <code>qnorm()</code> really inverts <code>pnorm()</code> by feeding the output of one into the other for a value of your choice.</li>
+<li>Plot the inverse cumulative distribution function of the standard normal distribution, i.e.&nbsp;plot <code>qnorm(p)</code> against <code>p</code>, for <code>p</code> running from just above 0 to just below 1. Compare the shape of this figure with the cumulative distribution function you plotted in Exercise 4 and explain how the two are related.</li>
+<li>Now plot the inverse cumulative distribution function of the Poisson distribution with <span class="math inline">\(\lambda = 4\)</span> in the same way. This figure looks like a staircase. Explain why, and explain what <code>qpois(0.5, lambda = 4)</code> means.</li>
+</ol>
+<section id="answer-4" class="level2">
+<h2 class="anchored" data-anchor-id="answer-4">Answer</h2>
+<p><strong>a.</strong> The three quantiles:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.50</span>, <span class="fl">0.975</span>), <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -1.959964  0.000000  1.959964</code></pre>
+</div>
+</div>
+<p>The familiar values <span class="math inline">\(\pm 1.96\)</span> appear: 95% of a standard normal distribution lies between <span class="math inline">\(-1.96\)</span> and <span class="math inline">\(1.96\)</span>, and 2.5% sticks out on either side. The 50% quantile is 0, the median (= mean, because the distribution is symmetric).</p>
+<p><strong>b.</strong> Going back and forth returns the value we started with:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>x0 <span class="ot">&lt;-</span> <span class="fl">1.3</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>p0 <span class="ot">&lt;-</span> <span class="fu">pnorm</span>(x0)          <span class="co"># from a value to a probability</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>back <span class="ot">&lt;-</span> <span class="fu">qnorm</span>(p0)        <span class="co"># and back again</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">x =</span> x0, <span class="at">p =</span> p0, <span class="at">q_of_p =</span> back)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        x         p    q_of_p 
+1.3000000 0.9031995 1.3000000 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">all.equal</span>(x0, back)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+<p><strong>c.</strong> The inverse cumulative distribution function has the probability on the x-axis and the value on the y-axis.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">qnorm</span>(x), <span class="at">from =</span> <span class="fl">0.001</span>, <span class="at">to =</span> <span class="fl">0.999</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">las =</span> <span class="dv">1</span>,</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>      <span class="at">xlab =</span> <span class="st">"probability p"</span>, <span class="at">ylab =</span> <span class="st">"quantile qnorm(p)"</span>)</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">0</span>, <span class="at">v =</span> <span class="fl">0.5</span>, <span class="at">col =</span> <span class="st">"grey"</span>, <span class="at">lty =</span> <span class="dv">3</span>)</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="fu">segments</span>(<span class="at">x0 =</span> <span class="fl">0.975</span>, <span class="at">y0 =</span> <span class="sc">-</span><span class="dv">4</span>, <span class="at">x1 =</span> <span class="fl">0.975</span>, <span class="at">y1 =</span> <span class="fu">qnorm</span>(<span class="fl">0.975</span>), <span class="at">col =</span> <span class="st">"firebrick"</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="fu">segments</span>(<span class="at">x0 =</span> <span class="fl">0.001</span>, <span class="at">y0 =</span> <span class="fu">qnorm</span>(<span class="fl">0.975</span>), <span class="at">x1 =</span> <span class="fl">0.975</span>, <span class="at">y1 =</span> <span class="fu">qnorm</span>(<span class="fl">0.975</span>), <span class="at">col =</span> <span class="st">"firebrick"</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="QSBS_2_probability_distributions_answers_files/figure-html/ex5-inverse-cdf-normal-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Inverse cumulative distribution function (quantile function) of N(0, 1).</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>This figure is exactly the cumulative distribution function of Exercise 4 with the two axes swapped, i.e.&nbsp;mirrored in the diagonal. Whatever <code>pnorm()</code> reads from left to right, <code>qnorm()</code> reads from bottom to top. The curve becomes very steep near <span class="math inline">\(p = 0\)</span> and <span class="math inline">\(p = 1\)</span> because the normal distribution has no upper or lower limit: to capture the last fraction of a percent you have to move ever further into the tails. The interval boundaries are deliberately chosen as 0.001 and 0.999, since <code>qnorm(0)</code> is <span class="math inline">\(-\infty\)</span> and <code>qnorm(1)</code> is <span class="math inline">\(+\infty\)</span>.</p>
+<p><strong>d.</strong> For a discrete distribution the quantile function is a step function.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>p_grid <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fl">0.001</span>, <span class="fl">0.999</span>, <span class="at">length.out =</span> <span class="dv">500</span>)</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(p_grid, <span class="fu">qpois</span>(p_grid, <span class="at">lambda =</span> <span class="dv">4</span>), <span class="at">type =</span> <span class="st">"s"</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">las =</span> <span class="dv">1</span>,</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"probability p"</span>, <span class="at">ylab =</span> <span class="st">"quantile qpois(p, lambda = 4)"</span>)</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> <span class="fl">0.5</span>, <span class="at">col =</span> <span class="st">"grey"</span>, <span class="at">lty =</span> <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="QSBS_2_probability_distributions_answers_files/figure-html/ex5-inverse-cdf-poisson-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Inverse cumulative distribution function of Pois(4).</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The staircase arises because a Poisson variable can only take whole numbers. The function returns the smallest integer <span class="math inline">\(k\)</span> for which <span class="math inline">\(P(X \le k) \ge p\)</span>, so the answer stays constant until <code>p</code> passes the next step of the cumulative distribution function, and then jumps by a whole unit. The widths of the treads are exactly the probabilities <code>dpois(k, lambda = 4)</code>: the widest tread corresponds to the most probable count.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">median =</span> <span class="fu">qpois</span>(<span class="fl">0.5</span>, <span class="at">lambda =</span> <span class="dv">4</span>),</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">check_ppois_3 =</span> <span class="fu">ppois</span>(<span class="dv">3</span>, <span class="at">lambda =</span> <span class="dv">4</span>),</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">check_ppois_4 =</span> <span class="fu">ppois</span>(<span class="dv">4</span>, <span class="at">lambda =</span> <span class="dv">4</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       median check_ppois_3 check_ppois_4 
+    4.0000000     0.4334701     0.6288369 </code></pre>
+</div>
+</div>
+<p><code>qpois(0.5, lambda = 4)</code> = 4 is the median of Pois(4): 4 is the smallest count for which the cumulative probability reaches at least 0.5 (<code>ppois(3, 4)</code> = 0.43 is still below 0.5, <code>ppois(4, 4)</code> = 0.63 is above it). Note that for a discrete distribution the cumulative probability at the median is generally not exactly 0.5 — no value of <span class="math inline">\(k\)</span> achieves that.</p>
+</section>
+</section>
+<section id="exercise-6" class="level1">
+<h1>Exercise 6</h1>
+<p>Three continuous distributions with a restricted domain are the uniform, the log-normal and the gamma distribution (Dormann, Sects. 3.4.6, 3.4.7 and 3.4.9). Look up their R functions and their arguments with <code>?dunif</code>, <code>?dlnorm</code> and <code>?dgamma</code>.</p>
+<ol type="a">
+<li>Plot the density of the uniform distribution on the interval [2, 6] together with its cumulative distribution function. Explain the height of the density (0.25) and the fact that the cumulative distribution function is a straight line.</li>
+<li>Plot the density of the log-normal distribution with <code>meanlog = 0</code> and <code>sdlog = 1</code>, and of the gamma distribution with <code>shape = 2</code> and <code>scale = 2</code>, each over a sensible range. Describe the shape of both curves and state for which kind of measurement each would be a plausible model.</li>
+<li>For the log-normal distribution above, calculate the median with <code>qlnorm()</code> and the mean with the formula <span class="math inline">\(e^{\mu + \sigma^2/2}\)</span>. Mark both in the density plot. Why are they not equal, and why is <code>exp(0) = 1</code> <em>not</em> the mean of this distribution?</li>
+</ol>
+<section id="answer-5" class="level2">
+<h2 class="anchored" data-anchor-id="answer-5">Answer</h2>
+<p>Before plotting any distribution it is essential to know its <strong>domain</strong>: the uniform distribution here only exists between 2 and 6, and the log-normal and gamma distributions are only defined for positive values. Choosing <code>from</code> and <code>to</code> accordingly is half the work.</p>
+<p><strong>a.</strong> Uniform distribution on [2, 6]:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">dunif</span>(x, <span class="at">min =</span> <span class="dv">2</span>, <span class="at">max =</span> <span class="dv">6</span>), <span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">8</span>, <span class="at">n =</span> <span class="dv">1001</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">las =</span> <span class="dv">1</span>,</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.35</span>),</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">xlab =</span> <span class="st">"x"</span>, <span class="at">ylab =</span> <span class="st">"probability density"</span>)</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">6</span>), <span class="at">col =</span> <span class="st">"grey"</span>, <span class="at">lty =</span> <span class="dv">3</span>)</span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">punif</span>(x, <span class="at">min =</span> <span class="dv">2</span>, <span class="at">max =</span> <span class="dv">6</span>), <span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">8</span>, <span class="at">n =</span> <span class="dv">1001</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">las =</span> <span class="dv">1</span>,</span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">xlab =</span> <span class="st">"x"</span>, <span class="at">ylab =</span> <span class="st">"cumulative probability"</span>)</span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">6</span>), <span class="at">col =</span> <span class="st">"grey"</span>, <span class="at">lty =</span> <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="QSBS_2_probability_distributions_answers_files/figure-html/ex6-uniform-1.png" class="img-fluid figure-img" width="864"></p>
+<figcaption>Density (left) and cumulative distribution function (right) of the uniform distribution on [2, 6].</figcaption>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The density is flat: every value between 2 and 6 is equally likely. The height follows from the requirement that the total area equals 1. The base of the rectangle is <span class="math inline">\(6 - 2 = 4\)</span>, so the height must be <span class="math inline">\(1/4 = 0.25\)</span>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">density =</span> <span class="fu">dunif</span>(<span class="dv">3</span>, <span class="at">min =</span> <span class="dv">2</span>, <span class="at">max =</span> <span class="dv">6</span>),</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">area =</span> <span class="dv">4</span> <span class="sc">*</span> <span class="fu">dunif</span>(<span class="dv">3</span>, <span class="at">min =</span> <span class="dv">2</span>, <span class="at">max =</span> <span class="dv">6</span>),</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">integral =</span> <span class="fu">integrate</span>(dunif, <span class="at">lower =</span> <span class="dv">2</span>, <span class="at">upper =</span> <span class="dv">6</span>, <span class="at">min =</span> <span class="dv">2</span>, <span class="at">max =</span> <span class="dv">6</span>)<span class="sc">$</span>value)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> density     area integral 
+    0.25     1.00     1.00 </code></pre>
+</div>
+</div>
+<p>Because the density is constant, the accumulated area grows at a constant rate, and the cumulative distribution function is therefore a straight line rising from 0 at <span class="math inline">\(x = 2\)</span> to 1 at <span class="math inline">\(x = 6\)</span>. Outside the interval the density is 0 and the cumulative function is flat at 0 or at 1.</p>
+<p><strong>b.</strong> Log-normal and gamma:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">dlnorm</span>(x, <span class="at">meanlog =</span> <span class="dv">0</span>, <span class="at">sdlog =</span> <span class="dv">1</span>), <span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">8</span>, <span class="at">n =</span> <span class="dv">1001</span>,</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">las =</span> <span class="dv">1</span>, <span class="at">col =</span> <span class="st">"steelblue"</span>,</span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">xlab =</span> <span class="st">"x"</span>, <span class="at">ylab =</span> <span class="st">"probability density"</span>, <span class="at">main =</span> <span class="st">"log-normal(0, 1)"</span>)</span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">dgamma</span>(x, <span class="at">shape =</span> <span class="dv">2</span>, <span class="at">scale =</span> <span class="dv">2</span>), <span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">20</span>, <span class="at">n =</span> <span class="dv">1001</span>,</span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">las =</span> <span class="dv">1</span>, <span class="at">col =</span> <span class="st">"firebrick"</span>,</span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">xlab =</span> <span class="st">"x"</span>, <span class="at">ylab =</span> <span class="st">"probability density"</span>, <span class="at">main =</span> <span class="st">"gamma(shape = 2, scale = 2)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="QSBS_2_probability_distributions_answers_files/figure-html/ex6-lognormal-gamma-1.png" class="img-fluid figure-img" width="864"></p>
+<figcaption>Density of the log-normal distribution (meanlog = 0, sdlog = 1) and of the gamma distribution (shape = 2, scale = 2).</figcaption>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Both curves start at 0, rise to a single peak and then decline with a long right tail: they are strongly right-skewed, and neither of them can produce negative values. They are therefore plausible models for measurements that are positive by definition and occasionally very large: concentrations, body or seed masses, rainfall amounts, waiting times, or the leaf area lost to herbivores. The log-normal arises when many factors act <em>multiplicatively</em> (taking the logarithm of a log-normal variable gives a normal distribution again), the gamma distribution typically arises as a waiting time.</p>
+<p><strong>c.</strong> Mean and median of the log-normal distribution:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>sigma <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>ex6c <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">median =</span> <span class="fu">qlnorm</span>(<span class="fl">0.5</span>, <span class="at">meanlog =</span> mu, <span class="at">sdlog =</span> sigma),</span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">mean =</span> <span class="fu">exp</span>(mu <span class="sc">+</span> sigma<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> <span class="dv">2</span>),</span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">exp_of_meanlog =</span> <span class="fu">exp</span>(mu)</span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(ex6c, <span class="dv">4</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        median           mean exp_of_meanlog 
+        1.0000         1.6487         1.0000 </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">dlnorm</span>(x, <span class="at">meanlog =</span> <span class="dv">0</span>, <span class="at">sdlog =</span> <span class="dv">1</span>), <span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">8</span>, <span class="at">n =</span> <span class="dv">1001</span>,</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>      <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">las =</span> <span class="dv">1</span>, <span class="at">xlab =</span> <span class="st">"x"</span>, <span class="at">ylab =</span> <span class="st">"probability density"</span>)</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> <span class="fu">qlnorm</span>(<span class="fl">0.5</span>), <span class="at">col =</span> <span class="st">"steelblue"</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> <span class="fu">exp</span>(<span class="dv">0</span> <span class="sc">+</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">2</span>), <span class="at">col =</span> <span class="st">"firebrick"</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>, <span class="at">bty =</span> <span class="st">"n"</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">lty =</span> <span class="dv">2</span>,</span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"steelblue"</span>, <span class="st">"firebrick"</span>),</span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"median = 1.00"</span>, <span class="st">"mean = 1.65"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="QSBS_2_probability_distributions_answers_files/figure-html/ex6-lognormal-marked-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Log-normal density with the median (blue) and the mean (red) marked.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The median is 1 and the mean is 1.65, so the mean lies clearly to the right of the median. This is the usual signature of a right-skewed distribution: the long right tail contains a few very large values which pull the mean upwards, whereas the median only counts how many observations lie left and right and is therefore unaffected. That the median equals <code>exp(meanlog)</code> is no coincidence: exactly half of a normal distribution lies below its mean, and exponentiating preserves the ordering, hence half of the log-normal distribution lies below <span class="math inline">\(e^{\mu}\)</span>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plnorm</span>(<span class="fu">exp</span>(<span class="dv">0</span>), <span class="at">meanlog =</span> <span class="dv">0</span>, <span class="at">sdlog =</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.5</code></pre>
+</div>
+</div>
+<p><code>exp(meanlog)</code> is therefore the median and <em>not</em> the mean — a mistake that is made frequently. The variance co-determines the mean of a log-normal distribution: the mean is <span class="math inline">\(e^{\mu + \sigma^2/2}\)</span>, which grows as <span class="math inline">\(\sigma\)</span> grows even when <span class="math inline">\(\mu\)</span> stays the same.</p>
+</section>
+</section>
+<section id="exercise-7" class="level1">
+<h1>Exercise 7</h1>
+<p>This exercise makes the link between the <strong>area under a density curve</strong> and the <strong>value of the cumulative distribution function</strong> explicit.</p>
+<p>For the standard normal distribution, draw the density curve between <span class="math inline">\(-4\)</span> and <span class="math inline">\(4\)</span> and shade the area under the curve to the left of <span class="math inline">\(x = 2\)</span>. Then:</p>
+<ol type="a">
+<li>Read <code>pnorm(2)</code> and check that it corresponds to the shaded area.</li>
+<li>Calculate the same area numerically with <code>integrate()</code>.</li>
+<li>Shade instead the area between <span class="math inline">\(x = -1.96\)</span> and <span class="math inline">\(x = 1.96\)</span>, and calculate that area both as a difference of two <code>pnorm()</code> values and with <code>integrate()</code>.</li>
+<li>Explain in one or two sentences why we cannot do the same thing for a single point, i.e.&nbsp;why <span class="math inline">\(P(X = 2) = 0\)</span> for a continuous distribution, whereas <code>dnorm(2)</code> is clearly larger than 0.</li>
+</ol>
+<section id="answer-6" class="level2">
+<h2 class="anchored" data-anchor-id="answer-6">Answer</h2>
+<p><strong>a.</strong> The shaded region runs from the left tail up to <span class="math inline">\(x = 2\)</span>. <code>polygon()</code> needs a closed sequence of coordinates: first along the curve from left to right, then back along the x-axis from right to left (which is what <code>rev()</code> accomplishes).</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>x_shade <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="sc">-</span><span class="dv">4</span>, <span class="at">to =</span> <span class="dv">2</span>, <span class="at">length.out =</span> <span class="dv">200</span>)</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>y_shade <span class="ot">&lt;-</span> <span class="fu">dnorm</span>(x_shade)</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">dnorm</span>(x), <span class="at">from =</span> <span class="sc">-</span><span class="dv">4</span>, <span class="at">to =</span> <span class="dv">4</span>, <span class="at">las =</span> <span class="dv">1</span>,</span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">xlab =</span> <span class="st">"x"</span>, <span class="at">ylab =</span> <span class="st">"probability density"</span>)</span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a><span class="fu">polygon</span>(<span class="at">x =</span> <span class="fu">c</span>(x_shade, <span class="fu">rev</span>(x_shade)),</span>
+<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> <span class="fu">c</span>(y_shade, <span class="fu">rep</span>(<span class="dv">0</span>, <span class="fu">length</span>(y_shade))),</span>
+<span id="cb46-9"><a href="#cb46-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">col =</span> <span class="st">"grey80"</span>, <span class="at">border =</span> <span class="cn">NA</span>)</span>
+<span id="cb46-10"><a href="#cb46-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-11"><a href="#cb46-11" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">dnorm</span>(x), <span class="at">from =</span> <span class="sc">-</span><span class="dv">4</span>, <span class="at">to =</span> <span class="dv">4</span>, <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb46-12"><a href="#cb46-12" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">"firebrick"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb46-13"><a href="#cb46-13" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="at">x =</span> <span class="sc">-</span><span class="fl">0.6</span>, <span class="at">y =</span> <span class="fl">0.15</span>, <span class="at">labels =</span> <span class="st">"area = 0.977"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="QSBS_2_probability_distributions_answers_files/figure-html/ex7-shade-left-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Standard normal density with the area to the left of x = 2 shaded. The shaded area equals pnorm(2) = 0.977.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Almost the entire area is shaded, which matches the cumulative probability:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.9772499</code></pre>
+</div>
+</div>
+<p><strong>b.</strong> The same number obtained by numerical integration of the density:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">integrate</span>(dnorm, <span class="at">lower =</span> <span class="sc">-</span><span class="cn">Inf</span>, <span class="at">upper =</span> <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>0.9772499 with absolute error &lt; 1.6e-06</code></pre>
+</div>
+</div>
+<p><code>integrate()</code> returns 0.9772 with a very small numerical error, identical to <code>pnorm(2)</code>. This is the point of the exercise: <strong>the cumulative distribution function is the integral of the density function</strong>, so “area under the curve up to <span class="math inline">\(x\)</span>” and “value of the cumulative distribution function at <span class="math inline">\(x\)</span>” are two descriptions of the same quantity. In Exercise 2 we saw the discrete counterpart, where the integral was simply a sum.</p>
+<p><strong>c.</strong> The central 95% region:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>x_mid <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="sc">-</span><span class="fl">1.96</span>, <span class="at">to =</span> <span class="fl">1.96</span>, <span class="at">length.out =</span> <span class="dv">200</span>)</span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>y_mid <span class="ot">&lt;-</span> <span class="fu">dnorm</span>(x_mid)</span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">dnorm</span>(x), <span class="at">from =</span> <span class="sc">-</span><span class="dv">4</span>, <span class="at">to =</span> <span class="dv">4</span>, <span class="at">las =</span> <span class="dv">1</span>,</span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">xlab =</span> <span class="st">"x"</span>, <span class="at">ylab =</span> <span class="st">"probability density"</span>)</span>
+<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a><span class="fu">polygon</span>(<span class="at">x =</span> <span class="fu">c</span>(x_mid, <span class="fu">rev</span>(x_mid)),</span>
+<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> <span class="fu">c</span>(y_mid, <span class="fu">rep</span>(<span class="dv">0</span>, <span class="fu">length</span>(y_mid))),</span>
+<span id="cb51-9"><a href="#cb51-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">col =</span> <span class="st">"grey80"</span>, <span class="at">border =</span> <span class="cn">NA</span>)</span>
+<span id="cb51-10"><a href="#cb51-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-11"><a href="#cb51-11" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">dnorm</span>(x), <span class="at">from =</span> <span class="sc">-</span><span class="dv">4</span>, <span class="at">to =</span> <span class="dv">4</span>, <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb51-12"><a href="#cb51-12" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">1.96</span>, <span class="fl">1.96</span>), <span class="at">col =</span> <span class="st">"firebrick"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb51-13"><a href="#cb51-13" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="at">x =</span> <span class="dv">0</span>, <span class="at">y =</span> <span class="fl">0.15</span>, <span class="at">labels =</span> <span class="st">"area = 0.95"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="QSBS_2_probability_distributions_answers_files/figure-html/ex7-shade-middle-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Standard normal density with the area between -1.96 and 1.96 shaded.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">difference_of_pnorm =</span> <span class="fu">pnorm</span>(<span class="fl">1.96</span>) <span class="sc">-</span> <span class="fu">pnorm</span>(<span class="sc">-</span><span class="fl">1.96</span>),</span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">numerical_integral =</span> <span class="fu">integrate</span>(dnorm, <span class="at">lower =</span> <span class="sc">-</span><span class="fl">1.96</span>, <span class="at">upper =</span> <span class="fl">1.96</span>)<span class="sc">$</span>value)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>difference_of_pnorm  numerical_integral 
+          0.9500042           0.9500042 </code></pre>
+</div>
+</div>
+<p>The area between two values is obtained as the difference of the two cumulative probabilities: everything up to 1.96 minus everything up to <span class="math inline">\(-1.96\)</span>. Both routes give 0.95, the familiar central 95% interval, which is of course the mirror image of the quantiles computed in Exercise 5a.</p>
+<p><strong>d.</strong> A single point has zero width, so the region under the curve above it has zero area, and <span class="math inline">\(P(X = 2) = 0\)</span>. Formally, <code>integrate(dnorm, lower = 2, upper = 2)</code> is 0:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">integrate</span>(dnorm, <span class="at">lower =</span> <span class="dv">2</span>, <span class="at">upper =</span> <span class="dv">2</span>)<span class="sc">$</span>value</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0</code></pre>
+</div>
+</div>
+<p><code>dnorm(2) = 0.054</code> is not this probability but the <em>height</em> of the curve there — a probability per unit of x. Only after multiplying by a width (i.e.&nbsp;integrating over an interval) does it become a probability. For a discrete distribution the situation is different: there the possible outcomes are separate points which each carry a genuine chunk of probability, which is why <code>dpois()</code> and <code>dbinom()</code> could be interpreted directly as probabilities in Exercises 2 and 3.</p>
+</section>
+</section>
+<section id="exercise-8" class="level1">
+<h1>Exercise 8</h1>
+<p>Finally we confront a theoretical distribution with real data. Using the <code>cats</code> dataset from the <code>MASS</code> package, take the body weight <code>Bwt</code> of the 144 cats.</p>
+<ol type="a">
+<li>Estimate the two parameters of a normal distribution from these data (use the sample mean and the sample standard deviation) and draw the resulting normal density on top of a density histogram of <code>Bwt</code>.</li>
+<li>Using the fitted normal distribution, calculate the probability that a cat weighs at most 2.5 kg and the probability that it weighs 3 kg or more. Compare each of them with the corresponding proportion actually observed in the data (<code>mean(cats$Bwt &lt;= 2.5)</code> gives you the observed proportion).</li>
+<li>Compare the theoretical 90% quantile <code>qnorm(0.90, ...)</code> with the observed 90% quantile <code>quantile(cats$Bwt, 0.90)</code>.</li>
+<li>Judging from the figure and from the comparisons in (b) and (c), is the normal distribution a satisfactory description of these data? Look at <code>table(cats$Sex)</code> and at separate histograms per sex before you answer.</li>
+</ol>
+<section id="answer-7" class="level2">
+<h2 class="anchored" data-anchor-id="answer-7">Answer</h2>
+<p><strong>a.</strong> The normal distribution has two parameters, <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span>, which we estimate by the sample mean and the sample standard deviation.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>mu_hat <span class="ot">&lt;-</span> <span class="fu">mean</span>(cats<span class="sc">$</span>Bwt)</span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>sigma_hat <span class="ot">&lt;-</span> <span class="fu">sd</span>(cats<span class="sc">$</span>Bwt)</span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">n =</span> <span class="fu">length</span>(cats<span class="sc">$</span>Bwt), <span class="at">mean =</span> mu_hat, <span class="at">sd =</span> sigma_hat)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          n        mean          sd 
+144.0000000   2.7236111   0.4853066 </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(cats<span class="sc">$</span>Bwt, <span class="at">probability =</span> <span class="cn">TRUE</span>, <span class="at">breaks =</span> <span class="dv">15</span>, <span class="at">col =</span> <span class="st">"grey90"</span>, <span class="at">las =</span> <span class="dv">1</span>,</span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Body weight (kg)"</span>, <span class="at">ylab =</span> <span class="st">"density"</span>,</span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">""</span>)</span>
+<span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rug</span>(cats<span class="sc">$</span>Bwt)</span>
+<span id="cb58-5"><a href="#cb58-5" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">density</span>(cats<span class="sc">$</span>Bwt), <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">"steelblue"</span>)</span>
+<span id="cb58-6"><a href="#cb58-6" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">dnorm</span>(x, <span class="at">mean =</span> mu_hat, <span class="at">sd =</span> sigma_hat),</span>
+<span id="cb58-7"><a href="#cb58-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">"firebrick"</span>)</span>
+<span id="cb58-8"><a href="#cb58-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb58-9"><a href="#cb58-9" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>, <span class="at">bty =</span> <span class="st">"n"</span>, <span class="at">lwd =</span> <span class="dv">2</span>,</span>
+<span id="cb58-10"><a href="#cb58-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"steelblue"</span>, <span class="st">"firebrick"</span>),</span>
+<span id="cb58-11"><a href="#cb58-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"empirical density"</span>, <span class="st">"fitted normal"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="QSBS_2_probability_distributions_answers_files/figure-html/ex8-histogram-with-curve-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Density histogram of cat body weight with the fitted normal density (red) and the empirical density (blue).</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Note that <code>probability = TRUE</code> is essential: only then does the histogram have a total area of 1 and is it on the same scale as the density curve.</p>
+<p><strong>b.</strong> Theoretical versus observed probabilities:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>comparison <span class="ot">&lt;-</span> <span class="fu">rbind</span>(</span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"P(Bwt &lt;= 2.5)"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="at">theoretical =</span> <span class="fu">pnorm</span>(<span class="fl">2.5</span>, <span class="at">mean =</span> mu_hat, <span class="at">sd =</span> sigma_hat),</span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">observed =</span> <span class="fu">mean</span>(cats<span class="sc">$</span>Bwt <span class="sc">&lt;=</span> <span class="fl">2.5</span>)),</span>
+<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"P(Bwt &gt;= 3.0)"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="at">theoretical =</span> <span class="fu">pnorm</span>(<span class="fl">3.0</span>, <span class="at">mean =</span> mu_hat, <span class="at">sd =</span> sigma_hat,</span>
+<span id="cb59-5"><a href="#cb59-5" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">lower.tail =</span> <span class="cn">FALSE</span>),</span>
+<span id="cb59-6"><a href="#cb59-6" aria-hidden="true" tabindex="-1"></a>                      <span class="at">observed =</span> <span class="fu">mean</span>(cats<span class="sc">$</span>Bwt <span class="sc">&gt;=</span> <span class="fl">3.0</span>))</span>
+<span id="cb59-7"><a href="#cb59-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb59-8"><a href="#cb59-8" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(comparison, <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>              theoretical observed
+P(Bwt &lt;= 2.5)       0.322    0.424
+P(Bwt &gt;= 3.0)       0.285    0.326</code></pre>
+</div>
+</div>
+<p>The fitted normal distribution says that about 32% of the cats should weigh 2.5 kg or less, but in fact 42% of them do. In the upper tail the agreement is better (28% expected against 33% observed). The discrepancy in the lower half is substantial.</p>
+<p><strong>c.</strong> The 90% quantiles:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">theoretical_q90 =</span> <span class="fu">qnorm</span>(<span class="fl">0.90</span>, <span class="at">mean =</span> mu_hat, <span class="at">sd =</span> sigma_hat),</span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">observed_q90 =</span> <span class="fu">as.numeric</span>(<span class="fu">quantile</span>(cats<span class="sc">$</span>Bwt, <span class="fl">0.90</span>)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>theoretical_q90    observed_q90 
+       3.345557        3.400000 </code></pre>
+</div>
+</div>
+<p>These two are reasonably close (3.35 against 3.40 kg), so in the upper tail the fitted normal distribution is not bad.</p>
+<p><strong>d.</strong> The normal distribution is a mediocre description of these data. The figure shows that the empirical density is not a single symmetric bell: there is a pronounced peak just above 2 kg with a shoulder or second bump around 3–3.5 kg, and the fitted normal curve smooths straight over this structure while at the same time predicting far too little probability just below 2.5 kg.</p>
+<p>The explanation is that the sample mixes two groups:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(cats<span class="sc">$</span>Sex)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ F  M 
+47 97 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">rbind</span>(</span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">mean =</span> <span class="fu">tapply</span>(cats<span class="sc">$</span>Bwt, cats<span class="sc">$</span>Sex, mean),</span>
+<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">sd =</span> <span class="fu">tapply</span>(cats<span class="sc">$</span>Bwt, cats<span class="sc">$</span>Sex, sd),</span>
+<span id="cb65-4"><a href="#cb65-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="fu">tapply</span>(cats<span class="sc">$</span>Bwt, cats<span class="sc">$</span>Sex, length)</span>
+<span id="cb65-5"><a href="#cb65-5" aria-hidden="true" tabindex="-1"></a>), <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          F      M
+mean  2.360  2.900
+sd    0.274  0.467
+n    47.000 97.000</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (s <span class="cf">in</span> <span class="fu">c</span>(<span class="st">"F"</span>, <span class="st">"M"</span>)) {</span>
+<span id="cb67-4"><a href="#cb67-4" aria-hidden="true" tabindex="-1"></a>  weights_s <span class="ot">&lt;-</span> cats<span class="sc">$</span>Bwt[cats<span class="sc">$</span>Sex <span class="sc">==</span> s]</span>
+<span id="cb67-5"><a href="#cb67-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hist</span>(weights_s, <span class="at">probability =</span> <span class="cn">TRUE</span>, <span class="at">breaks =</span> <span class="dv">10</span>, <span class="at">col =</span> <span class="st">"grey90"</span>, <span class="at">las =</span> <span class="dv">1</span>,</span>
+<span id="cb67-6"><a href="#cb67-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">xlim =</span> <span class="fu">range</span>(cats<span class="sc">$</span>Bwt),</span>
+<span id="cb67-7"><a href="#cb67-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">xlab =</span> <span class="st">"Body weight (kg)"</span>, <span class="at">ylab =</span> <span class="st">"density"</span>,</span>
+<span id="cb67-8"><a href="#cb67-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">main =</span> <span class="fu">paste</span>(<span class="st">"Sex ="</span>, s))</span>
+<span id="cb67-9"><a href="#cb67-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rug</span>(weights_s)</span>
+<span id="cb67-10"><a href="#cb67-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">curve</span>(<span class="fu">dnorm</span>(x, <span class="at">mean =</span> <span class="fu">mean</span>(weights_s), <span class="at">sd =</span> <span class="fu">sd</span>(weights_s)),</span>
+<span id="cb67-11"><a href="#cb67-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">"firebrick"</span>)</span>
+<span id="cb67-12"><a href="#cb67-12" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="QSBS_2_probability_distributions_answers_files/figure-html/ex8-histograms-per-sex-1.png" class="img-fluid figure-img" width="864"></p>
+<figcaption>Body weight per sex, each with its own fitted normal density.</figcaption>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Female cats are on average clearly lighter than male cats, and there are almost twice as many males as females. The pooled distribution is therefore a <em>mixture</em> of two normal distributions with different means, which is skewed and slightly bimodal rather than normal. Within each sex the normal distribution is a much more convincing description.</p>
+<p>The general lesson is the one Dormann stresses at the start of Chap. 3: a distribution is an <strong>assumption</strong> which we impose on the data, and it has to be justified in every single case. Plotting the fitted distribution on top of the data, and comparing a few theoretical probabilities and quantiles with their observed counterparts, is a quick and effective way of checking whether that assumption is tenable.</p>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
