@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="presentation4b_regression_diagnostics_files/libs/clipboard/clipboard.min.js"></script>
+<script src="presentation4b_regression_diagnostics_files/libs/quarto-html/tabby.min.js"></script>
+<script src="presentation4b_regression_diagnostics_files/libs/quarto-html/popper.min.js"></script>
+<script src="presentation4b_regression_diagnostics_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="presentation4b_regression_diagnostics_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="presentation4b_regression_diagnostics_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="presentation4b_regression_diagnostics_files/libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.9.38">
+
+  <meta name="author" content="Emiel van Loon">
+  <meta name="dcterms.date" content="2026-09-17">
+  <title>Regression Diagnostics</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="presentation4b_regression_diagnostics_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="presentation4b_regression_diagnostics_files/libs/revealjs/dist/reveal.css">
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="presentation4b_regression_diagnostics_files/libs/revealjs/dist/theme/quarto-0427d8d92a431aa6a6430e53ec02a470.css">
+  <link href="presentation4b_regression_diagnostics_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="presentation4b_regression_diagnostics_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="presentation4b_regression_diagnostics_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="presentation4b_regression_diagnostics_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">Regression Diagnostics</h1>
+  <p class="subtitle">Dormann (2020), <em>Environmental Data Analysis</em> — Chapters 9 and 10</p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Emiel van Loon 
+</div>
+</div>
+</div>
+
+  <p class="date">2026-09-17</p>
+</section>
+<section class="slide level2">
+
+<style>
+.reveal .fignote { font-size: 0.60em; line-height: 1.35; }
+.reveal .fignote code { font-size: 0.95em; }
+.reveal table { font-size: 0.75em; }
+</style>
+</section>
+<section id="where-we-are-going" class="slide level2 smaller">
+<h2>Where we are going</h2>
+<p>Fitting a GLM (Chapters 7 and 8) is only half the work. Chapters 9 and 10 ask: <strong>is the model adequate for the data?</strong> At the end of this chapter you should…</p>
+<ul>
+<li>know that a good-looking <code>summary()</code> is <strong>not</strong> a diagnosis — you have to look</li>
+<li>find <strong>influential points</strong> with Cook’s distance, and know what to do with them</li>
+<li>recognise <strong>over- and underdispersion</strong>, and repair it with a quasi-model</li>
+<li>read a plot of <strong>standardised deviance residuals</strong> against the linear predictor</li>
+<li>draw the <strong>fitted curve with its confidence band</strong>, and compare it with an alternative model (another distribution, a polynomial)</li>
+<li>interpret the <strong>four diagnostic plots</strong> that <code>plot(lm(...))</code> produces</li>
+</ul>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>Dormann lists five diagnostic steps. The first — the distribution of the <em>predictors</em> — is exploratory and we treat it only in passing; the remaining four each get their own section here, and their own exercise in practical 4b.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="statistics-alone-are-not-diagnostics" class="slide level2">
+<h2>Statistics alone are not diagnostics</h2>
+
+<img data-src="presentation4b_regression_diagnostics_files/figure-revealjs/anscombe-1.png" width="1350" class="r-stretch"><div class="fignote">
+<p><strong>Anscombe’s quartet</strong> (Dormann Fig. 9.1). All four regressions have the same line, <span class="math inline">\(y = 3.0 + 0.5x\)</span>, the same <span class="math inline">\(R^2 = 0.67\)</span>, the same <span class="math inline">\(t = 4.24\)</span>, <span class="math inline">\(P = 0.002\)</span>. Only the first is an acceptable regression: the second is <strong>curved</strong>, the third has one point that <strong>pulls the line</strong>, and in the fourth a single point makes the whole relationship. No number in <code>summary()</code> can tell these apart — <em>only the picture can</em>. Diagnostics are done <strong>after</strong> fitting, because we do not test <span class="math inline">\(y \sim N(\mu, \sigma)\)</span> but <span class="math inline">\(y \sim N(\mu = a + bx, \sigma)\)</span>.</p>
+</div>
+</section>
+<section id="the-four-checks-and-a-running-example" class="slide level2 smaller">
+<h2>The four checks, and a running example</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
+<ol type="1">
+<li><strong>Influential points</strong> — does one observation steer the fit?</li>
+<li><strong>Dispersion</strong> — is the variance what the distribution promises?</li>
+<li><strong>Residuals</strong> — is there a pattern left?</li>
+<li><strong>Functional relationship</strong> — is a straight line (on the link scale) enough?</li>
+</ol>
+<p>These are not independent: a wrong curve shows up as overdispersion <em>and</em> as a residual pattern, and an influential point can create or hide a curvature. Diagnostics are <strong>iterative</strong>.</p>
+</div><div class="column" style="width:55%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="presentation4b_regression_diagnostics_files/figure-revealjs/exa-intro-1.png" width="825"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+<div class="fignote">
+<p>Dormann’s “simple regression?” (Fig. 9.2 / Sect. 10.1): 12 points, a Poisson GLM. Ten points show a <em>negative</em> trend, two points far to the right make it <em>positive</em>. Because <em>x</em> is so skewed (step 0: the predictors), Dormann log-transforms it and continues with <code>fm2 &lt;- glm(y ~ log(x), family = poisson)</code>. So will we.</p>
+</div>
+</section>
+<section id="influential-points-cooks-distance" class="slide level2">
+<h2>1. Influential points: Cook’s distance</h2>
+
+<img data-src="presentation4b_regression_diagnostics_files/figure-revealjs/cook-idea-1.png" width="1350" class="r-stretch"><div class="fignote">
+<p><strong>Cook’s distance</strong> answers: <em>how much do all fitted values change when I drop this one observation?</em> Leaving out point 6 changes nothing; leaving out point 1 or 12 visibly tilts the curve. Dormann’s thresholds: <span class="math inline">\(D_i &gt; 1\)</span> or <span class="math inline">\(D_i &gt; 4/n\)</span>. Both flag points 1 and 12 here (with raw <em>x</em> it was 11 and 12 — step 0 influences step 1!). Unlike “3 standard deviations” rules, Cook’s distance finds <em>two</em> influential points at once.</p>
+</div>
+</section>
+<section id="influential-points-refit-compare-report-never-delete" class="slide level2 smaller">
+<h2>Influential points: refit, compare, report — never delete</h2>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">slope for log(x)</th>
+<th style="text-align: right;">std. error</th>
+<th style="text-align: right;">P</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">all 12 points</td>
+<td style="text-align: right;">0.601</td>
+<td style="text-align: right;">0.080</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">without points 1 and 12</td>
+<td style="text-align: right;">0.584</td>
+<td style="text-align: right;">0.108</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>There is <strong>no justification for eliminating a point because it is an “outlier”</strong>. A typo or a broken instrument, yes — but not “to make the result work”. What we <em>may</em> do is refit without the influential points <strong>in addition to</strong> the full analysis, and test for robustness.</p>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Tip</strong></p>
+</div>
+<div class="callout-content">
+<p>Dormann’s two model sentences (Sect. 10.1.2):</p>
+<ul>
+<li>robust: <em>“Data points 1 and 12 were identified as conspicuous according to Cook’s distance; their exclusion, however, did not qualitatively change the result (estimate for log(x) = 0.58 ± 0.11, p &lt; 0.001).”</em></li>
+<li>not robust: <em>“After excluding the influential data points 11 and 12 (Cook’s distance &gt; 1), the relationship between x and y was no longer significant (p = 0.158).”</em> — then report <strong>both</strong> analyses.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="dispersion-what-the-distribution-promises" class="slide level2">
+<h2>2. Dispersion: what the distribution promises</h2>
+
+<img data-src="presentation4b_regression_diagnostics_files/figure-revealjs/disp-idea-1.png" width="1350" class="r-stretch"><div class="fignote">
+<p>Poisson and binomial <strong>fix the variance as a function of the mean</strong> — there is no free spread parameter, so the <em>dispersion</em> is 1 by assumption (dashed: mean ± 2·√mean). If the real data scatter more (middle) they are <strong>overdispersed</strong> — very common: clumping, missing predictors, wrong curve. If they scatter less (right) they are <strong>underdispersed</strong> — rarer: e.g.&nbsp;clutch sizes that are physiologically regulated. Normal and gamma have no such problem: their dispersion is a fitted parameter. Bernoulli (0/1) data <em>cannot</em> be overdispersed.</p>
+</div>
+</section>
+<section id="dispersion-the-rough-check" class="slide level2 smaller">
+<h2>Dispersion: the rough check</h2>
+<p><span class="math display">\[\hat\phi \approx \frac{\text{residual deviance}}{\text{residual degrees of freedom}}
+\qquad \text{should be} \approx 1\]</span></p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">residual deviance</th>
+<th style="text-align: right;">df</th>
+<th style="text-align: right;">ratio</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">exa: Pois, y ~ log(x)</td>
+<td style="text-align: right;">30.9</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">3.09</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Galapagos: Pois, Species ~ log(Area)</td>
+<td style="text-align: right;">651.7</td>
+<td style="text-align: right;">28</td>
+<td style="text-align: right;">23.27</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">bioassay: Binom, survival ~ S</td>
+<td style="text-align: right;">10.8</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">0.83</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Dormann’s rule of thumb: much larger than <strong>2</strong> → overdispersed; much smaller than <strong>0.6</strong> → underdispersed. Both numbers are printed by <code>summary()</code>; the Pearson version <code>sum(residuals(m, type = "pearson")^2) / df.residual(m)</code> is what the quasi-models actually use.</p>
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Important</strong></p>
+</div>
+<div class="callout-content">
+<p>Overdispersion makes standard errors <strong>too small</strong> — effects look more significant than they are (McCullagh &amp; Nelder 1989). Underdispersion makes them <strong>too large</strong>. Either way the <em>estimates</em> themselves are fine; it is the uncertainty that is wrong.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="two-remedies-for-overdispersion-quasi-poisson-and-negative-binomial" class="slide level2 smaller">
+<h2>Two remedies for overdispersion: quasi-Poisson and negative binomial</h2>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">slope log(x)</th>
+<th style="text-align: right;">std. error</th>
+<th style="text-align: right;">P</th>
+<th style="text-align: right;">phi</th>
+<th style="text-align: right;">AIC</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Poisson</td>
+<td style="text-align: right;">0.601</td>
+<td style="text-align: right;">0.080</td>
+<td style="text-align: right;">0.00000</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">84.2</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">quasi-Poisson</td>
+<td style="text-align: right;">0.601</td>
+<td style="text-align: right;">0.145</td>
+<td style="text-align: right;">0.00200</td>
+<td style="text-align: right;">3.29</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">negative binomial</td>
+<td style="text-align: right;">0.463</td>
+<td style="text-align: right;">0.142</td>
+<td style="text-align: right;">0.00108</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">78.5</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a>fm6 <span class="ot">&lt;-</span> <span class="fu">glm</span>(y <span class="sc">~</span> <span class="fu">log</span>(x), <span class="at">family =</span> quasipoisson, <span class="at">data =</span> exa)   <span class="co"># quasi-likelihood</span></span>
+<span id="cb1-2"><a href=""></a>fm5 <span class="ot">&lt;-</span> <span class="fu">glm.nb</span>(y <span class="sc">~</span> <span class="fu">log</span>(x), <span class="at">data =</span> exa)                       <span class="co"># MASS</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li><strong>quasi-Poisson</strong>: keeps the Poisson mean–variance <em>shape</em> but estimates the dispersion <span class="math inline">\(\hat\phi\)</span> = 3.29 from the data. The estimates are <strong>identical</strong> to the Poisson fit; every standard error is multiplied by <span class="math inline">\(\sqrt{\hat\phi}\)</span> = 1.81: 0.080 → 0.145. <em>z</em> becomes <em>t</em>, and there is <strong>no AIC</strong> (no true likelihood).</li>
+<li><strong>negative binomial</strong>: a different distribution with a clumping parameter <span class="math inline">\(\theta\)</span> = 6.6 (<span class="math inline">\(\theta \to \infty\)</span> is the Poisson). The estimate itself changes (0.60 → 0.46), the SE almost doubles, and an AIC exists. Its own dispersion ratio: 1.18.</li>
+</ul>
+<p>Both make the relationship <em>less</em> significant — but it remains clearly positive.</p>
+</section>
+<section id="quasi-binomial-the-same-trick-for-proportions" class="slide level2">
+<h2>Quasi-binomial: the same trick for proportions</h2>
+
+<img data-src="presentation4b_regression_diagnostics_files/figure-revealjs/quasibinom-1.png" width="1350" class="r-stretch"><div class="fignote">
+<p>Survival of <em>Daphnia</em> against a toxin (a <strong>binomial</strong> GLM, presentation 3). Dispersion ratio 0.78 — slightly <strong>under</strong>dispersed. <code>family = quasibinomial</code> estimates <span class="math inline">\(\hat\phi\)</span> = 0.78 and scales the standard errors by <span class="math inline">\(\sqrt{0.78}\)</span> = 0.88: the same fitted curve, but a <em>narrower</em> band and a <em>smaller</em> p-value. With the more usual overdispersion it works the other way: the band widens. Never trust a binomial or Poisson standard error before you have checked <span class="math inline">\(\hat\phi\)</span>.</p>
+</div>
+</section>
+<section id="residuals-which-ones-and-on-which-axis" class="slide level2 smaller">
+<h2>3. Residuals: which ones, and on which axis</h2>
+<p>For a Gaussian model the residual is just <span class="math inline">\(y - \hat y\)</span>. For Poisson or binomial data that is useless: large <span class="math inline">\(\hat y\)</span> have large residuals <em>by design</em>. So we divide by what the model expects (<strong>Pearson</strong>), or use the contribution to the deviance (<strong>deviance residual</strong>), and then correct for dispersion and leverage:</p>
+<blockquote>
+<p><strong>standardised deviance residuals</strong>: <code>rstandard(fm)</code> — patternless cloud around 0, spread about ±2, roughly 5% outside ±2.</p>
+</blockquote>
+
+<img data-src="presentation4b_regression_diagnostics_files/figure-revealjs/link-vs-response-1.png" width="1350" class="r-stretch"><div class="fignote">
+<p>Same residuals, two <em>x</em>-axes. On the response scale the points pile up at the left and the plot is uninformative; on the <strong>link scale</strong> — <code>predict(fm, type = "link")</code> — the points spread out evenly (Dormann Fig. 9.3). Always plot against the linear predictor, and against <strong>each predictor</strong> — including candidate predictors that are <em>not</em> (yet) in the model.</p>
+</div>
+</section>
+<section id="residuals-the-four-faces-of-a-residual-plot" class="slide level2">
+<h2>Residuals: the four faces of a residual plot</h2>
+
+<img data-src="presentation4b_regression_diagnostics_files/figure-revealjs/four-faces-1.png" width="1350" class="r-stretch"><div class="fignote">
+<p>Dormann Fig. 9.4. Two questions, always: <strong>is there a trend?</strong> and <strong>is the spread the same everywhere?</strong> A trend (right column) means the <em>mean</em> is misspecified — wrong functional form, or a missing predictor (→ step 4). A fan (bottom row) means the <em>variance</em> is misspecified — wrong distribution or dispersion (→ step 2). Crawley: the ideal plot looks like “stars in a clear night sky”. For 0/1 (Bernoulli) data these plots are <em>not</em> helpful; there one simulates from the model instead (<code>DHARMa</code>).</p>
+</div>
+</section>
+<section id="residuals-of-the-running-example" class="slide level2">
+<h2>Residuals of the running example</h2>
+
+<img data-src="presentation4b_regression_diagnostics_files/figure-revealjs/exa-resid-1.png" width="1350" class="r-stretch"><div class="fignote">
+<p>The first ten residuals march down in a <strong>straight line</strong> — from +2.5 at <em>x</em> = 1 to −1.7 at <em>x</em> = 10 — and then the two large <em>x</em> jump back up. Such a pattern in residuals that should be random makes us suspicious of the <em>whole</em> model: <code>log(x)</code> alone does not capture the opposing trends of the small and the large <em>x</em> values. Note that this is the negative binomial fit — the dispersion “fix” of step 2 did nothing for the shape. We need a different <strong>functional relationship</strong> (step 4).</p>
+</div>
+</section>
+<section id="functional-relationship-draw-the-curve-with-its-band" class="slide level2">
+<h2>4. Functional relationship: draw the curve — with its band</h2>
+
+<img data-src="presentation4b_regression_diagnostics_files/figure-revealjs/curve-band-1.png" width="1350" class="r-stretch"><div class="fignote">
+<p>Dormann Fig. 10.4. <code>curve()</code> can draw <span class="math inline">\(e^{a + b\log x}\)</span> but not its confidence band; for that: a fine sequence of <em>x</em>, <code>predict(fm, newdata, se.fit = TRUE)</code> on the <strong>link scale</strong>, fit ± 2 SE, then back-transform (<code>exp()</code> for a log link, <code>plogis()</code> for a logit) and <code>matlines()</code>. Poisson and quasi-Poisson give the <em>same</em> curve — only the band differs. Beyond <em>x</em> ≈ 20 the bands are so wide that the two models are “very similar”, even though the negative binomial curve lies consistently lower.</p>
+</div>
+</section>
+<section id="alternative-1-or-2-a-polynomial-on-the-link-scale" class="slide level2 smaller">
+<h2>Alternative 1 or 2? A polynomial on the link scale</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="presentation4b_regression_diagnostics_files/figure-revealjs/poly-plot-1.png" width="780"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;">model</th>
+<th style="text-align: right;">resid. dev</th>
+<th style="text-align: right;">df</th>
+<th style="text-align: right;">P</th>
+<th style="text-align: right;">AIC</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">log(x)</td>
+<td style="text-align: right;">30.9</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">84.2</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">poly(log(x), 2)</td>
+<td style="text-align: right;">8.8</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">2.59e-06</td>
+<td style="text-align: right;">64.1</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><code>fm22 &lt;- glm(y ~ poly(log(x), 2), family = poisson)</code> <code>anova(fm2, fm22, test = "Chisq")</code></p>
+<p>Any smooth curve can be approximated by a polynomial, and “simply non-linear” data rarely need more than <span class="math inline">\(x + x^2\)</span>. The quadratic term explains 22 more units of deviance (<em>P</em> &lt; 10⁻⁵), the AIC drops by 20 — and the dispersion ratio falls from 3.09 to 0.98: the overdispersion <strong>was</strong> the wrong curve. Refit the negative binomial with the quadratic and <span class="math inline">\(\theta\)</span> jumps from 6.6 to 197 — it <em>becomes</em> a Poisson.</p>
+</div></div>
+<div class="fignote">
+<p>Nested models (one is the other with a term set to 0): <strong>likelihood-ratio test</strong>. Non-nested (Poisson vs negative binomial): <strong>AIC</strong>. Quasi-models: neither — only the pictures. Use <code>poly()</code> for the test (orthogonal, correct SEs); the explicit <code>x + I(x^2)</code> gives the same curve and readable coefficients but distorted standard errors (Dormann’s footnote 9). Refit and <strong>repeat all checks</strong>: the residuals of <code>fm22</code> are within ±2 without a pattern, and the observed values sit on the 1:1 line against the fitted ones (Dormann Fig. 10.6).</p>
+</div>
+</section>
+<section id="statistically-better-ecologically-different" class="slide level2 smaller">
+<h2>Statistically better ≠ ecologically different</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="presentation4b_regression_diagnostics_files/figure-revealjs/gala-poly-1.png" width="780"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<p>Galapagos (Dormann Sect. 9.1.5): the quadratic term is “significant” (LR test <em>P</em> = 0.001, AIC −8) — but the curves differ only for the smallest islands, and <span class="math inline">\(\hat\phi\)</span> = 23 says the Poisson standard errors are far too optimistic.</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;">family</th>
+<th style="text-align: right;">LR test: quadratic term</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Poisson</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">neg. binomial</td>
+<td style="text-align: right;">0.840</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Account for the overdispersion with a negative binomial and the evidence for the curvature <strong>vanishes</strong>. Extrapolating to a 1000 m² rock, the two Poisson models predict λ = 2.6 vs 1.2 species — with overlapping intervals.</p>
+</div></div>
+<div class="fignote">
+<p>Dormann: <em>“What we really need here is a sense of proportion.”</em> Use the quadratic if your hypothesis demands it; otherwise a linear interpretation is defensible when the curves are practically indistinguishable — and be very careful when the models only disagree <em>outside</em> the range of the data.</p>
+</div>
+</section>
+<section id="the-gaussian-case-plotlm...-gives-four-plots-for-free" class="slide level2">
+<h2>The Gaussian case: <code>plot(lm(...))</code> gives four plots for free</h2>
+
+<img data-src="presentation4b_regression_diagnostics_files/figure-revealjs/lm-four-1.png" width="1350" class="r-stretch"><div class="fignote">
+<p>Anscombe’s <em>good</em> data set 1. For a normal LM the link is the identity, so response and link scale coincide and residual analysis is “especially important” (Dormann): mean and variance are independent, so the spread must be the <strong>same for all fitted values</strong> (<em>homoscedasticity</em>). R’s four standard plots check, in turn: the <strong>mean</strong> (1), the <strong>distribution</strong> (2), the <strong>variance</strong> (3) and the <strong>influence</strong> (4). The three most extreme points are labelled with their row numbers in every panel.</p>
+</div>
+</section>
+<section id="plots-1-and-3-residuals-vs-fitted-scale-location" class="slide level2 smaller">
+<h2>Plots 1 and 3: residuals vs fitted, scale-location</h2>
+
+<img data-src="presentation4b_regression_diagnostics_files/figure-revealjs/lm-13-1.png" width="1350" class="r-stretch"><div class="fignote">
+<p><strong>Plot 1</strong> — raw residuals <span class="math inline">\(y - \hat y\)</span> against <span class="math inline">\(\hat y\)</span> with a red lowess line. Ideal: a flat line at 0 and a uniform band of points. A bend = the functional form is wrong (Anscombe 2, middle); a fan = the variance grows with the mean (right). <strong>Plot 3</strong> — <span class="math inline">\(\sqrt{|\text{standardised residual}|}\)</span> against <span class="math inline">\(\hat y\)</span>. Taking the absolute value folds the cloud upwards and the square root tames the skew, so this plot isolates the <em>variance</em> question: a rising red line means <strong>heteroscedasticity</strong> → think log-transform of <em>y</em>, or a gamma/Poisson GLM whose variance is <em>allowed</em> to grow with the mean.</p>
+</div>
+</section>
+<section id="plot-2-the-normal-q-q-plot" class="slide level2 smaller">
+<h2>Plot 2: the normal Q-Q plot</h2>
+
+<img data-src="presentation4b_regression_diagnostics_files/figure-revealjs/lm-qq-1.png" width="1350" class="r-stretch"><div class="fignote">
+<p>The standardised residuals are <strong>sorted</strong> and plotted against the quantiles one would expect from a standard normal distribution of the same size (<em>Q</em> = quantile: empirical on the <em>y</em>-axis, theoretical on the <em>x</em>-axis). Normal residuals lie on the 1:1 line. A <strong>curve</strong> (middle) means skew: the largest residuals are larger than a normal distribution allows — typical for a strictly positive response, and a hint towards a log-transform or a gamma distribution. An <strong>S-shape</strong> (right) means heavy tails: more extreme residuals at <em>both</em> ends than expected. Small wiggles at the extremes are normal; only check normality <em>of the residuals</em>, never of the raw <em>y</em>.</p>
+</div>
+</section>
+<section id="plot-4-residuals-vs-leverage-where-cooks-distance-lives" class="slide level2 smaller">
+<h2>Plot 4: residuals vs leverage — where Cook’s distance lives</h2>
+
+<img data-src="presentation4b_regression_diagnostics_files/figure-revealjs/lm-lev-1.png" width="1350" class="r-stretch"><div class="fignote">
+<p><strong>Leverage</strong> (the hat value, <em>x</em>-axis) says how <em>unusual</em> an observation’s predictor value is — far from <span class="math inline">\(\bar x\)</span> means a long lever. The <strong>standardised residual</strong> (<em>y</em>-axis) says how far it is from the line. Cook’s distance is the product of the two, and the dashed red <strong>contours at 0.5 and 1</strong> show where it gets dangerous: the top-right and bottom-right corners. Anscombe 3’s point 3 has a moderate leverage but a huge residual → <em>D</em> = 1.4. (Anscombe 4 cannot be drawn: its single outlying <em>x</em> has leverage 1 and Cook’s distance is undefined.) <code>plot(fm, which = 4)</code> shows the same information as a bar per observation.</p>
+</div>
+</section>
+<section id="take-home-messages" class="slide level2 smaller">
+<h2>Take-home messages</h2>
+<ol type="1">
+<li><code>summary()</code> <strong>cannot</strong> diagnose a model — Anscombe’s quartet has identical numbers and only one acceptable fit. Plot the data, plot the fit, plot the residuals.</li>
+<li><strong>Cook’s distance</strong> finds observations that steer the fit (<span class="math inline">\(D &gt; 1\)</span> or <span class="math inline">\(&gt; 4/n\)</span>). Never delete them: refit without them, compare, and report both if the conclusion changes.</li>
+<li>Poisson and binomial models assume <strong>dispersion = 1</strong>. Check deviance / df; if it is far from 1, the standard errors are wrong. A <strong>quasi</strong>-model keeps the estimates and rescales the SEs by <span class="math inline">\(\sqrt{\hat\phi}\)</span>; a <strong>negative binomial</strong> changes the estimates too, and has an AIC.</li>
+<li>Plot <strong>standardised deviance residuals</strong> against the <em>linear predictor</em> and against every predictor. Ask: trend? unequal spread?</li>
+<li>A straight line on the link scale is an assumption — <strong>compare</strong> with a polynomial (LR test / AIC) and with another distribution, and always <strong>draw</strong> the curves with their confidence bands.</li>
+<li>The checks interact: fixing the curve can remove the overdispersion. After every change, <strong>repeat all checks</strong>.</li>
+<li>For a normal LM, <code>plot(fm)</code> does most of the work: mean (1), distribution (2), variance (3), influence (4). For a GLM build plots 1, 3 and 4 yourself with <code>rstandard()</code>, <code>predict(type = "link")</code> and <code>cooks.distance()</code>; the Q-Q plot is for the Gaussian case only.</li>
+</ol>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>Practical 4b runs exactly these four steps on <code>wells</code>, <code>clutch</code>, <code>RIKZdat</code> and <code>gala</code>: <code>cooks.distance()</code>, <code>family = quasipoisson / quasibinomial</code>, <code>glm.nb()</code>, <code>rstandard()</code>, <code>predict(..., se.fit = TRUE)</code> + <code>matlines()</code>, <code>poly()</code>, <code>anova(..., test = "Chisq")</code>, <code>AIC()</code>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Tip</strong></p>
+</div>
+<div class="callout-content">
+<p>Dormann, C. F. (2020). <em>Environmental Data Analysis: An Introduction with Examples in R</em>, Chapters 9 and 10. Springer. Further reading on the <code>lm</code> plots: Faraway (2005) <em>Linear Models with R</em>; Fox &amp; Weisberg (2019) <em>An R Companion to Applied Regression</em>.</p>
+</div>
+</div>
+</div>
+
+</section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<div class="footer footer-default">
+
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="presentation4b_regression_diagnostics_files/libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="presentation4b_regression_diagnostics_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="presentation4b_regression_diagnostics_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="presentation4b_regression_diagnostics_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="presentation4b_regression_diagnostics_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="presentation4b_regression_diagnostics_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="presentation4b_regression_diagnostics_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="presentation4b_regression_diagnostics_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="presentation4b_regression_diagnostics_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="presentation4b_regression_diagnostics_files/libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp('/' + window.location.host + '/');
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    
+
+</body></html>
