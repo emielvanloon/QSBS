@@ -1,0 +1,1397 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>QSBS Practical 4b — Regression diagnostics for GLMs Answers</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="QSBS_4b_regression_diagnostics_answers_files/libs/clipboard/clipboard.min.js"></script>
+<script src="QSBS_4b_regression_diagnostics_answers_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="QSBS_4b_regression_diagnostics_answers_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="QSBS_4b_regression_diagnostics_answers_files/libs/quarto-html/popper.min.js"></script>
+<script src="QSBS_4b_regression_diagnostics_answers_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="QSBS_4b_regression_diagnostics_answers_files/libs/quarto-html/anchor.min.js"></script>
+<link href="QSBS_4b_regression_diagnostics_answers_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="QSBS_4b_regression_diagnostics_answers_files/libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="QSBS_4b_regression_diagnostics_answers_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="QSBS_4b_regression_diagnostics_answers_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="QSBS_4b_regression_diagnostics_answers_files/libs/bootstrap/bootstrap-94053d6e10daeb31c4957f2bd90b11ca.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#exercise-1-influential-points" id="toc-exercise-1-influential-points" class="nav-link" data-scroll-target="#exercise-1-influential-points">Exercise 1 — Influential points</a>
+  <ul class="collapse">
+  <li><a href="#answer" id="toc-answer" class="nav-link" data-scroll-target="#answer">Answer</a></li>
+  </ul></li>
+  <li><a href="#exercise-2-dispersion" id="toc-exercise-2-dispersion" class="nav-link" data-scroll-target="#exercise-2-dispersion">Exercise 2 — Dispersion</a>
+  <ul class="collapse">
+  <li><a href="#answer-1" id="toc-answer-1" class="nav-link" data-scroll-target="#answer-1">Answer</a></li>
+  </ul></li>
+  <li><a href="#exercise-3-residuals" id="toc-exercise-3-residuals" class="nav-link" data-scroll-target="#exercise-3-residuals">Exercise 3 — Residuals</a>
+  <ul class="collapse">
+  <li><a href="#answer-2" id="toc-answer-2" class="nav-link" data-scroll-target="#answer-2">Answer</a></li>
+  </ul></li>
+  <li><a href="#exercise-4-the-functional-relationship-between-y-and-x" id="toc-exercise-4-the-functional-relationship-between-y-and-x" class="nav-link" data-scroll-target="#exercise-4-the-functional-relationship-between-y-and-x">Exercise 4 — The functional relationship between y and x</a>
+  <ul class="collapse">
+  <li><a href="#answer-3" id="toc-answer-3" class="nav-link" data-scroll-target="#answer-3">Answer</a></li>
+  </ul></li>
+  <li><a href="#exercise-5-putting-it-all-together" id="toc-exercise-5-putting-it-all-together" class="nav-link" data-scroll-target="#exercise-5-putting-it-all-together">Exercise 5 — Putting it all together</a>
+  <ul class="collapse">
+  <li><a href="#answer-4" id="toc-answer-4" class="nav-link" data-scroll-target="#answer-4">Answer</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">QSBS Practical 4b — Regression diagnostics for GLMs Answers</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>In Practical 3 we fitted generalised linear models and interpreted their output. In this practical we check whether those models are <em>adequate</em> for the data, following the four model-based diagnostic steps of Dormann (Sect. 9.1 and 10.1): influential points (Cook’s distance), dispersion, residuals, and the functional relationship between <span class="math inline">\(y\)</span> and <span class="math inline">\(x\)</span>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(qsbsdata)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="exercise-1-influential-points" class="level1">
+<h1>Exercise 1 — Influential points</h1>
+<p>In Practical 3 (Exercise 3) we modelled the proportion of contaminated wells in 20 areas on Long Island as a function of the nitrate concentration: <code>glm(cbind(y, n - y) ~ nitrate, family = binomial, data = wells)</code>. Refit that model and call it <code>fw</code>.</p>
+<ol type="a">
+<li>Calculate Cook’s distance for every area with <code>cooks.distance(fw)</code> and plot the values against the row number (<code>type = "h"</code>). Add horizontal reference lines at the two thresholds mentioned by Dormann (Sect. 9.1.2): 1 and <span class="math inline">\(4/n\)</span>. Which areas are flagged by each threshold?</li>
+<li>Look at the flagged area(s) in the data (<code>wells[i, ]</code>). Why does this particular area have such a large influence? Think about <em>where</em> it sits on the x-axis, <em>how many</em> wells it contributes, and how far its observed proportion is from the fitted curve.</li>
+<li>Refit the model without the most influential area (<code>update(fw, data = wells[-i, ])</code>). Put the coefficients and standard errors of the full and the reduced model side by side. By how much does the slope change? Does the conclusion about the effect of nitrate change?</li>
+<li>Draw the data (proportion <code>y/n</code> against <code>nitrate</code>, with point size proportional to <code>n</code>) and add the fitted curves of both models. Where do the two curves differ most, and why is that region exactly where you should be most careful with predictions?</li>
+<li>Write the sentence you would put in a report, following the two model sentences in Dormann Sect. 10.1.2. Explain why the influential area must <em>not</em> simply be dropped from the analysis.</li>
+</ol>
+<section id="answer" class="level2">
+<h2 class="anchored" data-anchor-id="answer">Answer</h2>
+<p><strong>(a)</strong> Cook’s distance combines the leverage of an observation (how unusual its <span class="math inline">\(x\)</span> value is) with the size of its residual. It tells us how much <em>all</em> fitted values change when that one observation is left out.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>fw <span class="ot">&lt;-</span> <span class="fu">glm</span>(<span class="fu">cbind</span>(y, n <span class="sc">-</span> y) <span class="sc">~</span> nitrate, <span class="at">family =</span> binomial, <span class="at">data =</span> wells)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>cd <span class="ot">&lt;-</span> <span class="fu">cooks.distance</span>(fw)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>n  <span class="ot">&lt;-</span> <span class="fu">nrow</span>(wells)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(cd, <span class="at">type =</span> <span class="st">"h"</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">las =</span> <span class="dv">1</span>,</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"area (row number)"</span>, <span class="at">ylab =</span> <span class="st">"Cook's distance"</span>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">4</span> <span class="sc">/</span> n), <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">"grey40"</span>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="fu">which</span>(cd <span class="sc">&gt;</span> <span class="dv">4</span> <span class="sc">/</span> n), cd[cd <span class="sc">&gt;</span> <span class="dv">4</span> <span class="sc">/</span> n], <span class="at">labels =</span> <span class="fu">which</span>(cd <span class="sc">&gt;</span> <span class="dv">4</span> <span class="sc">/</span> n), <span class="at">pos =</span> <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="QSBS_4b_regression_diagnostics_answers_files/figure-html/ex1a-cooks-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Cook’s distance for the 20 areas in the binomial model. Dashed lines: thresholds 1 and 4/n.</figcaption>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(cd, <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     1      2      3      4      5      6      7      8      9     10     11 
+ 0.046  0.737  0.007 35.900  0.004  0.019  0.073  0.568  2.210  0.045  0.001 
+    12     13     14     15     16     17     18     19     20 
+ 0.000  0.044  0.079  0.006  0.066  0.790  0.007  0.713  0.025 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span>(cd <span class="sc">&gt;</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>4 9 
+4 9 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span>(cd <span class="sc">&gt;</span> <span class="dv">4</span> <span class="sc">/</span> n)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> 2  4  8  9 17 19 
+ 2  4  8  9 17 19 </code></pre>
+</div>
+</div>
+<p>Area 4 has a Cook’s distance of about 36 — far beyond either threshold — and area 9 (<span class="math inline">\(D = 2.2\)</span>) also exceeds 1. The lenient <span class="math inline">\(4/n = 0.2\)</span> rule additionally flags areas 2, 8, 17 and 19, but these are all below 1 and only marginally above 0.2. Area 4 is in a league of its own, and we concentrate on it.</p>
+<p><strong>(b)</strong></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>wells[<span class="dv">4</span>, ]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  y  n land.use sewer nitrate chloride
+4 2 48     agri    no       7       20</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">range</span>(wells<span class="sc">$</span>nitrate)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.8 7.0</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">cbind</span>(<span class="at">observed =</span> wells<span class="sc">$</span>y <span class="sc">/</span> wells<span class="sc">$</span>n, <span class="at">fitted =</span> <span class="fu">fitted</span>(fw))[<span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">9</span>, <span class="dv">17</span>, <span class="dv">19</span>), ], <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   observed fitted
+4     0.042  0.420
+9     0.434  0.281
+17    0.476  0.224
+19    0.515  0.190</code></pre>
+</div>
+</div>
+<p>Three things come together in area 4:</p>
+<ul>
+<li>it has the <strong>highest nitrate concentration</strong> of all areas (7.0 mg/l, the next highest is 5.4), so it sits alone at the right end of the x-axis and has a large <em>leverage</em>: the slope of the logistic curve is largely determined by what happens at the extremes of <span class="math inline">\(x\)</span>;</li>
+<li>it contributes <strong>48 wells</strong>, so in a binomial model it carries a lot of weight;</li>
+<li>yet only 2 of those 48 wells are contaminated (4 %), whereas the model, driven by the other areas, expects around 40 % at this nitrate level. Its residual is therefore huge.</li>
+</ul>
+<p>Large leverage combined with a large residual is the recipe for a large Cook’s distance.</p>
+<p><strong>(c)</strong></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>fw_red <span class="ot">&lt;-</span> <span class="fu">update</span>(fw, <span class="at">data =</span> wells[<span class="sc">-</span><span class="dv">4</span>, ])</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>comp <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="at">full_est =</span> <span class="fu">coef</span>(fw),      <span class="at">full_se =</span> <span class="fu">summary</span>(fw)<span class="sc">$</span>coef[, <span class="dv">2</span>],</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">red_est  =</span> <span class="fu">coef</span>(fw_red),  <span class="at">red_se  =</span> <span class="fu">summary</span>(fw_red)<span class="sc">$</span>coef[, <span class="dv">2</span>])</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(comp, <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            full_est full_se red_est red_se
+(Intercept)   -2.714   0.250  -4.191  0.382
+nitrate        0.342   0.059   0.815  0.097</code></pre>
+</div>
+</div>
+<p>Without area 4 the slope more than doubles (from 0.34 to 0.82 per mg/l nitrate), and the intercept drops. The <em>direction</em> and the <em>significance</em> of the effect do not change (both models give <span class="math inline">\(p &lt; 0.001\)</span>), but the <em>size</em> of the effect is anything but robust: one area decides whether the odds of contamination increase by a factor <span class="math inline">\(e^{0.34} = 1.4\)</span> or by a factor <span class="math inline">\(e^{0.82} = 2.3\)</span> per mg/l.</p>
+<p><strong>(d)</strong></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>xnew <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">8</span>, <span class="at">length =</span> <span class="dv">100</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>p_full <span class="ot">&lt;-</span> <span class="fu">predict</span>(fw,     <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">nitrate =</span> xnew), <span class="at">type =</span> <span class="st">"response"</span>)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>p_red  <span class="ot">&lt;-</span> <span class="fu">predict</span>(fw_red, <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">nitrate =</span> xnew), <span class="at">type =</span> <span class="st">"response"</span>)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(y <span class="sc">/</span> n <span class="sc">~</span> nitrate, <span class="at">data =</span> wells, <span class="at">cex =</span> <span class="fu">sqrt</span>(n) <span class="sc">/</span> <span class="dv">3</span>, <span class="at">pch =</span> <span class="dv">21</span>, <span class="at">bg =</span> <span class="st">"grey80"</span>, <span class="at">las =</span> <span class="dv">1</span>,</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"nitrate (mg/l)"</span>, <span class="at">ylab =</span> <span class="st">"proportion of contaminated wells"</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(wells<span class="sc">$</span>nitrate[<span class="dv">4</span>], wells<span class="sc">$</span>y[<span class="dv">4</span>] <span class="sc">/</span> wells<span class="sc">$</span>n[<span class="dv">4</span>], <span class="at">pch =</span> <span class="dv">21</span>, <span class="at">bg =</span> <span class="st">"firebrick"</span>, <span class="at">cex =</span> <span class="fu">sqrt</span>(<span class="dv">48</span>) <span class="sc">/</span> <span class="dv">3</span>)</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(xnew, p_full, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(xnew, p_red, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topleft"</span>, <span class="at">bty =</span> <span class="st">"n"</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">lty =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>),</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"all areas"</span>, <span class="st">"without area 4"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="QSBS_4b_regression_diagnostics_answers_files/figure-html/ex1d-curves-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Observed proportion of contaminated wells (symbol size proportional to the number of wells) with the fitted curves of the full model (solid) and the model without area 4 (dashed).</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The curves are almost identical up to about 4 mg/l, where most of the data are. They diverge strongly above 5 mg/l — exactly the region where area 4 is the only observation. Without it, nothing constrains the curve there, so the reduced model extrapolates steeply upwards. Predictions in a region that is supported by a single observation depend entirely on that observation, whichever model you pick.</p>
+<p><strong>(e)</strong> A report sentence in the style of Dormann:</p>
+<blockquote class="blockquote">
+<p>“Area 4 (nitrate 7.0 mg/l, 2 of 48 wells contaminated) was identified as influential according to Cook’s distance (<span class="math inline">\(D = 36\)</span>, threshold 1: Cook and Weisberg 1982). Its exclusion did not change the direction or significance of the nitrate effect (<span class="math inline">\(p &lt; 0.001\)</span> in both cases), but the estimated slope increased from 0.34 (SE 0.06) to 0.82 (SE 0.10) per mg/l, so the size of the effect at high nitrate concentrations is uncertain. We report the model based on all areas.”</p>
+</blockquote>
+<p>The area cannot simply be dropped because there is no indication that it is a data error: it is a real area with real measurements, and it happens to be the <em>only</em> information we have about high nitrate concentrations. Deleting it would mean fitting a model that claims to know what happens at 7 mg/l while having thrown away the only observation at that level. What we <em>can</em> do is show that the analysis is (or is not) robust to its exclusion, and say so — which is what the sentence above does.</p>
+</section>
+</section>
+<section id="exercise-2-dispersion" class="level1">
+<h1>Exercise 2 — Dispersion</h1>
+<p>In this exercise we look at over- and underdispersion, and at how a quasi-likelihood model corrects the standard errors.</p>
+<ol type="a">
+<li>For the binomial model <code>fw</code> from Exercise 1, calculate the ratio residual deviance / residual degrees of freedom. Also calculate the Pearson version, <span class="math inline">\(\sum r_P^2 / \mathrm{df}\)</span>, with <code>residuals(fw, type = "pearson")</code>. Are the data over- or underdispersed? Is a binomial model with 20 areas on Long Island likely to satisfy the assumption that all wells in an area are independent draws with the same probability?</li>
+<li>Refit the model with <code>family = quasibinomial</code> and compare the <code>summary()</code> of the two fits. Which numbers are identical, which have changed, and what is the value reported as “Dispersion parameter”? Show that the standard errors of the quasi-model equal those of the binomial model multiplied by <span class="math inline">\(\sqrt{\hat\phi}\)</span>. What happens to the p-value of the nitrate effect?</li>
+<li>Now take the Mallard clutch-size data <code>clutch</code> (see <code>?clutch</code>): the number of eggs (<code>CLUTCH</code>) in nests in artificial nesting structures, together with the Julian date on which the nest was found (<code>date</code>). Plot <code>CLUTCH</code> against <code>date</code>, fit a Poisson GLM <code>CLUTCH ~ date</code> and calculate the dispersion ratio. Are these data over- or underdispersed? Give a biological reason why clutch sizes might be <em>less</em> variable than a Poisson distribution predicts.</li>
+<li>Refit the clutch model with <code>family = quasipoisson</code>. In which direction do the standard errors move, and by what factor? What does this imply for the p-value and for the width of a confidence interval of the date effect? Explain in one sentence why underdispersion is, in a sense, a “luckier” problem to have than overdispersion.</li>
+<li>Finally, return to the Galápagos species–area model of Practical 3 (Exercise 4): <code>glm(Species ~ log(Area), family = poisson, data = gala)</code>. The dispersion ratio is enormous. Fit a quasi-Poisson model and a negative binomial model (<code>glm.nb()</code>) and put the estimate and standard error of the <code>log(Area)</code> slope from all three models in one table. Which of the two remedies changes the <em>estimate</em>, and which one only changes the <em>standard error</em>? Why can the quasi-Poisson model not be compared with the others by AIC?</li>
+</ol>
+<section id="answer-1" class="level2">
+<h2 class="anchored" data-anchor-id="answer-1">Answer</h2>
+<p><strong>(a)</strong></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">deviance_ratio =</span> <span class="fu">deviance</span>(fw) <span class="sc">/</span> <span class="fu">df.residual</span>(fw),</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">pearson_ratio  =</span> <span class="fu">sum</span>(<span class="fu">residuals</span>(fw, <span class="at">type =</span> <span class="st">"pearson"</span>)<span class="sc">^</span><span class="dv">2</span>) <span class="sc">/</span> <span class="fu">df.residual</span>(fw))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>deviance_ratio  pearson_ratio 
+      6.231120       5.572557 </code></pre>
+</div>
+</div>
+<p>Both ratios are about 6, far above the “<span class="math inline">\(&gt; 2\)</span>” rule of thumb: the proportions are strongly <strong>overdispersed</strong>. This is not surprising. Wells within one area are not independent draws with one common probability: they share local geology, depth, distance to sources of pollution, etc. Such <em>extra-binomial variation</em> between wells within an area — and between areas that are not captured by nitrate alone — inflates the variance beyond <span class="math inline">\(np(1-p)\)</span>.</p>
+<p><strong>(b)</strong></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>fwq <span class="ot">&lt;-</span> <span class="fu">glm</span>(<span class="fu">cbind</span>(y, n <span class="sc">-</span> y) <span class="sc">~</span> nitrate, <span class="at">family =</span> quasibinomial, <span class="at">data =</span> wells)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fw)<span class="sc">$</span>coefficients</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>              Estimate Std. Error    z value     Pr(&gt;|z|)
+(Intercept) -2.7135372 0.25042191 -10.835862 2.327629e-27
+nitrate      0.3415587 0.05928292   5.761502 8.336847e-09</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fwq)<span class="sc">$</span>coefficients</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>              Estimate Std. Error   t value    Pr(&gt;|t|)
+(Intercept) -2.7135372  0.5911654 -4.590149 0.000227116
+nitrate      0.3415587  0.1399479  2.440614 0.025227652</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>phi <span class="ot">&lt;-</span> <span class="fu">summary</span>(fwq)<span class="sc">$</span>dispersion</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>phi</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5.572799</code></pre>
+</div>
+</div>
+<p>Identical: the estimates, the deviances and the degrees of freedom — the quasi-likelihood uses the same score equations, so the fitted curve is unchanged. Changed: the standard errors, the test statistics (now <span class="math inline">\(t\)</span> instead of <span class="math inline">\(z\)</span>) and the p-values; the AIC is reported as <code>NA</code>. The “Dispersion parameter for quasibinomial family” is <span class="math inline">\(\hat\phi = 5.57\)</span>, which is the Pearson ratio from (a) — <em>not</em> the deviance ratio.</p>
+<p>The standard errors are exactly the binomial ones multiplied by <span class="math inline">\(\sqrt{\hat\phi}\)</span>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(<span class="at">binomial_se =</span> <span class="fu">summary</span>(fw)<span class="sc">$</span>coef[, <span class="dv">2</span>],</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>      <span class="at">binomial_se_x_sqrt_phi =</span> <span class="fu">summary</span>(fw)<span class="sc">$</span>coef[, <span class="dv">2</span>] <span class="sc">*</span> <span class="fu">sqrt</span>(phi),</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">quasi_se =</span> <span class="fu">summary</span>(fwq)<span class="sc">$</span>coef[, <span class="dv">2</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            binomial_se binomial_se_x_sqrt_phi  quasi_se
+(Intercept)  0.25042191              0.5911654 0.5911654
+nitrate      0.05928292              0.1399479 0.1399479</code></pre>
+</div>
+</div>
+<p>The p-value of the nitrate effect goes from <span class="math inline">\(8 \times 10^{-9}\)</span> to <span class="math inline">\(0.025\)</span>: still significant, but the binomial model exaggerated the evidence by many orders of magnitude. That is what “underestimated standard errors” means in practice.</p>
+<p><strong>(c)</strong></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>fc <span class="ot">&lt;-</span> <span class="fu">glm</span>(CLUTCH <span class="sc">~</span> date, <span class="at">family =</span> poisson, <span class="at">data =</span> clutch)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">jitter</span>(CLUTCH) <span class="sc">~</span> date, <span class="at">data =</span> clutch, <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">col =</span> <span class="st">"grey40"</span>, <span class="at">las =</span> <span class="dv">1</span>,</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Julian date"</span>, <span class="at">ylab =</span> <span class="st">"clutch size"</span>)</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>dnew <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fu">min</span>(clutch<span class="sc">$</span>date), <span class="fu">max</span>(clutch<span class="sc">$</span>date), <span class="at">length =</span> <span class="dv">100</span>)</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(dnew, <span class="fu">predict</span>(fc, <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">date =</span> dnew), <span class="at">type =</span> <span class="st">"response"</span>), <span class="at">lwd =</span> <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="QSBS_4b_regression_diagnostics_answers_files/figure-html/ex2c-clutch-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Mallard clutch size against Julian date of nest discovery, with the Poisson regression line.</figcaption>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">deviance_ratio =</span> <span class="fu">deviance</span>(fc) <span class="sc">/</span> <span class="fu">df.residual</span>(fc),</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">pearson_ratio  =</span> <span class="fu">sum</span>(<span class="fu">residuals</span>(fc, <span class="at">type =</span> <span class="st">"pearson"</span>)<span class="sc">^</span><span class="dv">2</span>) <span class="sc">/</span> <span class="fu">df.residual</span>(fc),</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">mean =</span> <span class="fu">mean</span>(clutch<span class="sc">$</span>CLUTCH), <span class="at">variance =</span> <span class="fu">var</span>(clutch<span class="sc">$</span>CLUTCH))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>deviance_ratio  pearson_ratio           mean       variance 
+     0.4333727      0.5099544     11.2446043      6.6788656 </code></pre>
+</div>
+</div>
+<p>The ratio is about 0.4–0.5, well below Dormann’s “<span class="math inline">\(&lt; 0.6\)</span>” limit: the clutch sizes are <strong>underdispersed</strong>. Already the raw numbers show it: the variance (6.7) is much smaller than the mean (11.2), whereas a Poisson variable would have both equal.</p>
+<p>Biologically this is what we expect. A Poisson distribution describes counts of <em>independent</em> events; eggs in a clutch are not independent events but the outcome of a tightly regulated physiological process. A Mallard lays roughly 9–13 eggs; clutches of 2 or 25 are physiologically or evolutionarily “not allowed”. Regulation squeezes the variance below the Poisson value.</p>
+<p><strong>(d)</strong></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>fcq <span class="ot">&lt;-</span> <span class="fu">glm</span>(CLUTCH <span class="sc">~</span> date, <span class="at">family =</span> quasipoisson, <span class="at">data =</span> clutch)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fc)<span class="sc">$</span>coefficients</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                Estimate Std. Error  z value     Pr(&gt;|z|)
+(Intercept)  2.951499860 0.16049609 18.38985 1.584031e-75
+date        -0.004594781 0.00137942 -3.33095 8.655005e-04</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fcq)<span class="sc">$</span>coefficients</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                Estimate   Std. Error   t value     Pr(&gt;|t|)
+(Intercept)  2.951499860 0.1146120099 25.752099 2.345706e-54
+date        -0.004594781 0.0009850592 -4.664472 7.271117e-06</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>phi_c <span class="ot">&lt;-</span> <span class="fu">summary</span>(fcq)<span class="sc">$</span>dispersion</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">phi =</span> phi_c, <span class="at">sqrt_phi =</span> <span class="fu">sqrt</span>(phi_c))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      phi  sqrt_phi 
+0.5099544 0.7141109 </code></pre>
+</div>
+</div>
+<p>Now <span class="math inline">\(\hat\phi = 0.51 &lt; 1\)</span>, so the standard errors <em>shrink</em> by a factor <span class="math inline">\(\sqrt{0.51} = 0.71\)</span>. The <span class="math inline">\(t\)</span>-value of the date effect rises from 3.3 to 4.7, the p-value falls from <span class="math inline">\(9 \times 10^{-4}\)</span> to <span class="math inline">\(7 \times 10^{-6}\)</span>, and a confidence interval for the slope becomes about 30 % narrower.</p>
+<p>Underdispersion is the “luckier” problem because the naive Poisson model is <em>conservative</em>: its standard errors are too large, so whatever it declares significant is significant; correcting for the underdispersion can only strengthen the conclusions, whereas correcting for overdispersion can make an apparently clear effect disappear.</p>
+<p><strong>(e)</strong></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>fg   <span class="ot">&lt;-</span> <span class="fu">glm</span>(Species <span class="sc">~</span> <span class="fu">log</span>(Area), <span class="at">family =</span> poisson,      <span class="at">data =</span> gala)</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>fgq  <span class="ot">&lt;-</span> <span class="fu">glm</span>(Species <span class="sc">~</span> <span class="fu">log</span>(Area), <span class="at">family =</span> quasipoisson, <span class="at">data =</span> gala)</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>fgnb <span class="ot">&lt;-</span> <span class="fu">glm.nb</span>(Species <span class="sc">~</span> <span class="fu">log</span>(Area), <span class="at">data =</span> gala)</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">deviance_ratio_poisson =</span> <span class="fu">deviance</span>(fg) <span class="sc">/</span> <span class="fu">df.residual</span>(fg),</span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">dispersion_quasipoisson =</span> <span class="fu">summary</span>(fgq)<span class="sc">$</span>dispersion,</span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">theta_negbin =</span> fgnb<span class="sc">$</span>theta)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> deviance_ratio_poisson dispersion_quasipoisson            theta_negbin 
+              23.711798               23.809650                2.634311 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>tab <span class="ot">&lt;-</span> <span class="fu">rbind</span>(<span class="at">poisson      =</span> <span class="fu">summary</span>(fg)<span class="sc">$</span>coef[<span class="st">"log(Area)"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>],</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">quasipoisson =</span> <span class="fu">summary</span>(fgq)<span class="sc">$</span>coef[<span class="st">"log(Area)"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>],</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">negbin       =</span> <span class="fu">summary</span>(fgnb)<span class="sc">$</span>coef[<span class="st">"log(Area)"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>])</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(tab, <span class="dv">4</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>             Estimate Std. Error
+poisson         0.343     0.0073
+quasipoisson    0.343     0.0358
+negbin          0.367     0.0360</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(fg, fgq, fgnb)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     df      AIC
+fg    2 800.0266
+fgq   3       NA
+fgnb  3 273.9926</code></pre>
+</div>
+</div>
+<p>The quasi-Poisson model keeps the Poisson <em>estimate</em> (<span class="math inline">\(z = 0.343\)</span>) and only inflates the standard error, from 0.007 to about 0.036 (a factor <span class="math inline">\(\sqrt{23.8} \approx 4.9\)</span>). The negative binomial model changes the <em>estimate</em> as well (<span class="math inline">\(z = 0.367\)</span>), because it weights the observations differently: the large islands with their huge counts no longer dominate the fit as they do under the Poisson variance. Its standard error is similar to the quasi-Poisson one.</p>
+<p>The quasi-Poisson fit has no likelihood — only a <em>quasi</em>-likelihood, a set of estimating equations that is not the derivative of any probability model — so <code>logLik()</code> and hence AIC are undefined (<code>AIC()</code> returns <code>NA</code>). The Poisson and negative binomial models, in contrast, are proper probability models for the same data and <em>can</em> be compared by AIC: the negative binomial wins by more than 500 units.</p>
+</section>
+</section>
+<section id="exercise-3-residuals" class="level1">
+<h1>Exercise 3 — Residuals</h1>
+<p>We return to the macro-fauna data <code>RIKZdat</code> and the Poisson model of species richness against tidal height, <code>glm(Richness ~ NAP, family = poisson, data = RIKZdat)</code>, which we call <code>fr</code>.</p>
+<ol type="a">
+<li>Calculate the standardised deviance residuals with <code>rstandard(fr)</code> and the fitted values on the link scale with <code>predict(fr, type = "link")</code>. Plot the residuals against the fitted values, add a horizontal line at 0 and a smoother (<code>lines(lowess(...))</code>). What should this plot look like if the model were adequate? What do you actually see?</li>
+<li>Why do we plot against the linear predictor <span class="math inline">\(\hat\eta\)</span> rather than against the fitted means <span class="math inline">\(\hat y\)</span> on the response scale? Make the same plot with <code>predict(fr, type = "response")</code> on the x-axis and describe how the picture changes (hint: look at the spacing of the points along the x-axis).</li>
+<li>How many residuals lie outside <span class="math inline">\(\pm 2\)</span>, and which stations are they (<code>which(abs(rSD) &gt; 2)</code>)? For standardised residuals roughly 5 % should exceed <span class="math inline">\(\pm 2\)</span> in absolute value; is that what you find? Is any single station also flagged by Cook’s distance?</li>
+<li>Plot the residuals against the predictor <code>NAP</code>. Is there a systematic pattern, e.g.&nbsp;a curvature? What kind of model change would this suggest? (We will test it in Exercise 4.)</li>
+<li>The data set contains more variables than <code>NAP</code>. Plot the residuals against <code>exposure</code> (a variable with three values, so use a boxplot with <code>factor(exposure)</code>) and against <code>humus</code>. Is there structure left in the residuals that one of these variables could explain? Extend the model with the variable that shows the clearest pattern, refit, and check whether the dispersion ratio and the residual plots have improved.</li>
+</ol>
+<section id="answer-2" class="level2">
+<h2 class="anchored" data-anchor-id="answer-2">Answer</h2>
+<p><strong>(a)</strong> Standardised deviance residuals are deviance residuals divided by <span class="math inline">\(\sqrt{\hat\phi (1 - h_i)}\)</span>, so they are corrected for the variance function, for the dispersion and for the leverage <span class="math inline">\(h_i\)</span> of each point. If the model is adequate they behave approximately like standard-normal noise: a horizontal, structureless band around 0, about 95 % of the points within <span class="math inline">\(\pm 2\)</span>, and no relation between their spread and the x-axis.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>fr  <span class="ot">&lt;-</span> <span class="fu">glm</span>(Richness <span class="sc">~</span> NAP, <span class="at">family =</span> poisson, <span class="at">data =</span> RIKZdat)</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>rSD <span class="ot">&lt;-</span> <span class="fu">rstandard</span>(fr)</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>eta <span class="ot">&lt;-</span> <span class="fu">predict</span>(fr, <span class="at">type =</span> <span class="st">"link"</span>)</span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(eta, rSD, <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">las =</span> <span class="dv">1</span>,</span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="fu">expression</span>(<span class="fu">hat</span>(eta) <span class="sc">==</span> <span class="fu">log</span>(<span class="fu">hat</span>(lambda))), <span class="at">ylab =</span> <span class="st">"standardised deviance residual"</span>)</span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">0</span>, <span class="at">lty =</span> <span class="dv">3</span>)</span>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="dv">2</span>), <span class="at">lty =</span> <span class="dv">3</span>, <span class="at">col =</span> <span class="st">"grey60"</span>)</span>
+<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">lowess</span>(eta, rSD), <span class="at">col =</span> <span class="st">"firebrick"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="QSBS_4b_regression_diagnostics_answers_files/figure-html/ex3a-resid-link-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Standardised deviance residuals of the Poisson model against the linear predictor (log scale).</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>What we see instead: the residuals are far from a tidy band. There are several very large positive residuals (up to +5.5) and the spread is clearly larger for the higher fitted values — consistent with the overdispersion (deviance ratio 2.6). The smoother is not flat either: it lies below 0 at both ends of the range and rises to 0 in the middle, suggesting some curvature that a straight line on the log scale does not capture. Also note that the smoother sits mostly <em>below</em> zero: the median residual is negative, while the mean is pulled to 0 by the few very large positive residuals.</p>
+<p><strong>(b)</strong> The GLM assumes linearity <strong>on the link scale</strong>: <span class="math inline">\(\log\lambda = a + b\,\mathrm{NAP}\)</span>. Any misspecification of that linear predictor shows up most cleanly when we plot against <span class="math inline">\(\hat\eta\)</span>. On the response scale the inverse link (<code>exp()</code>) compresses small values together and stretches large ones apart, so the points are unevenly spaced and curvature is distorted.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>yhat <span class="ot">&lt;-</span> <span class="fu">predict</span>(fr, <span class="at">type =</span> <span class="st">"response"</span>)</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(yhat, rSD, <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">las =</span> <span class="dv">1</span>,</span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="fu">expression</span>(<span class="fu">hat</span>(lambda)), <span class="at">ylab =</span> <span class="st">"standardised deviance residual"</span>)</span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">0</span>, <span class="at">lty =</span> <span class="dv">3</span>)</span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">lowess</span>(yhat, rSD), <span class="at">col =</span> <span class="st">"firebrick"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="QSBS_4b_regression_diagnostics_answers_files/figure-html/ex3b-resid-response-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>The same residuals against the fitted values on the response scale.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The residuals themselves are identical (they are the same numbers), but the x-axis is now <code>exp(eta)</code>: the low-richness stations are squashed into the left part of the plot and the few high-richness stations are stretched out to the right, making the smoother less reliable there. Note that with only one predictor the plot against <span class="math inline">\(\hat\eta\)</span> is, up to a linear rescaling of the x-axis, the same as the plot against <code>NAP</code> in (d).</p>
+<p><strong>(c)</strong></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>big <span class="ot">&lt;-</span> <span class="fu">which</span>(<span class="fu">abs</span>(rSD) <span class="sc">&gt;</span> <span class="dv">2</span>)</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>big</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> 1  4  6  7  9 22 42 
+ 1  4  6  7  9 22 42 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(big) <span class="sc">/</span> <span class="fu">length</span>(rSD)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.1555556</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(rSD[big], <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   1    4    6    7    9   22   42 
+2.16 3.32 2.85 2.71 5.55 5.09 2.25 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>RIKZdat[big, ]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   week exposure    NAP humus Beach Richness
+1     1       10  0.045  0.05     1       11
+4     1       10  0.616  0.15     1       11
+6     1        8  1.190  0.10     2        8
+7     1        8  0.820  0.10     2        9
+9     1        8  0.061  0.15     2       19
+22    4       10 -0.503  0.00     5       22
+42    3       10  0.094  0.20     9       11</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>cd <span class="ot">&lt;-</span> <span class="fu">cooks.distance</span>(fr)</span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(cd[cd <span class="sc">&gt;</span> <span class="dv">4</span> <span class="sc">/</span> <span class="fu">nrow</span>(RIKZdat)], <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    4     6     7     9    10    20    22 
+0.165 0.170 0.125 0.376 0.148 0.103 0.489 </code></pre>
+</div>
+</div>
+<p>Seven of the 45 stations (16 %) have <span class="math inline">\(|r| &gt; 2\)</span>, three times the 5 % we expect from a well-fitting model, and all of them are <em>positive</em>: the model underpredicts these stations. Three of them (stations 6, 7 and 9, all on beach 2) are the stations with <code>exposure = 8</code>. Station 22 (richness 22 at NAP <span class="math inline">\(= -0.5\)</span>, residual 5.5) is also the one with the largest Cook’s distance (0.49, above the <span class="math inline">\(4/n = 0.09\)</span> rule but below 1), followed by station 9. So there is a small group of stations, not a single outlier, that the model does not describe.</p>
+<p><strong>(d)</strong></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(RIKZdat<span class="sc">$</span>NAP, rSD, <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">las =</span> <span class="dv">1</span>,</span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"NAP (m)"</span>, <span class="at">ylab =</span> <span class="st">"standardised deviance residual"</span>)</span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">0</span>, <span class="at">lty =</span> <span class="dv">3</span>)</span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">lowess</span>(RIKZdat<span class="sc">$</span>NAP, rSD), <span class="at">col =</span> <span class="st">"firebrick"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="QSBS_4b_regression_diagnostics_answers_files/figure-html/ex3d-resid-nap-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Standardised deviance residuals against NAP.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The smoother has an inverted-U shape: residuals tend to be negative at the lowest and at the highest <code>NAP</code> values (the straight line overpredicts there) and closer to 0 or positive in between. That is the signature of a <em>curvature</em> that the linear term misses — on the log scale the decline seems to flatten off at low NAP and to steepen at high NAP — so the natural next step is to add a quadratic term, <code>poly(NAP, 2)</code>, and test whether it improves the model (Exercise 4). Notice, however, that the pattern is carried by a handful of points at the ends of the range and by a few large positive residuals in the middle, so the evidence is not overwhelming.</p>
+<p><strong>(e)</strong></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(rSD <span class="sc">~</span> <span class="fu">factor</span>(RIKZdat<span class="sc">$</span>exposure), <span class="at">las =</span> <span class="dv">1</span>,</span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab =</span> <span class="st">"exposure"</span>, <span class="at">ylab =</span> <span class="st">"standardised deviance residual"</span>)</span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">0</span>, <span class="at">lty =</span> <span class="dv">3</span>)</span>
+<span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(RIKZdat<span class="sc">$</span>humus, rSD, <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">las =</span> <span class="dv">1</span>,</span>
+<span id="cb56-6"><a href="#cb56-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"humus"</span>, <span class="at">ylab =</span> <span class="st">"standardised deviance residual"</span>)</span>
+<span id="cb56-7"><a href="#cb56-7" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">0</span>, <span class="at">lty =</span> <span class="dv">3</span>)</span>
+<span id="cb56-8"><a href="#cb56-8" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">lowess</span>(RIKZdat<span class="sc">$</span>humus, rSD), <span class="at">col =</span> <span class="st">"firebrick"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="QSBS_4b_regression_diagnostics_answers_files/figure-html/ex3e-other-predictors-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Residuals against two variables that are not in the model: exposure (left) and humus (right).</figcaption>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tapply</span>(rSD, RIKZdat<span class="sc">$</span>exposure, mean)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         8         10         11 
+ 2.8652928  0.2851675 -1.0425300 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(RIKZdat<span class="sc">$</span>exposure)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ 8 10 11 
+ 5 20 20 </code></pre>
+</div>
+</div>
+<p><code>exposure</code> shows a very clear pattern: all five stations with exposure 8 have positive residuals (mean residual +2.9, three of them above +2), while the residuals for exposure 10 and 11 are centred near 0. The relationship with <code>humus</code> is weaker (a mild positive trend), and humus is itself related to exposure. So <code>exposure</code> is the obvious variable to add:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>fr_e <span class="ot">&lt;-</span> <span class="fu">glm</span>(Richness <span class="sc">~</span> NAP <span class="sc">+</span> <span class="fu">factor</span>(exposure), <span class="at">family =</span> poisson, <span class="at">data =</span> RIKZdat)</span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fr_e)<span class="sc">$</span>coefficients</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                     Estimate Std. Error   z value     Pr(&gt;|z|)
+(Intercept)         2.5269495 0.12874138 19.628106 8.896961e-86
+NAP                -0.5137374 0.06929506 -7.413767 1.227616e-13
+factor(exposure)10 -0.5897684 0.15428468 -3.822599 1.320525e-04
+factor(exposure)11 -1.3312021 0.18224085 -7.304631 2.780286e-13</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">dispersion_NAP_only =</span> <span class="fu">deviance</span>(fr) <span class="sc">/</span> <span class="fu">df.residual</span>(fr),</span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">dispersion_NAP_exposure =</span> <span class="fu">deviance</span>(fr_e) <span class="sc">/</span> <span class="fu">df.residual</span>(fr_e))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    dispersion_NAP_only dispersion_NAP_exposure 
+               2.632145                1.423712 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(fr, fr_e)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     df      AIC
+fr    2 259.1807
+fr_e  4 208.3707</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>rSD_e <span class="ot">&lt;-</span> <span class="fu">rstandard</span>(fr_e)</span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>eta_e <span class="ot">&lt;-</span> <span class="fu">predict</span>(fr_e, <span class="at">type =</span> <span class="st">"link"</span>)</span>
+<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb67-4"><a href="#cb67-4" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb67-5"><a href="#cb67-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(eta_e, rSD_e, <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">las =</span> <span class="dv">1</span>, <span class="at">xlab =</span> <span class="fu">expression</span>(<span class="fu">hat</span>(eta)),</span>
+<span id="cb67-6"><a href="#cb67-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"standardised deviance residual"</span>)</span>
+<span id="cb67-7"><a href="#cb67-7" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">0</span>, <span class="at">lty =</span> <span class="dv">3</span>); <span class="fu">lines</span>(<span class="fu">lowess</span>(eta_e, rSD_e), <span class="at">col =</span> <span class="st">"firebrick"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb67-8"><a href="#cb67-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(RIKZdat<span class="sc">$</span>NAP, rSD_e, <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">las =</span> <span class="dv">1</span>, <span class="at">xlab =</span> <span class="st">"NAP (m)"</span>,</span>
+<span id="cb67-9"><a href="#cb67-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"standardised deviance residual"</span>)</span>
+<span id="cb67-10"><a href="#cb67-10" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">0</span>, <span class="at">lty =</span> <span class="dv">3</span>); <span class="fu">lines</span>(<span class="fu">lowess</span>(RIKZdat<span class="sc">$</span>NAP, rSD_e), <span class="at">col =</span> <span class="st">"firebrick"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="QSBS_4b_regression_diagnostics_answers_files/figure-html/ex3e-extended-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Residuals of the extended model (NAP + exposure) against the linear predictor and against NAP.</figcaption>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">abs</span>(rSD_e) <span class="sc">&gt;</span> <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4</code></pre>
+</div>
+</div>
+<p>Adding exposure lowers the AIC by 50 units, reduces the dispersion ratio from 2.6 to 1.4, and removes most of the extreme residuals: the plots are now much closer to a structureless band, although a mild curvature against <code>NAP</code> (and a downward tail at the largest fitted values, driven by a single station) is still visible. This illustrates Dormann’s point that the diagnostic steps interact: what looked like overdispersion and curvature was to a large extent a <em>missing predictor</em>. Richness decreases with NAP and is highest on the most sheltered beaches (exposure 8).</p>
+<p>For the remainder of this practical we nevertheless continue with the single-predictor model, because Exercise 4 is about the <em>shape</em> of the NAP effect.</p>
+</section>
+</section>
+<section id="exercise-4-the-functional-relationship-between-y-and-x" class="level1">
+<h1>Exercise 4 — The functional relationship between y and x</h1>
+<p>The residual plot in Exercise 3 hinted that a straight line on the log scale may not be the best description of how richness depends on <code>NAP</code>. We now compare the model <code>fr</code> with two alternatives.</p>
+<ol type="a">
+<li>Draw the data and the fitted curve of <code>fr</code> with its 95 % confidence band, following the recipe from Practical 3: a fine sequence of <code>NAP</code> values, <code>predict(..., se.fit = TRUE)</code> on the link scale, <span class="math inline">\(\pm 2\)</span> standard errors, and <code>exp()</code> before drawing. Use <code>matlines()</code> to draw the three lines in one go.</li>
+<li><strong>Alternative 1 — a different error distribution.</strong> Fit <code>glm.nb(Richness ~ NAP, data = RIKZdat)</code>. Compare the estimate and standard error of the slope, the AIC and the value of <span class="math inline">\(\theta\)</span> with the Poisson model. Add the negative binomial curve and confidence band to the plot from (a). Does the <em>shape</em> of the curve change, or mainly the width of the band?</li>
+<li><strong>Alternative 2 — a polynomial on the link scale.</strong> Fit <code>glm(Richness ~ poly(NAP, 2), family = poisson, data = RIKZdat)</code> and compare it with <code>fr</code> by a likelihood-ratio test (<code>anova(fr, fr2, test = "Chisq")</code>) and by AIC. Is the quadratic term needed? Add the quadratic curve with its confidence band to the plot. Where do the linear and the quadratic curve differ, and in which region of <code>NAP</code> is the difference supported by data?</li>
+<li>Also fit the quadratic model with the <em>explicit</em> formula <code>Richness ~ NAP + I(NAP^2)</code>. Show that the fitted values (and the AIC) are identical to those of the <code>poly()</code> model, but that the coefficients and their standard errors differ. Read Dormann’s footnote 9 in Sect. 10.1.5 and explain why one should prefer <code>poly()</code> for the test, but may prefer the explicit formula for reading off the shape of the curve.</li>
+<li>Combine both alternatives: fit <code>glm.nb(Richness ~ poly(NAP, 2))</code> and compare it with the negative binomial straight-line model using <code>anova()</code>. Is the quadratic term still significant once overdispersion is accounted for by the negative binomial? Explain why the evidence for the curvature is weaker here than in (c).</li>
+<li>Predict, with each of the four models, the expected richness at <code>NAP = 2.5</code> m (just above the observed range) and at <code>NAP = -2</code> m (just below it). Where do the models disagree most, and what does this tell you about the difference between <em>interpolation</em> and <em>extrapolation</em>?</li>
+</ol>
+<section id="answer-3" class="level2">
+<h2 class="anchored" data-anchor-id="answer-3">Answer</h2>
+<p><strong>(a)</strong> We write a small helper that returns the three curves (fit, lower, upper) on the response scale for any model with a log link, so that we can reuse it.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>nap_new <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fu">min</span>(RIKZdat<span class="sc">$</span>NAP), <span class="fu">max</span>(RIKZdat<span class="sc">$</span>NAP), <span class="at">length =</span> <span class="dv">100</span>)</span>
+<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a>band <span class="ot">&lt;-</span> <span class="cf">function</span>(model, <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">NAP =</span> nap_new)) {</span>
+<span id="cb70-4"><a href="#cb70-4" aria-hidden="true" tabindex="-1"></a>  pr <span class="ot">&lt;-</span> <span class="fu">predict</span>(model, <span class="at">newdata =</span> newdata, <span class="at">se.fit =</span> <span class="cn">TRUE</span>)   <span class="co"># link scale</span></span>
+<span id="cb70-5"><a href="#cb70-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">exp</span>(<span class="fu">cbind</span>(<span class="at">fit =</span> pr<span class="sc">$</span>fit, <span class="at">lower =</span> pr<span class="sc">$</span>fit <span class="sc">-</span> <span class="dv">2</span> <span class="sc">*</span> pr<span class="sc">$</span>se.fit, <span class="at">upper =</span> pr<span class="sc">$</span>fit <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> pr<span class="sc">$</span>se.fit))</span>
+<span id="cb70-6"><a href="#cb70-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb70-7"><a href="#cb70-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-8"><a href="#cb70-8" aria-hidden="true" tabindex="-1"></a>b_pois <span class="ot">&lt;-</span> <span class="fu">band</span>(fr)</span>
+<span id="cb70-9"><a href="#cb70-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-10"><a href="#cb70-10" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Richness <span class="sc">~</span> NAP, <span class="at">data =</span> RIKZdat, <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">col =</span> <span class="st">"grey40"</span>, <span class="at">las =</span> <span class="dv">1</span>,</span>
+<span id="cb70-11"><a href="#cb70-11" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"NAP (m)"</span>, <span class="at">ylab =</span> <span class="st">"species richness"</span>)</span>
+<span id="cb70-12"><a href="#cb70-12" aria-hidden="true" tabindex="-1"></a><span class="fu">matlines</span>(nap_new, b_pois, <span class="at">lty =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>), <span class="at">col =</span> <span class="st">"black"</span>, <span class="at">lwd =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="QSBS_4b_regression_diagnostics_answers_files/figure-html/ex4a-poisson-band-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Species richness against NAP with the Poisson regression curve and its 95 % confidence band.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>(b)</strong></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>fr_nb <span class="ot">&lt;-</span> <span class="fu">glm.nb</span>(Richness <span class="sc">~</span> NAP, <span class="at">data =</span> RIKZdat)</span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rbind</span>(<span class="at">poisson =</span> <span class="fu">summary</span>(fr)<span class="sc">$</span>coef[<span class="st">"NAP"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>],</span>
+<span id="cb71-4"><a href="#cb71-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">negbin  =</span> <span class="fu">summary</span>(fr_nb)<span class="sc">$</span>coef[<span class="st">"NAP"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          Estimate Std. Error
+poisson -0.5559735 0.07163199
+negbin  -0.6229732 0.11220817</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(fr, fr_nb)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      df      AIC
+fr     2 259.1807
+fr_nb  3 231.7456</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a>fr_nb<span class="sc">$</span>theta</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.712226</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a>b_nb <span class="ot">&lt;-</span> <span class="fu">band</span>(fr_nb)</span>
+<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-3"><a href="#cb77-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Richness <span class="sc">~</span> NAP, <span class="at">data =</span> RIKZdat, <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">col =</span> <span class="st">"grey40"</span>, <span class="at">las =</span> <span class="dv">1</span>,</span>
+<span id="cb77-4"><a href="#cb77-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"NAP (m)"</span>, <span class="at">ylab =</span> <span class="st">"species richness"</span>)</span>
+<span id="cb77-5"><a href="#cb77-5" aria-hidden="true" tabindex="-1"></a><span class="fu">matlines</span>(nap_new, b_pois, <span class="at">lty =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>), <span class="at">col =</span> <span class="st">"black"</span>, <span class="at">lwd =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb77-6"><a href="#cb77-6" aria-hidden="true" tabindex="-1"></a><span class="fu">matlines</span>(nap_new, b_nb,   <span class="at">lty =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>), <span class="at">col =</span> <span class="st">"steelblue"</span>, <span class="at">lwd =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb77-7"><a href="#cb77-7" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>, <span class="at">bty =</span> <span class="st">"n"</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"black"</span>, <span class="st">"steelblue"</span>),</span>
+<span id="cb77-8"><a href="#cb77-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"Poisson"</span>, <span class="st">"negative binomial"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="QSBS_4b_regression_diagnostics_answers_files/figure-html/ex4b-negbin-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Poisson (black) and negative binomial (blue) regression curves with 95 % confidence bands.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The slope hardly changes (<span class="math inline">\(-0.56\)</span> vs <span class="math inline">\(-0.54\)</span>), so the <em>shape</em> of the curve is practically the same. What changes is the width of the band: the standard error grows from 0.072 to 0.108, and the negative binomial band is visibly wider. The AIC drops by 27 units (259 → 232) and <span class="math inline">\(\theta = 3.7\)</span> is small, so the negative binomial is a much better description of the <em>scatter</em> around the curve. A different error distribution mainly affects our <em>uncertainty</em> about the curve, not the curve itself.</p>
+<p><strong>(c)</strong></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>fr2 <span class="ot">&lt;-</span> <span class="fu">glm</span>(Richness <span class="sc">~</span> <span class="fu">poly</span>(NAP, <span class="dv">2</span>), <span class="at">family =</span> poisson, <span class="at">data =</span> RIKZdat)</span>
+<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-3"><a href="#cb78-3" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(fr, fr2, <span class="at">test =</span> <span class="st">"Chisq"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Deviance Table
+
+Model 1: Richness ~ NAP
+Model 2: Richness ~ poly(NAP, 2)
+  Resid. Df Resid. Dev Df Deviance Pr(&gt;Chi)   
+1        43     113.18                        
+2        42     106.21  1   6.9702 0.008288 **
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(fr, fr2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    df      AIC
+fr   2 259.1807
+fr2  3 254.2105</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a>b_p2 <span class="ot">&lt;-</span> <span class="fu">band</span>(fr2)</span>
+<span id="cb82-2"><a href="#cb82-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-3"><a href="#cb82-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Richness <span class="sc">~</span> NAP, <span class="at">data =</span> RIKZdat, <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">col =</span> <span class="st">"grey40"</span>, <span class="at">las =</span> <span class="dv">1</span>,</span>
+<span id="cb82-4"><a href="#cb82-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"NAP (m)"</span>, <span class="at">ylab =</span> <span class="st">"species richness"</span>)</span>
+<span id="cb82-5"><a href="#cb82-5" aria-hidden="true" tabindex="-1"></a><span class="fu">matlines</span>(nap_new, b_pois, <span class="at">lty =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>), <span class="at">col =</span> <span class="st">"black"</span>, <span class="at">lwd =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb82-6"><a href="#cb82-6" aria-hidden="true" tabindex="-1"></a><span class="fu">matlines</span>(nap_new, b_p2,   <span class="at">lty =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>), <span class="at">col =</span> <span class="st">"firebrick"</span>, <span class="at">lwd =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb82-7"><a href="#cb82-7" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>, <span class="at">bty =</span> <span class="st">"n"</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"black"</span>, <span class="st">"firebrick"</span>),</span>
+<span id="cb82-8"><a href="#cb82-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"linear"</span>, <span class="st">"quadratic"</span>))</span>
+<span id="cb82-9"><a href="#cb82-9" aria-hidden="true" tabindex="-1"></a><span class="fu">rug</span>(RIKZdat<span class="sc">$</span>NAP)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="QSBS_4b_regression_diagnostics_answers_files/figure-html/ex4c-poly-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Linear (black) and quadratic (red) Poisson regression curves on the log scale, with 95 % confidence bands.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The quadratic term reduces the deviance by 7.0 on 1 df (<span class="math inline">\(p = 0.008\)</span>) and the AIC by 5 units, so <em>within the Poisson family</em> the quadratic model is preferred. The two curves are nearly identical between about <span class="math inline">\(-1\)</span> and <span class="math inline">\(+1\)</span> m, where nearly all the stations are (see the rug). They differ at the extremes: the quadratic curve bends down at the low end (the highest richness is predicted at about NAP <span class="math inline">\(= -1.2\)</span> rather than at the lowest NAP) and drops faster at the high end. Both regions contain only a few stations, and the confidence band of the quadratic model fans out accordingly. The curvature is thus statistically significant but supported by little data.</p>
+<p><strong>(d)</strong></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a>fr2b <span class="ot">&lt;-</span> <span class="fu">glm</span>(Richness <span class="sc">~</span> NAP <span class="sc">+</span> <span class="fu">I</span>(NAP<span class="sc">^</span><span class="dv">2</span>), <span class="at">family =</span> poisson, <span class="at">data =</span> RIKZdat)</span>
+<span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb83-3"><a href="#cb83-3" aria-hidden="true" tabindex="-1"></a><span class="fu">all.equal</span>(<span class="fu">fitted</span>(fr2), <span class="fu">fitted</span>(fr2b))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(fr2, fr2b)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     df      AIC
+fr2   3 254.2105
+fr2b  3 254.2105</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fr2)<span class="sc">$</span>coefficients</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>               Estimate Std. Error   z value     Pr(&gt;|z|)
+(Intercept)    1.547359 0.07855932 19.696701 2.301372e-86
+poly(NAP, 2)1 -4.507825 0.63869595 -7.057858 1.690887e-12
+poly(NAP, 2)2 -1.321893 0.52395896 -2.522893 1.163937e-02</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb89"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fr2b)<span class="sc">$</span>coefficients</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>              Estimate Std. Error   z value      Pr(&gt;|z|)
+(Intercept)  1.9404255 0.08278730 23.438686 1.724281e-121
+NAP         -0.5023395 0.08106806 -6.196515  5.772687e-10
+I(NAP^2)    -0.2008204 0.07959926 -2.522893  1.163937e-02</code></pre>
+</div>
+</div>
+<p>Both models describe the <em>same</em> curve: identical fitted values, identical deviance and AIC, and the test for the quadratic term gives the same <span class="math inline">\(z = -2.52\)</span>, <span class="math inline">\(p = 0.012\)</span> in both. But the coefficients differ, because <code>poly()</code> builds two <em>orthogonal</em> (uncorrelated) columns, whereas <code>NAP</code> and <code>NAP^2</code> are correlated. In the explicit model, the coefficient of <code>NAP</code> (<span class="math inline">\(-0.50\)</span>) and its standard error refer to the slope <em>at NAP = 0</em>, and the estimate of the linear term changes when the quadratic term is added; the two estimates are correlated and their individual standard errors are inflated by that correlation. With <code>poly()</code> the linear coefficient stays what it was, and the test of the second term is a clean test of “is there curvature beyond the straight line”.</p>
+<p>So: use <code>poly()</code> when the question is <em>whether</em> a polynomial term is needed (and always use <code>predict()</code> to draw it, never plug the coefficients into <span class="math inline">\(a + bx + cx^2\)</span>). Use the explicit form if you want to read off the curve: <span class="math inline">\(\log\lambda = 1.94 - 0.50\,\mathrm{NAP} - 0.20\,\mathrm{NAP}^2\)</span>, with its maximum at <span class="math inline">\(\mathrm{NAP} = -b/(2c) = -0.50 / (2 \times 0.20) \approx -1.25\)</span> m.</p>
+<p><strong>(e)</strong></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb91"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a>fr_nb2 <span class="ot">&lt;-</span> <span class="fu">glm.nb</span>(Richness <span class="sc">~</span> <span class="fu">poly</span>(NAP, <span class="dv">2</span>), <span class="at">data =</span> RIKZdat)</span>
+<span id="cb91-2"><a href="#cb91-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb91-3"><a href="#cb91-3" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(fr_nb, fr_nb2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Likelihood ratio tests of Negative Binomial Models
+
+Response: Richness
+         Model    theta Resid. df    2 x log-lik.   Test    df LR stat.
+1          NAP 3.712226        43       -225.7456                      
+2 poly(NAP, 2) 4.122278        42       -220.2577 1 vs 2     1 5.487903
+    Pr(Chi)
+1          
+2 0.0191485</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb93"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(fr, fr2, fr_nb, fr_nb2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       df      AIC
+fr      2 259.1807
+fr2     3 254.2105
+fr_nb   3 231.7456
+fr_nb2  4 228.2577</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb95"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a>b_nb2 <span class="ot">&lt;-</span> <span class="fu">band</span>(fr_nb2)</span>
+<span id="cb95-2"><a href="#cb95-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-3"><a href="#cb95-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Richness <span class="sc">~</span> NAP, <span class="at">data =</span> RIKZdat, <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">col =</span> <span class="st">"grey40"</span>, <span class="at">las =</span> <span class="dv">1</span>,</span>
+<span id="cb95-4"><a href="#cb95-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"NAP (m)"</span>, <span class="at">ylab =</span> <span class="st">"species richness"</span>)</span>
+<span id="cb95-5"><a href="#cb95-5" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(nap_new, b_pois[, <span class="st">"fit"</span>], <span class="at">col =</span> <span class="st">"black"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb95-6"><a href="#cb95-6" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(nap_new, b_p2[, <span class="st">"fit"</span>],   <span class="at">col =</span> <span class="st">"black"</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb95-7"><a href="#cb95-7" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(nap_new, b_nb[, <span class="st">"fit"</span>],   <span class="at">col =</span> <span class="st">"steelblue"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb95-8"><a href="#cb95-8" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(nap_new, b_nb2[, <span class="st">"fit"</span>],  <span class="at">col =</span> <span class="st">"steelblue"</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb95-9"><a href="#cb95-9" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>, <span class="at">bty =</span> <span class="st">"n"</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"black"</span>, <span class="st">"black"</span>, <span class="st">"steelblue"</span>, <span class="st">"steelblue"</span>),</span>
+<span id="cb95-10"><a href="#cb95-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">lty =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>),</span>
+<span id="cb95-11"><a href="#cb95-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"Poisson linear"</span>, <span class="st">"Poisson quadratic"</span>, <span class="st">"NB linear"</span>, <span class="st">"NB quadratic"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="QSBS_4b_regression_diagnostics_answers_files/figure-html/ex4e-nb-poly-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>All four models: Poisson (black) and negative binomial (blue), linear (solid) and quadratic (dashed).</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Within the negative binomial family the quadratic term is still significant, but less convincingly: LR statistic 5.5 on 1 df, <span class="math inline">\(p = 0.019\)</span> (vs <span class="math inline">\(p = 0.008\)</span> in the Poisson comparison), and the AIC gain is 3.5 units instead of 5. The reason is that the negative binomial model allows more scatter around the curve. Part of the deviance that the Poisson model could only “explain” through the quadratic term is, under the negative binomial, simply absorbed by the larger variance. Overdispersion inflates <em>all</em> test statistics, including the one for the curvature; once the dispersion is modelled correctly the evidence for the curvature shrinks to its honest size. Overall the negative binomial quadratic model has the lowest AIC (228), but the four models tell a consistent story: a decline of richness with NAP, possibly with a slight optimum at low NAP.</p>
+<p><strong>(f)</strong></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb96"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="fu">range</span>(RIKZdat<span class="sc">$</span>NAP)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -1.336  2.255</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb98"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a>nd <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">NAP =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="fl">2.5</span>))</span>
+<span id="cb98-2"><a href="#cb98-2" aria-hidden="true" tabindex="-1"></a>pred <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="fu">list</span>(<span class="at">Poisson_lin =</span> fr, <span class="at">Poisson_quad =</span> fr2, <span class="at">NB_lin =</span> fr_nb, <span class="at">NB_quad =</span> fr_nb2),</span>
+<span id="cb98-3"><a href="#cb98-3" aria-hidden="true" tabindex="-1"></a>               predict, <span class="at">newdata =</span> nd, <span class="at">type =</span> <span class="st">"response"</span>)</span>
+<span id="cb98-4"><a href="#cb98-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(pred) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"NAP = "</span>, nd<span class="sc">$</span>NAP)</span>
+<span id="cb98-5"><a href="#cb98-5" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(pred, <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          Poisson_lin Poisson_quad NB_lin NB_quad
+NAP = -2        18.23         8.51  21.00    6.84
+NAP = 2.5        1.49         0.57   1.27    0.39</code></pre>
+</div>
+</div>
+<p>At <code>NAP = 2.5</code> m, just beyond the highest observed value (2.26), the predictions are already spread over a factor of three (0.4 to 1.5 species). At <code>NAP = -2</code> m, below the lowest observed value (<span class="math inline">\(-1.34\)</span>), the linear models predict 18–21 species whereas the quadratic models predict only 7–9. Inside the range of the data the four curves are almost interchangeable (see the plot in (e)): that is <em>interpolation</em>, and the data constrain all models to agree. Outside the range — <em>extrapolation</em> — the models are only constrained by their functional form, and functional forms that are indistinguishable on the data diverge rapidly. Which prediction is right cannot be decided from these data; it would require samples at NAP <span class="math inline">\(&lt; -1.3\)</span> m.</p>
+</section>
+</section>
+<section id="exercise-5-putting-it-all-together" class="level1">
+<h1>Exercise 5 — Putting it all together</h1>
+<p>In this last exercise you run through the complete diagnostic sequence for the Galápagos species–area model, with less guidance. Start from <code>fg &lt;- glm(Species ~ log(Area), family = poisson, data = gala)</code> and use the island names (<code>gala$Island</code>) rather than row numbers in your answers.</p>
+<ol type="a">
+<li><strong>Influential points.</strong> Which islands have a Cook’s distance above 1? Refit without them and compare the slope <span class="math inline">\(z\)</span>. Is the species–area exponent robust?</li>
+<li><strong>Dispersion.</strong> Calculate the dispersion ratio for the Poisson model and for the negative binomial model <code>glm.nb(Species ~ log(Area), data = gala)</code>. Which model will you continue with?</li>
+<li><strong>Residuals.</strong> For the model chosen in (b), plot the standardised deviance residuals against the linear predictor and against <code>log(Area)</code>. Then plot them against <code>log(Elevation)</code> and against <code>log(Nearest.dist)</code> (two variables not in the model). Is there a predictor that explains some of the remaining variation?</li>
+<li><strong>Functional relationship.</strong> Compare the chosen model with its quadratic extension <code>poly(log(Area), 2)</code> using <code>anova()</code>. Draw both fitted curves, with confidence bands, on a plot of <code>Species</code> against <code>log(Area)</code>. Is the quadratic term needed? Compare your conclusion with Dormann’s conclusion for the same data in Sect. 9.1.5, where the <em>Poisson</em> models were compared, and explain why the two conclusions differ.</li>
+<li>Write a short diagnostic paragraph (4–6 sentences) for a methods section, stating which model you finally chose and which checks you did.</li>
+</ol>
+<section id="answer-4" class="level2">
+<h2 class="anchored" data-anchor-id="answer-4">Answer</h2>
+<p><strong>(a)</strong></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb100"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a>fg <span class="ot">&lt;-</span> <span class="fu">glm</span>(Species <span class="sc">~</span> <span class="fu">log</span>(Area), <span class="at">family =</span> poisson, <span class="at">data =</span> gala)</span>
+<span id="cb100-2"><a href="#cb100-2" aria-hidden="true" tabindex="-1"></a>cd_g <span class="ot">&lt;-</span> <span class="fu">cooks.distance</span>(fg)</span>
+<span id="cb100-3"><a href="#cb100-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb100-4"><a href="#cb100-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(cd_g, <span class="at">type =</span> <span class="st">"h"</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">las =</span> <span class="dv">1</span>, <span class="at">xlab =</span> <span class="st">"island"</span>, <span class="at">ylab =</span> <span class="st">"Cook's distance"</span>)</span>
+<span id="cb100-5"><a href="#cb100-5" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">1</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb100-6"><a href="#cb100-6" aria-hidden="true" tabindex="-1"></a>infl <span class="ot">&lt;-</span> <span class="fu">which</span>(cd_g <span class="sc">&gt;</span> <span class="dv">1</span>)</span>
+<span id="cb100-7"><a href="#cb100-7" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(infl, cd_g[infl], gala<span class="sc">$</span>Island[infl], <span class="at">pos =</span> <span class="dv">3</span>, <span class="at">cex =</span> <span class="fl">0.8</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="QSBS_4b_regression_diagnostics_answers_files/figure-html/ex5a-cooks-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Cook’s distance per island for the Poisson species–area model.</figcaption>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb101"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">island =</span> gala<span class="sc">$</span>Island[infl], <span class="at">cooks =</span> <span class="fu">round</span>(cd_g[infl], <span class="dv">2</span>),</span>
+<span id="cb101-2"><a href="#cb101-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">Area =</span> gala<span class="sc">$</span>Area[infl], <span class="at">Species =</span> gala<span class="sc">$</span>Species[infl])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        island cooks    Area Species
+11  Fernandina  6.03  634.49      93
+12   Gardner.a  1.64    0.57      58
+15     Isabela 21.43 4669.32     347
+16    Marchena  1.60  129.49      51
+24  Santa.Cruz 11.74  903.82     444
+26 Santa.Maria  4.12  170.92     285</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb103"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb103-1"><a href="#cb103-1" aria-hidden="true" tabindex="-1"></a>fg_red <span class="ot">&lt;-</span> <span class="fu">update</span>(fg, <span class="at">data =</span> gala[<span class="sc">-</span>infl, ])</span>
+<span id="cb103-2"><a href="#cb103-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rbind</span>(<span class="at">all_islands =</span> <span class="fu">summary</span>(fg)<span class="sc">$</span>coef[<span class="st">"log(Area)"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>],</span>
+<span id="cb103-3"><a href="#cb103-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">without_influential =</span> <span class="fu">summary</span>(fg_red)<span class="sc">$</span>coef[<span class="st">"log(Area)"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                     Estimate  Std. Error
+all_islands         0.3429906 0.007346425
+without_influential 0.3975148 0.011435153</code></pre>
+</div>
+</div>
+<p>Six islands exceed <span class="math inline">\(D = 1\)</span>, most dramatically Isabela (<span class="math inline">\(D = 21\)</span>) — by far the largest island but with fewer species than its area would suggest — followed by Santa Cruz, Fernandina, Santa Maria, Marchena and Gardner.a. Removing them shifts <span class="math inline">\(z\)</span> from 0.34 to 0.40. That is a noticeable change, but both values lie in the typical range for islands and the exponent remains highly significant. Note that under the Poisson model the standard error of <span class="math inline">\(z\)</span> is tiny (0.007), which makes a shift of 0.05 look enormous; we will see in (b) that this standard error is not to be trusted.</p>
+<p><strong>(b)</strong></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb105"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb105-1"><a href="#cb105-1" aria-hidden="true" tabindex="-1"></a>fg_nb <span class="ot">&lt;-</span> <span class="fu">glm.nb</span>(Species <span class="sc">~</span> <span class="fu">log</span>(Area), <span class="at">data =</span> gala)</span>
+<span id="cb105-2"><a href="#cb105-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb105-3"><a href="#cb105-3" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">poisson =</span> <span class="fu">deviance</span>(fg) <span class="sc">/</span> <span class="fu">df.residual</span>(fg),</span>
+<span id="cb105-4"><a href="#cb105-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">negbin  =</span> <span class="fu">deviance</span>(fg_nb) <span class="sc">/</span> <span class="fu">df.residual</span>(fg_nb))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  poisson    negbin 
+23.711798  1.159088 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb107"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb107-1"><a href="#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(fg, fg_nb)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      df      AIC
+fg     2 800.0266
+fg_nb  3 273.9926</code></pre>
+</div>
+</div>
+<p>The Poisson model is overdispersed by a factor of 24; the negative binomial model has a ratio of 1.16 and an AIC that is 526 units lower. We continue with the negative binomial model. (The Cook’s distances for that model are all below 0.3, by the way: once the variance is modelled realistically, the large islands no longer dominate the fit.)</p>
+<p><strong>(c)</strong></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb109"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb109-1"><a href="#cb109-1" aria-hidden="true" tabindex="-1"></a>rSD_g <span class="ot">&lt;-</span> <span class="fu">rstandard</span>(fg_nb)</span>
+<span id="cb109-2"><a href="#cb109-2" aria-hidden="true" tabindex="-1"></a>eta_g <span class="ot">&lt;-</span> <span class="fu">predict</span>(fg_nb, <span class="at">type =</span> <span class="st">"link"</span>)</span>
+<span id="cb109-3"><a href="#cb109-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb109-4"><a href="#cb109-4" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>), <span class="at">mar =</span> <span class="fu">c</span>(<span class="fl">4.5</span>, <span class="fl">4.5</span>, <span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb109-5"><a href="#cb109-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(eta_g, rSD_g, <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">las =</span> <span class="dv">1</span>, <span class="at">xlab =</span> <span class="fu">expression</span>(<span class="fu">hat</span>(eta)), <span class="at">ylab =</span> <span class="st">"std. deviance residual"</span>)</span>
+<span id="cb109-6"><a href="#cb109-6" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">0</span>, <span class="at">lty =</span> <span class="dv">3</span>); <span class="fu">lines</span>(<span class="fu">lowess</span>(eta_g, rSD_g), <span class="at">col =</span> <span class="st">"firebrick"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb109-7"><a href="#cb109-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">log</span>(gala<span class="sc">$</span>Area), rSD_g, <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">las =</span> <span class="dv">1</span>, <span class="at">xlab =</span> <span class="st">"log(Area)"</span>, <span class="at">ylab =</span> <span class="st">"std. deviance residual"</span>)</span>
+<span id="cb109-8"><a href="#cb109-8" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">0</span>, <span class="at">lty =</span> <span class="dv">3</span>); <span class="fu">lines</span>(<span class="fu">lowess</span>(<span class="fu">log</span>(gala<span class="sc">$</span>Area), rSD_g), <span class="at">col =</span> <span class="st">"firebrick"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb109-9"><a href="#cb109-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">log</span>(gala<span class="sc">$</span>Elevation), rSD_g, <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">las =</span> <span class="dv">1</span>, <span class="at">xlab =</span> <span class="st">"log(Elevation)"</span>, <span class="at">ylab =</span> <span class="st">"std. deviance residual"</span>)</span>
+<span id="cb109-10"><a href="#cb109-10" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">0</span>, <span class="at">lty =</span> <span class="dv">3</span>); <span class="fu">lines</span>(<span class="fu">lowess</span>(<span class="fu">log</span>(gala<span class="sc">$</span>Elevation), rSD_g), <span class="at">col =</span> <span class="st">"firebrick"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb109-11"><a href="#cb109-11" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">log</span>(gala<span class="sc">$</span>Nearest.dist), rSD_g, <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">las =</span> <span class="dv">1</span>, <span class="at">xlab =</span> <span class="st">"log(Nearest.dist)"</span>, <span class="at">ylab =</span> <span class="st">"std. deviance residual"</span>)</span>
+<span id="cb109-12"><a href="#cb109-12" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">0</span>, <span class="at">lty =</span> <span class="dv">3</span>); <span class="fu">lines</span>(<span class="fu">lowess</span>(<span class="fu">log</span>(gala<span class="sc">$</span>Nearest.dist), rSD_g), <span class="at">col =</span> <span class="st">"firebrick"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="QSBS_4b_regression_diagnostics_answers_files/figure-html/ex5c-residuals-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Standardised deviance residuals of the negative binomial model against the linear predictor, log(Area), and two variables not in the model.</figcaption>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb110"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb110-1"><a href="#cb110-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb110-2"><a href="#cb110-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb110-3"><a href="#cb110-3" aria-hidden="true" tabindex="-1"></a>gala<span class="sc">$</span>Island[<span class="fu">abs</span>(rSD_g) <span class="sc">&gt;</span> <span class="dv">2</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Champion"  "Gardner.a"</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb112"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb112-1"><a href="#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(fg_nb,</span>
+<span id="cb112-2"><a href="#cb112-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">update</span>(fg_nb, . <span class="sc">~</span> . <span class="sc">+</span> <span class="fu">log</span>(Elevation)),</span>
+<span id="cb112-3"><a href="#cb112-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">update</span>(fg_nb, . <span class="sc">~</span> . <span class="sc">+</span> <span class="fu">log</span>(Nearest.dist)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                                         df      AIC
+fg_nb                                     3 273.9926
+update(fg_nb, . ~ . + log(Elevation))     4 275.8631
+update(fg_nb, . ~ . + log(Nearest.dist))  4 273.3798</code></pre>
+</div>
+</div>
+<p>Against the linear predictor and against <code>log(Area)</code> the residuals form a reasonably flat band; two islands stand out with positive residuals (Champion and Gardner.a, small islands with relatively many species). <code>log(Elevation)</code> shows no trend at all — not surprising, since elevation and area are strongly correlated and area is already in the model. <code>log(Nearest.dist)</code> shows a weak negative trend (isolated islands have somewhat fewer species than expected from their area), but adding it lowers the AIC by less than one unit, so the evidence is marginal. We keep area as the only predictor.</p>
+<p><strong>(d)</strong></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb114"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb114-1"><a href="#cb114-1" aria-hidden="true" tabindex="-1"></a>fg_nb2 <span class="ot">&lt;-</span> <span class="fu">glm.nb</span>(Species <span class="sc">~</span> <span class="fu">poly</span>(<span class="fu">log</span>(Area), <span class="dv">2</span>), <span class="at">data =</span> gala)</span>
+<span id="cb114-2"><a href="#cb114-2" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(fg_nb, fg_nb2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Likelihood ratio tests of Negative Binomial Models
+
+Response: Species
+               Model    theta Resid. df    2 x log-lik.   Test    df  LR stat.
+1          log(Area) 2.634311        27       -267.9926                       
+2 poly(log(Area), 2) 2.655795        26       -267.6884 1 vs 2     1 0.3042669
+    Pr(Chi)
+1          
+2 0.5812197</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb116"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(fg_nb, fg_nb2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       df      AIC
+fg_nb   3 273.9926
+fg_nb2  4 275.6884</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb118"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb118-1"><a href="#cb118-1" aria-hidden="true" tabindex="-1"></a>a_new <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fu">min</span>(gala<span class="sc">$</span>Area), <span class="fu">max</span>(gala<span class="sc">$</span>Area), <span class="at">length =</span> <span class="dv">200</span>)</span>
+<span id="cb118-2"><a href="#cb118-2" aria-hidden="true" tabindex="-1"></a>pr1 <span class="ot">&lt;-</span> <span class="fu">predict</span>(fg_nb,  <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">Area =</span> a_new), <span class="at">se.fit =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb118-3"><a href="#cb118-3" aria-hidden="true" tabindex="-1"></a>pr2 <span class="ot">&lt;-</span> <span class="fu">predict</span>(fg_nb2, <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">Area =</span> a_new), <span class="at">se.fit =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb118-4"><a href="#cb118-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb118-5"><a href="#cb118-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Species <span class="sc">~</span> <span class="fu">log</span>(Area), <span class="at">data =</span> gala, <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">col =</span> <span class="st">"grey40"</span>, <span class="at">las =</span> <span class="dv">1</span>,</span>
+<span id="cb118-6"><a href="#cb118-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"log(Area) (km²)"</span>, <span class="at">ylab =</span> <span class="st">"number of plant species"</span>)</span>
+<span id="cb118-7"><a href="#cb118-7" aria-hidden="true" tabindex="-1"></a><span class="fu">matlines</span>(<span class="fu">log</span>(a_new), <span class="fu">exp</span>(<span class="fu">cbind</span>(pr1<span class="sc">$</span>fit, pr1<span class="sc">$</span>fit <span class="sc">-</span> <span class="dv">2</span> <span class="sc">*</span> pr1<span class="sc">$</span>se.fit, pr1<span class="sc">$</span>fit <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> pr1<span class="sc">$</span>se.fit)),</span>
+<span id="cb118-8"><a href="#cb118-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">lty =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">3</span>), <span class="at">col =</span> <span class="st">"black"</span>, <span class="at">lwd =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb118-9"><a href="#cb118-9" aria-hidden="true" tabindex="-1"></a><span class="fu">matlines</span>(<span class="fu">log</span>(a_new), <span class="fu">exp</span>(<span class="fu">cbind</span>(pr2<span class="sc">$</span>fit, pr2<span class="sc">$</span>fit <span class="sc">-</span> <span class="dv">2</span> <span class="sc">*</span> pr2<span class="sc">$</span>se.fit, pr2<span class="sc">$</span>fit <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> pr2<span class="sc">$</span>se.fit)),</span>
+<span id="cb118-10"><a href="#cb118-10" aria-hidden="true" tabindex="-1"></a>         <span class="at">lty =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">3</span>), <span class="at">col =</span> <span class="st">"firebrick"</span>, <span class="at">lwd =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb118-11"><a href="#cb118-11" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topleft"</span>, <span class="at">bty =</span> <span class="st">"n"</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">lty =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"black"</span>, <span class="st">"firebrick"</span>),</span>
+<span id="cb118-12"><a href="#cb118-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"NB linear"</span>, <span class="st">"NB quadratic"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="QSBS_4b_regression_diagnostics_answers_files/figure-html/ex5d-functional-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Species richness on the Galápagos islands against log(Area), with the negative binomial linear (solid) and quadratic (dashed) fits and 95 % confidence bands.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>In the negative binomial model the quadratic term is <em>not</em> needed: LR statistic 0.3, <span class="math inline">\(p = 0.58\)</span>, and the AIC increases by 1.7 when it is added. The two curves are practically on top of each other, and the confidence band of the quadratic model is wider at the extremes without buying anything. The species–area relationship is an honest power law, <span class="math inline">\(S = c A^{0.37}\)</span>.</p>
+<p>Dormann (Sect. 9.1.5) found the quadratic term significant (<span class="math inline">\(p = 0.001\)</span> in the deviance table) because he compared the two <em>Poisson</em> models. In a Poisson model that is overdispersed by a factor of 24, every likelihood-ratio statistic is inflated by roughly that factor: a deviance difference of 10.5 that looks highly significant against a <span class="math inline">\(\chi^2_1\)</span> distribution corresponds to a difference of only about 10.5/24 ≈ 0.4 once the dispersion is taken into account — which is exactly the LR statistic we get from the negative binomial comparison. The lesson is the one drawn in Exercise 4(e): the dispersion must be sorted out <em>before</em> the functional form is tested, otherwise the test for curvature is not to be trusted.</p>
+<p><strong>(e)</strong> A possible methods paragraph:</p>
+<blockquote class="blockquote">
+<p>“We modelled the number of plant species as a function of log(island area) with a generalised linear model with log link. A Poisson model was strongly overdispersed (residual deviance / df = 24), so a negative binomial GLM was used instead (<span class="math inline">\(\hat\theta = 2.6\)</span>, dispersion ratio 1.16, <span class="math inline">\(\Delta\)</span>AIC = 526 in favour of the negative binomial). Under the Poisson model six islands (notably Isabela) had a Cook’s distance above 1, but their exclusion changed the species–area exponent only from 0.34 to 0.40, and under the negative binomial model all Cook’s distances were below 0.3. Standardised deviance residuals showed no trend against the linear predictor, log(area), log(elevation) or log(distance to the nearest island). A quadratic term in log(area) did not improve the model (likelihood-ratio test, <span class="math inline">\(p = 0.58\)</span>), so the final model is the power law <span class="math inline">\(S = c A^z\)</span> with <span class="math inline">\(z = 0.37\)</span> (SE 0.036).”</p>
+</blockquote>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

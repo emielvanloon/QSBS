@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>QSBS Practical 4b — Regression diagnostics for GLMs</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="QSBS_4b_regression_diagnostics_files/libs/clipboard/clipboard.min.js"></script>
+<script src="QSBS_4b_regression_diagnostics_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="QSBS_4b_regression_diagnostics_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="QSBS_4b_regression_diagnostics_files/libs/quarto-html/popper.min.js"></script>
+<script src="QSBS_4b_regression_diagnostics_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="QSBS_4b_regression_diagnostics_files/libs/quarto-html/anchor.min.js"></script>
+<link href="QSBS_4b_regression_diagnostics_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="QSBS_4b_regression_diagnostics_files/libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="QSBS_4b_regression_diagnostics_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="QSBS_4b_regression_diagnostics_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="QSBS_4b_regression_diagnostics_files/libs/bootstrap/bootstrap-94053d6e10daeb31c4957f2bd90b11ca.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#compact-command-reference" id="toc-compact-command-reference" class="nav-link" data-scroll-target="#compact-command-reference">Compact command reference</a></li>
+  <li><a href="#exercise-1-influential-points" id="toc-exercise-1-influential-points" class="nav-link" data-scroll-target="#exercise-1-influential-points">Exercise 1 — Influential points</a></li>
+  <li><a href="#exercise-2-dispersion" id="toc-exercise-2-dispersion" class="nav-link" data-scroll-target="#exercise-2-dispersion">Exercise 2 — Dispersion</a></li>
+  <li><a href="#exercise-3-residuals" id="toc-exercise-3-residuals" class="nav-link" data-scroll-target="#exercise-3-residuals">Exercise 3 — Residuals</a></li>
+  <li><a href="#exercise-4-the-functional-relationship-between-y-and-x" id="toc-exercise-4-the-functional-relationship-between-y-and-x" class="nav-link" data-scroll-target="#exercise-4-the-functional-relationship-between-y-and-x">Exercise 4 — The functional relationship between y and x</a></li>
+  <li><a href="#exercise-5-putting-it-all-together" id="toc-exercise-5-putting-it-all-together" class="nav-link" data-scroll-target="#exercise-5-putting-it-all-together">Exercise 5 — Putting it all together</a></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">QSBS Practical 4b — Regression diagnostics for GLMs</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>In Practical 3 we fitted generalised linear models and interpreted their output. Fitting a model is, however, only half of the work: we also have to check whether the model is <em>adequate</em> for the data. That is what <strong>model diagnostics</strong> is about (Dormann, Chap. 9 and 10).</p>
+<p>Dormann (Sect. 9.1) distinguishes five diagnostic steps. The first one, the analysis of the predictors, is descriptive and belongs to the exploratory phase of an analysis; in this practical we concentrate on the four steps that require a fitted model:</p>
+<ol type="1">
+<li><strong>Analysis of influential points.</strong> Some observations pull the regression line much harder than others. <strong>Cook’s distance</strong> measures, for each observation, how much all the fitted values change when that observation is left out. Values above 1 (Cook and Weisberg 1982) or above <span class="math inline">\(4/n\)</span> (Bollen and Jackman 1990) deserve attention. An influential point is <em>never</em> simply deleted: we refit the model without it, compare the two fits, and report whether the conclusions are robust.</li>
+<li><strong>Analysis of the dispersion.</strong> Poisson and binomial distributions fix the variance as a function of the mean, so the <strong>dispersion parameter</strong> is 1 by assumption. If the ratio residual deviance / residual degrees of freedom is much larger than 1 (say <span class="math inline">\(&gt; 2\)</span>) the data are <strong>overdispersed</strong>; if it is much smaller (say <span class="math inline">\(&lt; 0.6\)</span>) they are <strong>underdispersed</strong>. Overdispersion makes the standard errors too <em>small</em> (McCullagh and Nelder 1989), underdispersion makes them too <em>large</em>. The remedy is either a different distribution (e.g.&nbsp;negative binomial) or a <strong>quasi-likelihood</strong> model (<code>quasipoisson</code>, <code>quasibinomial</code>), which estimates the dispersion <span class="math inline">\(\hat\phi\)</span> from the data and rescales all standard errors by <span class="math inline">\(\sqrt{\hat\phi}\)</span>.</li>
+<li><strong>Analysis of the residuals.</strong> For a GLM the raw residuals <span class="math inline">\(y - \hat y\)</span> are not useful, because their variance changes with <span class="math inline">\(\hat y\)</span>. We use <strong>standardised deviance residuals</strong> (<code>rstandard()</code>), which are corrected for the variance function, the dispersion and the leverage, and should look like a patternless cloud around 0 with a spread of roughly <span class="math inline">\(\pm 2\)</span>. We plot them against the fitted values <strong>on the link scale</strong> (<code>predict(fm, type = "link")</code>) and against each predictor, including candidate predictors that are <em>not</em> in the model.</li>
+<li><strong>Analysis of the functional relationship between y and x.</strong> A GLM assumes that the relationship is linear <em>on the link scale</em>. Whether that is adequate can only be found out by <strong>comparing the model with an alternative</strong>: a model with a different error distribution, or a model extended with a polynomial term (<code>poly(x, 2)</code>). Nested models are compared with a likelihood-ratio test (<code>anova(..., test = "Chisq")</code>), non-nested models with AIC. Always <em>draw</em> the alternative fitted curves with their confidence bands on top of the data.</li>
+</ol>
+<p>These four steps are not independent: a wrong functional form shows up as overdispersion and as a pattern in the residuals, and an influential point can create or hide a curvature. Diagnostics are therefore an iterative process, and after every change of the model the checks have to be repeated.</p>
+<p>The data come from the <code>qsbsdata</code> package; the negative binomial GLM comes from <code>MASS</code>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(qsbsdata)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The data sets <code>wells</code>, <code>RIKZdat</code>, <code>gala</code> and <code>clutch</code> are used; read their help pages (<code>?wells</code> etc.) before you start.</p>
+</section>
+<section id="compact-command-reference" class="level1">
+<h1>Compact command reference</h1>
+<p>Below you find a list of the R commands that you can use to complete the exercises in this practical.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Documentation</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>?cooks.distance</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>?influence.measures</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>?rstandard</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>?predict.glm</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>?anova.glm</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>?poly</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Fitting the models (see Practical 3)</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>fm  <span class="ot">&lt;-</span> <span class="fu">glm</span>(y <span class="sc">~</span> x, <span class="at">data =</span> d, <span class="at">family =</span> poisson)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>fm  <span class="ot">&lt;-</span> <span class="fu">glm</span>(<span class="fu">cbind</span>(succ, fail) <span class="sc">~</span> x, <span class="at">data =</span> d, <span class="at">family =</span> binomial)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>fmq <span class="ot">&lt;-</span> <span class="fu">glm</span>(y <span class="sc">~</span> x, <span class="at">data =</span> d, <span class="at">family =</span> quasipoisson)       <span class="co"># quasi-likelihood</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>fmq <span class="ot">&lt;-</span> <span class="fu">glm</span>(<span class="fu">cbind</span>(succ, fail) <span class="sc">~</span> x, <span class="at">data =</span> d, <span class="at">family =</span> quasibinomial)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>fnb <span class="ot">&lt;-</span> <span class="fu">glm.nb</span>(y <span class="sc">~</span> x, <span class="at">data =</span> d)                           <span class="co"># negative binomial (MASS)</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>fm2 <span class="ot">&lt;-</span> <span class="fu">glm</span>(y <span class="sc">~</span> <span class="fu">poly</span>(x, <span class="dv">2</span>), <span class="at">data =</span> d, <span class="at">family =</span> poisson)   <span class="co"># quadratic on the link scale</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>fm2 <span class="ot">&lt;-</span> <span class="fu">glm</span>(y <span class="sc">~</span> x <span class="sc">+</span> <span class="fu">I</span>(x<span class="sc">^</span><span class="dv">2</span>), <span class="at">data =</span> d, <span class="at">family =</span> poisson)   <span class="co"># same curve, non-orthogonal coding</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Influential points</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>cd <span class="ot">&lt;-</span> <span class="fu">cooks.distance</span>(fm)</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(cd, <span class="at">type =</span> <span class="st">"h"</span>); <span class="fu">abline</span>(<span class="at">h =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">4</span> <span class="sc">/</span> <span class="fu">nrow</span>(d)), <span class="at">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fm, <span class="at">which =</span> <span class="dv">4</span>)                                      <span class="co"># built-in Cook's distance plot</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span>(cd <span class="sc">&gt;</span> <span class="dv">4</span> <span class="sc">/</span> <span class="fu">nrow</span>(d))</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>fm_red <span class="ot">&lt;-</span> <span class="fu">update</span>(fm, <span class="at">data =</span> d[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">9</span>), ])               <span class="co"># refit without rows 4 and 9</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(<span class="at">full =</span> <span class="fu">coef</span>(fm), <span class="at">reduced =</span> <span class="fu">coef</span>(fm_red))</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Dispersion</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="fu">deviance</span>(fm) <span class="sc">/</span> <span class="fu">df.residual</span>(fm)                           <span class="co"># rough check: should be about 1</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">residuals</span>(fm, <span class="at">type =</span> <span class="st">"pearson"</span>)<span class="sc">^</span><span class="dv">2</span>) <span class="sc">/</span> <span class="fu">df.residual</span>(fm) <span class="co"># Pearson version, used by quasi-models</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fmq)<span class="sc">$</span>dispersion</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fm)<span class="sc">$</span>coefficients                                 <span class="co"># compare Std. Error columns</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fmq)<span class="sc">$</span>coefficients</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Residuals</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>rSD <span class="ot">&lt;-</span> <span class="fu">rstandard</span>(fm)                                     <span class="co"># standardised deviance residuals</span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>eta <span class="ot">&lt;-</span> <span class="fu">predict</span>(fm, <span class="at">type =</span> <span class="st">"link"</span>)                        <span class="co"># fitted values on the link scale</span></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(rSD <span class="sc">~</span> eta); <span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">0</span>, <span class="at">lty =</span> <span class="dv">3</span>)</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">lowess</span>(eta, rSD), <span class="at">col =</span> <span class="st">"red"</span>)                     <span class="co"># smoother to reveal a trend</span></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(rSD <span class="sc">~</span> d<span class="sc">$</span>x); <span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">0</span>, <span class="at">lty =</span> <span class="dv">3</span>)</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(rSD <span class="sc">~</span> d<span class="sc">$</span>f); <span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">0</span>, <span class="at">lty =</span> <span class="dv">3</span>)               <span class="co"># against a factor</span></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Functional relationship: fitted curve with 95 % confidence band</span></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>xnew <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fu">min</span>(d<span class="sc">$</span>x), <span class="fu">max</span>(d<span class="sc">$</span>x), <span class="at">length =</span> <span class="dv">100</span>)</span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>pr <span class="ot">&lt;-</span> <span class="fu">predict</span>(fm, <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">x =</span> xnew), <span class="at">se.fit =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(y <span class="sc">~</span> x, <span class="at">data =</span> d)</span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a><span class="fu">matlines</span>(xnew, <span class="fu">exp</span>(<span class="fu">cbind</span>(pr<span class="sc">$</span>fit, pr<span class="sc">$</span>fit <span class="sc">-</span> <span class="dv">2</span> <span class="sc">*</span> pr<span class="sc">$</span>se.fit, pr<span class="sc">$</span>fit <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> pr<span class="sc">$</span>se.fit)),</span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>         <span class="at">lty =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>), <span class="at">col =</span> <span class="st">"black"</span>)                <span class="co"># exp() for a log link, plogis() for a logit link</span></span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a><span class="co"># Comparing models</span></span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(fm, fm2, <span class="at">test =</span> <span class="st">"Chisq"</span>)                           <span class="co"># nested models (likelihood-ratio test)</span></span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(fnb, fnb2)                                         <span class="co"># nested negative binomial models</span></span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(fm, fm2, fnb)                                        <span class="co"># any models with a true likelihood</span></span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a><span class="fu">logLik</span>(fm)</span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(fm, <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="dv">5</span>), <span class="at">type =</span> <span class="st">"response"</span>)</span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a><span class="co"># Useful helpers</span></span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a><span class="fu">which.max</span>(); <span class="fu">order</span>(); <span class="fu">round</span>(x, <span class="dv">3</span>); <span class="fu">sqrt</span>(); <span class="fu">nrow</span>()</span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>)); <span class="fu">legend</span>(); <span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">0</span>, <span class="at">lty =</span> <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="exercise-1-influential-points" class="level1">
+<h1>Exercise 1 — Influential points</h1>
+<p>In Practical 3 (Exercise 3) we modelled the proportion of contaminated wells in 20 areas on Long Island as a function of the nitrate concentration: <code>glm(cbind(y, n - y) ~ nitrate, family = binomial, data = wells)</code>. Refit that model and call it <code>fw</code>.</p>
+<ol type="a">
+<li>Calculate Cook’s distance for every area with <code>cooks.distance(fw)</code> and plot the values against the row number (<code>type = "h"</code>). Add horizontal reference lines at the two thresholds mentioned by Dormann (Sect. 9.1.2): 1 and <span class="math inline">\(4/n\)</span>. Which areas are flagged by each threshold?</li>
+<li>Look at the flagged area(s) in the data (<code>wells[i, ]</code>). Why does this particular area have such a large influence? Think about <em>where</em> it sits on the x-axis, <em>how many</em> wells it contributes, and how far its observed proportion is from the fitted curve.</li>
+<li>Refit the model without the most influential area (<code>update(fw, data = wells[-i, ])</code>). Put the coefficients and standard errors of the full and the reduced model side by side. By how much does the slope change? Does the conclusion about the effect of nitrate change?</li>
+<li>Draw the data (proportion <code>y/n</code> against <code>nitrate</code>, with point size proportional to <code>n</code>) and add the fitted curves of both models. Where do the two curves differ most, and why is that region exactly where you should be most careful with predictions?</li>
+<li>Write the sentence you would put in a report, following the two model sentences in Dormann Sect. 10.1.2. Explain why the influential area must <em>not</em> simply be dropped from the analysis.</li>
+</ol>
+</section>
+<section id="exercise-2-dispersion" class="level1">
+<h1>Exercise 2 — Dispersion</h1>
+<p>In this exercise we look at over- and underdispersion, and at how a quasi-likelihood model corrects the standard errors.</p>
+<ol type="a">
+<li>For the binomial model <code>fw</code> from Exercise 1, calculate the ratio residual deviance / residual degrees of freedom. Also calculate the Pearson version, <span class="math inline">\(\sum r_P^2 / \mathrm{df}\)</span>, with <code>residuals(fw, type = "pearson")</code>. Are the data over- or underdispersed? Is a binomial model with 20 areas on Long Island likely to satisfy the assumption that all wells in an area are independent draws with the same probability?</li>
+<li>Refit the model with <code>family = quasibinomial</code> and compare the <code>summary()</code> of the two fits. Which numbers are identical, which have changed, and what is the value reported as “Dispersion parameter”? Show that the standard errors of the quasi-model equal those of the binomial model multiplied by <span class="math inline">\(\sqrt{\hat\phi}\)</span>. What happens to the p-value of the nitrate effect?</li>
+<li>Now take the Mallard clutch-size data <code>clutch</code> (see <code>?clutch</code>): the number of eggs (<code>CLUTCH</code>) in nests in artificial nesting structures, together with the Julian date on which the nest was found (<code>date</code>). Plot <code>CLUTCH</code> against <code>date</code>, fit a Poisson GLM <code>CLUTCH ~ date</code> and calculate the dispersion ratio. Are these data over- or underdispersed? Give a biological reason why clutch sizes might be <em>less</em> variable than a Poisson distribution predicts.</li>
+<li>Refit the clutch model with <code>family = quasipoisson</code>. In which direction do the standard errors move, and by what factor? What does this imply for the p-value and for the width of a confidence interval of the date effect? Explain in one sentence why underdispersion is, in a sense, a “luckier” problem to have than overdispersion.</li>
+<li>Finally, return to the Galápagos species–area model of Practical 3 (Exercise 4): <code>glm(Species ~ log(Area), family = poisson, data = gala)</code>. The dispersion ratio is enormous. Fit a quasi-Poisson model and a negative binomial model (<code>glm.nb()</code>) and put the estimate and standard error of the <code>log(Area)</code> slope from all three models in one table. Which of the two remedies changes the <em>estimate</em>, and which one only changes the <em>standard error</em>? Why can the quasi-Poisson model not be compared with the others by AIC?</li>
+</ol>
+</section>
+<section id="exercise-3-residuals" class="level1">
+<h1>Exercise 3 — Residuals</h1>
+<p>We return to the macro-fauna data <code>RIKZdat</code> and the Poisson model of species richness against tidal height, <code>glm(Richness ~ NAP, family = poisson, data = RIKZdat)</code>, which we call <code>fr</code>.</p>
+<ol type="a">
+<li>Calculate the standardised deviance residuals with <code>rstandard(fr)</code> and the fitted values on the link scale with <code>predict(fr, type = "link")</code>. Plot the residuals against the fitted values, add a horizontal line at 0 and a smoother (<code>lines(lowess(...))</code>). What should this plot look like if the model were adequate? What do you actually see?</li>
+<li>Why do we plot against the linear predictor <span class="math inline">\(\hat\eta\)</span> rather than against the fitted means <span class="math inline">\(\hat y\)</span> on the response scale? Make the same plot with <code>predict(fr, type = "response")</code> on the x-axis and describe how the picture changes (hint: look at the spacing of the points along the x-axis).</li>
+<li>How many residuals lie outside <span class="math inline">\(\pm 2\)</span>, and which stations are they (<code>which(abs(rSD) &gt; 2)</code>)? For standardised residuals roughly 5 % should exceed <span class="math inline">\(\pm 2\)</span> in absolute value; is that what you find? Is any single station also flagged by Cook’s distance?</li>
+<li>Plot the residuals against the predictor <code>NAP</code>. Is there a systematic pattern, e.g.&nbsp;a curvature? What kind of model change would this suggest? (We will test it in Exercise 4.)</li>
+<li>The data set contains more variables than <code>NAP</code>. Plot the residuals against <code>exposure</code> (a variable with three values, so use a boxplot with <code>factor(exposure)</code>) and against <code>humus</code>. Is there structure left in the residuals that one of these variables could explain? Extend the model with the variable that shows the clearest pattern, refit, and check whether the dispersion ratio and the residual plots have improved.</li>
+</ol>
+</section>
+<section id="exercise-4-the-functional-relationship-between-y-and-x" class="level1">
+<h1>Exercise 4 — The functional relationship between y and x</h1>
+<p>The residual plot in Exercise 3 hinted that a straight line on the log scale may not be the best description of how richness depends on <code>NAP</code>. We now compare the model <code>fr</code> with two alternatives.</p>
+<ol type="a">
+<li>Draw the data and the fitted curve of <code>fr</code> with its 95 % confidence band, following the recipe from Practical 3: a fine sequence of <code>NAP</code> values, <code>predict(..., se.fit = TRUE)</code> on the link scale, <span class="math inline">\(\pm 2\)</span> standard errors, and <code>exp()</code> before drawing. Use <code>matlines()</code> to draw the three lines in one go.</li>
+<li><strong>Alternative 1 — a different error distribution.</strong> Fit <code>glm.nb(Richness ~ NAP, data = RIKZdat)</code>. Compare the estimate and standard error of the slope, the AIC and the value of <span class="math inline">\(\theta\)</span> with the Poisson model. Add the negative binomial curve and confidence band to the plot from (a). Does the <em>shape</em> of the curve change, or mainly the width of the band?</li>
+<li><strong>Alternative 2 — a polynomial on the link scale.</strong> Fit <code>glm(Richness ~ poly(NAP, 2), family = poisson, data = RIKZdat)</code> and compare it with <code>fr</code> by a likelihood-ratio test (<code>anova(fr, fr2, test = "Chisq")</code>) and by AIC. Is the quadratic term needed? Add the quadratic curve with its confidence band to the plot. Where do the linear and the quadratic curve differ, and in which region of <code>NAP</code> is the difference supported by data?</li>
+<li>Also fit the quadratic model with the <em>explicit</em> formula <code>Richness ~ NAP + I(NAP^2)</code>. Show that the fitted values (and the AIC) are identical to those of the <code>poly()</code> model, but that the coefficients and their standard errors differ. Read Dormann’s footnote 9 in Sect. 10.1.5 and explain why one should prefer <code>poly()</code> for the test, but may prefer the explicit formula for reading off the shape of the curve.</li>
+<li>Combine both alternatives: fit <code>glm.nb(Richness ~ poly(NAP, 2))</code> and compare it with the negative binomial straight-line model using <code>anova()</code>. Is the quadratic term still significant once overdispersion is accounted for by the negative binomial? Explain why the evidence for the curvature is weaker here than in (c).</li>
+<li>Predict, with each of the four models, the expected richness at <code>NAP = 2.5</code> m (just above the observed range) and at <code>NAP = -2</code> m (just below it). Where do the models disagree most, and what does this tell you about the difference between <em>interpolation</em> and <em>extrapolation</em>?</li>
+</ol>
+</section>
+<section id="exercise-5-putting-it-all-together" class="level1">
+<h1>Exercise 5 — Putting it all together</h1>
+<p>In this last exercise you run through the complete diagnostic sequence for the Galápagos species–area model, with less guidance. Start from <code>fg &lt;- glm(Species ~ log(Area), family = poisson, data = gala)</code> and use the island names (<code>gala$Island</code>) rather than row numbers in your answers.</p>
+<ol type="a">
+<li><strong>Influential points.</strong> Which islands have a Cook’s distance above 1? Refit without them and compare the slope <span class="math inline">\(z\)</span>. Is the species–area exponent robust?</li>
+<li><strong>Dispersion.</strong> Calculate the dispersion ratio for the Poisson model and for the negative binomial model <code>glm.nb(Species ~ log(Area), data = gala)</code>. Which model will you continue with?</li>
+<li><strong>Residuals.</strong> For the model chosen in (b), plot the standardised deviance residuals against the linear predictor and against <code>log(Area)</code>. Then plot them against <code>log(Elevation)</code> and against <code>log(Nearest.dist)</code> (two variables not in the model). Is there a predictor that explains some of the remaining variation?</li>
+<li><strong>Functional relationship.</strong> Compare the chosen model with its quadratic extension <code>poly(log(Area), 2)</code> using <code>anova()</code>. Draw both fitted curves, with confidence bands, on a plot of <code>Species</code> against <code>log(Area)</code>. Is the quadratic term needed? Compare your conclusion with Dormann’s conclusion for the same data in Sect. 9.1.5, where the <em>Poisson</em> models were compared, and explain why the two conclusions differ.</li>
+<li>Write a short diagnostic paragraph (4–6 sentences) for a methods section, stating which model you finally chose and which checks you did.</li>
+</ol>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
