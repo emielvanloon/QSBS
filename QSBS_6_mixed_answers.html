@@ -1,0 +1,1568 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>QSBS Practical 6 — Mixed exercises Answers</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="QSBS_6_mixed_answers_files/libs/clipboard/clipboard.min.js"></script>
+<script src="QSBS_6_mixed_answers_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="QSBS_6_mixed_answers_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="QSBS_6_mixed_answers_files/libs/quarto-html/popper.min.js"></script>
+<script src="QSBS_6_mixed_answers_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="QSBS_6_mixed_answers_files/libs/quarto-html/anchor.min.js"></script>
+<link href="QSBS_6_mixed_answers_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="QSBS_6_mixed_answers_files/libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="QSBS_6_mixed_answers_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="QSBS_6_mixed_answers_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="QSBS_6_mixed_answers_files/libs/bootstrap/bootstrap-94053d6e10daeb31c4957f2bd90b11ca.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#exercise-1-describing-a-variable" id="toc-exercise-1-describing-a-variable" class="nav-link active" data-scroll-target="#exercise-1-describing-a-variable">Exercise 1 — Describing a variable</a>
+  <ul class="collapse">
+  <li><a href="#answer" id="toc-answer" class="nav-link" data-scroll-target="#answer">Answer</a></li>
+  </ul></li>
+  <li><a href="#exercise-2-correlation-and-association" id="toc-exercise-2-correlation-and-association" class="nav-link" data-scroll-target="#exercise-2-correlation-and-association">Exercise 2 — Correlation and association</a>
+  <ul class="collapse">
+  <li><a href="#answer-1" id="toc-answer-1" class="nav-link" data-scroll-target="#answer-1">Answer</a></li>
+  </ul></li>
+  <li><a href="#exercise-3-fitting-a-distribution" id="toc-exercise-3-fitting-a-distribution" class="nav-link" data-scroll-target="#exercise-3-fitting-a-distribution">Exercise 3 — Fitting a distribution</a>
+  <ul class="collapse">
+  <li><a href="#answer-2" id="toc-answer-2" class="nav-link" data-scroll-target="#answer-2">Answer</a></li>
+  </ul></li>
+  <li><a href="#exercise-4-a-generalised-linear-model" id="toc-exercise-4-a-generalised-linear-model" class="nav-link" data-scroll-target="#exercise-4-a-generalised-linear-model">Exercise 4 — A generalised linear model</a>
+  <ul class="collapse">
+  <li><a href="#answer-3" id="toc-answer-3" class="nav-link" data-scroll-target="#answer-3">Answer</a></li>
+  </ul></li>
+  <li><a href="#exercise-5-regression-diagnostics" id="toc-exercise-5-regression-diagnostics" class="nav-link" data-scroll-target="#exercise-5-regression-diagnostics">Exercise 5 — Regression diagnostics</a>
+  <ul class="collapse">
+  <li><a href="#answer-4" id="toc-answer-4" class="nav-link" data-scroll-target="#answer-4">Answer</a></li>
+  </ul></li>
+  <li><a href="#exercise-6-multiple-regression-with-two-categorical-predictors" id="toc-exercise-6-multiple-regression-with-two-categorical-predictors" class="nav-link" data-scroll-target="#exercise-6-multiple-regression-with-two-categorical-predictors">Exercise 6 — Multiple regression with two categorical predictors</a>
+  <ul class="collapse">
+  <li><a href="#answer-5" id="toc-answer-5" class="nav-link" data-scroll-target="#answer-5">Answer</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">QSBS Practical 6 — Mixed exercises Answers</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Model answers to the six mixed exercises. The code is folded away (click “Code” to see it).</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(qsbsdata)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<section id="exercise-1-describing-a-variable" class="level1">
+<h1>Exercise 1 — Describing a variable</h1>
+<ol type="a">
+<li>Report for <code>TF</code> the mean, the median, the standard deviation, the interquartile range and the skewness statistic. Do the same for <code>DBH</code>. Which of the two variables is the more skewed, and in which direction?</li>
+<li>Density histogram with density curve and rug, boxplot, five-number summary, number and range of the outliers.</li>
+<li>Boxplots of <code>TF</code> per <code>trunk_shape</code> with n, mean and sd per shape. Is it sensible to compare the three groups?</li>
+<li>Summarise the distribution and state which measure of location you would report.</li>
+</ol>
+<section id="answer" class="level2">
+<h2 class="anchored" data-anchor-id="answer">Answer</h2>
+<p><strong>(a)</strong></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>skewness <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="fu">mean</span>((x <span class="sc">-</span> <span class="fu">mean</span>(x))<span class="sc">^</span><span class="dv">3</span>) <span class="sc">/</span> <span class="fu">sd</span>(x)<span class="sc">^</span><span class="dv">3</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>describe <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="fu">c</span>(<span class="at">n =</span> <span class="fu">length</span>(x), <span class="at">mean =</span> <span class="fu">mean</span>(x), <span class="at">median =</span> <span class="fu">median</span>(x),</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">sd =</span> <span class="fu">sd</span>(x), <span class="at">IQR =</span> <span class="fu">IQR</span>(x), <span class="at">skewness =</span> <span class="fu">skewness</span>(x))</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">rbind</span>(<span class="at">TF =</span> <span class="fu">describe</span>(trunkfl<span class="sc">$</span>TF), <span class="at">DBH =</span> <span class="fu">describe</span>(trunkfl<span class="sc">$</span>DBH)), <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>      n   mean median    sd IQR skewness
+TF  619  6.271    6.1 2.697 3.5    0.745
+DBH 619 16.960   17.0 7.786 9.0    3.038</code></pre>
+</div>
+</div>
+<p>Trunk flare: mean 6.27 cm, median 6.10 cm, sd 2.70 cm, IQR 3.5 cm, skewness 0.75. Diameter: mean 16.96 cm, median 17 cm, sd 7.79 cm, skewness 3.04. Both are right-skewed (mean above median, positive skewness), but <code>DBH</code> far more so: a skewness of 3.0 against 0.75. The trunk flare is only mildly asymmetric; the diameters have a long tail of a few very thick trees.</p>
+<p><strong>(b)</strong></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(trunkfl<span class="sc">$</span>TF, <span class="at">probability =</span> <span class="cn">TRUE</span>, <span class="at">breaks =</span> <span class="dv">25</span>, <span class="at">las =</span> <span class="dv">1</span>,</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">""</span>, <span class="at">xlab =</span> <span class="st">"trunk flare (cm)"</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">density</span>(trunkfl<span class="sc">$</span>TF), <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">rug</span>(trunkfl<span class="sc">$</span>TF)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(trunkfl<span class="sc">$</span>TF, <span class="at">las =</span> <span class="dv">1</span>, <span class="at">ylab =</span> <span class="st">"trunk flare (cm)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="QSBS_6_mixed_answers_files/figure-html/ex1b-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Distribution of trunk flare: density histogram with kernel density and rug (left) and boxplot (right).</figcaption>
+</figure>
+</div>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot.stats</span>(trunkfl<span class="sc">$</span>TF)<span class="sc">$</span>stats</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  0.5  4.3  6.1  7.8 13.0</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">boxplot.stats</span>(trunkfl<span class="sc">$</span>TF)<span class="sc">$</span>out</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">n_outliers =</span> <span class="fu">length</span>(out), <span class="at">min =</span> <span class="fu">min</span>(out), <span class="at">max =</span> <span class="fu">max</span>(out))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>n_outliers        min        max 
+      14.0       13.4       18.8 </code></pre>
+</div>
+</div>
+<p>Five-number summary of the boxplot: lower whisker 0.5, lower hinge 4.3, median 6.1, upper hinge 7.8, upper whisker 13.0 cm. There are 14 outliers, all on the high side, between 13.4 and 18.8 cm. The histogram shows a single mode around 5–6 cm with a tail to the right; the density curve confirms a unimodal, mildly right-skewed distribution.</p>
+<p><strong>(c)</strong></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(TF <span class="sc">~</span> trunk_shape, <span class="at">data =</span> trunkfl, <span class="at">las =</span> <span class="dv">1</span>,</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab =</span> <span class="st">"trunk shape"</span>, <span class="at">ylab =</span> <span class="st">"trunk flare (cm)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="QSBS_6_mixed_answers_files/figure-html/ex1c-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Trunk flare per trunk shape.</figcaption>
+</figure>
+</div>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">t</span>(<span class="fu">sapply</span>(<span class="fu">split</span>(trunkfl<span class="sc">$</span>TF, trunkfl<span class="sc">$</span>trunk_shape),</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>               <span class="cf">function</span>(x) <span class="fu">c</span>(<span class="at">n =</span> <span class="fu">length</span>(x), <span class="at">mean =</span> <span class="fu">mean</span>(x), <span class="at">sd =</span> <span class="fu">sd</span>(x)))), <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>           n mean   sd
+Circular 555 6.22 2.73
+Egg       10 6.79 2.35
+Oval      54 6.67 2.40</code></pre>
+</div>
+</div>
+<p>Circular: 555 trees, mean 6.22 cm (sd 2.73); Egg: 10 trees, mean 6.79 (sd 2.35); Oval: 54 trees, mean 6.67 (sd 2.40). The three means differ by less than half a standard deviation, so there is no striking difference. More important is the design: the groups are extremely unbalanced (555 against 54 against 10). With only ten “Egg” trees, the box of that group is based on almost nothing — its quartiles jump if a single tree changes — and any comparison involving it has very little power. Comparing Circular with Oval is reasonable; statements about Egg trees should be avoided or made with an explicit caveat.</p>
+<p><strong>(d)</strong> Trunk flare is a unimodal, mildly right-skewed variable with a median of 6.1 cm and a middle half between 4.3 and 7.8 cm. The mean (6.27 cm) is barely above the median, so with a skewness of only 0.75 both are acceptable summaries; I would report the <strong>median with the IQR</strong>, because 14 trees with an exceptionally wide flare (up to 18.8 cm) pull the mean and inflate the standard deviation, and the median/IQR describe the typical street tree without being affected by them. The outliers are real, plausible measurements of large old trees and should not be removed. The trunk shape explains very little of the variation in flare.</p>
+</section>
+</section>
+<section id="exercise-2-correlation-and-association" class="level1">
+<h1>Exercise 2 — Correlation and association</h1>
+<ol type="a">
+<li>Scatter plot of <code>TF</code> against <code>DBH</code>, with the Pearson, Spearman and Kendall correlation.</li>
+<li>Why is Pearson (0.81) much lower than Spearman (0.95)?</li>
+<li>Cross table of <code>trunk_shape</code> and <code>SidewalkDamage</code>, with conditional proportions per shape.</li>
+<li>Chi-square test, the warning, and the expected counts.</li>
+<li>The test without the <code>Egg</code> trees, and the conclusion.</li>
+</ol>
+<section id="answer-1" class="level2">
+<h2 class="anchored" data-anchor-id="answer-1">Answer</h2>
+<p><strong>(a)</strong></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(TF <span class="sc">~</span> DBH, <span class="at">data =</span> trunkfl, <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">col =</span> <span class="st">"grey40"</span>, <span class="at">las =</span> <span class="dv">1</span>,</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"diameter at breast height (cm)"</span>, <span class="at">ylab =</span> <span class="st">"trunk flare (cm)"</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="fu">lm</span>(TF <span class="sc">~</span> DBH, <span class="at">data =</span> trunkfl), <span class="at">col =</span> <span class="st">"grey60"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">lowess</span>(trunkfl<span class="sc">$</span>DBH, trunkfl<span class="sc">$</span>TF), <span class="at">col =</span> <span class="st">"firebrick"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="QSBS_6_mixed_answers_files/figure-html/ex2a-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Trunk flare against diameter at breast height, with a lowess smoother (red) and the least-squares line (grey).</figcaption>
+</figure>
+</div>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">pearson  =</span> <span class="fu">cor</span>(trunkfl<span class="sc">$</span>DBH, trunkfl<span class="sc">$</span>TF),</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">spearman =</span> <span class="fu">cor</span>(trunkfl<span class="sc">$</span>DBH, trunkfl<span class="sc">$</span>TF, <span class="at">method =</span> <span class="st">"spearman"</span>),</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">kendall  =</span> <span class="fu">cor</span>(trunkfl<span class="sc">$</span>DBH, trunkfl<span class="sc">$</span>TF, <span class="at">method =</span> <span class="st">"kendall"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>  pearson  spearman   kendall 
+0.8065441 0.9476953 0.8371797 </code></pre>
+</div>
+</div>
+<p>Pearson <span class="math inline">\(r = 0.81\)</span>, Spearman <span class="math inline">\(\rho = 0.95\)</span>, Kendall <span class="math inline">\(\tau = 0.84\)</span>.</p>
+<p><strong>(b)</strong> Pearson measures how close the points are to a <em>straight</em> line; Spearman and Kendall only require the relationship to be <em>monotone</em>. A Spearman coefficient of 0.95 with a Pearson of 0.81 therefore says: the order of the trees is almost perfectly preserved (a thicker tree nearly always has a wider flare), but the relationship is not straight. The lowess smoother shows it: trunk flare rises steeply for thin trees and flattens off for thick ones, so the straight line lies above the data in the middle and below it at both ends. In addition both variables are right-skewed, and the handful of very thick trees sit far out on the x-axis where they have great leverage on the Pearson coefficient.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">pearson_loglog =</span> <span class="fu">cor</span>(<span class="fu">log</span>(trunkfl<span class="sc">$</span>DBH), <span class="fu">log</span>(trunkfl<span class="sc">$</span>TF)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>pearson_loglog 
+     0.9418963 </code></pre>
+</div>
+</div>
+<p>On the log-log scale the Pearson correlation rises to 0.94, close to the Spearman value: the relationship is approximately a power law, i.e.&nbsp;straight after logging both variables. That confirms the diagnosis. In a report one would either use Spearman or model <code>log(TF)</code> against <code>log(DBH)</code>.</p>
+<p><strong>(c)</strong></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>frtab <span class="ot">&lt;-</span> <span class="fu">table</span>(trunkfl<span class="sc">$</span>trunk_shape, trunkfl<span class="sc">$</span>SidewalkDamage)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>frtab</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>          
+             0   1
+  Circular 383 172
+  Egg        9   1
+  Oval      45   9</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">prop.table</span>(frtab, <span class="at">margin =</span> <span class="dv">1</span>), <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>          
+               0     1
+  Circular 0.690 0.310
+  Egg      0.900 0.100
+  Oval     0.833 0.167</code></pre>
+</div>
+</div>
+<p>Circular trunks damage the sidewalk most often: 31.0 % of them, against 16.7 % of the Oval and 10.0 % of the Egg-shaped trunks.</p>
+<p><strong>(d)</strong></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>chsq <span class="ot">&lt;-</span> <span class="fu">chisq.test</span>(frtab)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>chsq</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Pearson's Chi-squared test
+
+data:  frtab
+X-squared = 6.7079, df = 2, p-value = 0.03495</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(chsq<span class="sc">$</span>expected, <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>          
+               0     1
+  Circular 391.8 163.2
+  Egg        7.1   2.9
+  Oval      38.1  15.9</code></pre>
+</div>
+</div>
+<p><span class="math inline">\(\chi^2 = 6.71\)</span> on 2 df, <span class="math inline">\(p = 0.035\)</span>. R warns that “Chi-squared approximation may be incorrect”. The expected counts show why: for the Egg trees only 7.1 and 2.9 cases are expected, and the usual rule of thumb is that all expected counts should be at least 5 (some authors allow a few above 1 as long as 80 % are above 5). With ten Egg trees the <span class="math inline">\(\chi^2\)</span> statistic does not follow a <span class="math inline">\(\chi^2\)</span> distribution closely, so the p-value of 0.035 — just below the conventional 0.05 — is not trustworthy.</p>
+<p><strong>(e)</strong></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(frtab[<span class="fu">c</span>(<span class="st">"Circular"</span>, <span class="st">"Oval"</span>), ])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Pearson's Chi-squared test with Yates' continuity correction
+
+data:  frtab[c("Circular", "Oval"), ]
+X-squared = 4.1728, df = 1, p-value = 0.04108</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fisher.test</span>(frtab)<span class="sc">$</span>p.value</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.0333463</code></pre>
+</div>
+</div>
+<p>Dropping the Egg trees leaves a <span class="math inline">\(2 \times 2\)</span> table with all expected counts above 5. The test then gives <span class="math inline">\(\chi^2 = 4.17\)</span> on 1 df, <span class="math inline">\(p = 0.041\)</span> — the same order of magnitude, so the conclusion does not hinge on the Egg trees. Fisher’s exact test on the full table, which does not rely on the <span class="math inline">\(\chi^2\)</span> approximation, gives <span class="math inline">\(p = 0.043\)</span> and confirms this.</p>
+<p>Conclusion to report: “Trees with a circular trunk damaged the sidewalk more often (31 %) than trees with an oval (17 %) or egg-shaped (10 %) trunk (<span class="math inline">\(\chi^2 = 6.7\)</span>, df = 2, <span class="math inline">\(p = 0.035\)</span>). Because only ten egg-shaped trees were present, the <span class="math inline">\(\chi^2\)</span> approximation is unreliable for the full table; a test restricted to circular and oval trunks (<span class="math inline">\(p = 0.041\)</span>) and Fisher’s exact test (<span class="math inline">\(p = 0.043\)</span>) gave the same result. Note that this is an association, not a demonstrated cause: trunk shape may covary with species, age or planting site.”</p>
+</section>
+</section>
+<section id="exercise-3-fitting-a-distribution" class="level1">
+<h1>Exercise 3 — Fitting a distribution</h1>
+<ol type="a">
+<li>Density histograms of <code>hr</code> and <code>log(hr)</code>, skewness of both, suggested distribution family.</li>
+<li>Fit four distributions, compare log-likelihood, AIC and BIC.</li>
+<li>Draw the four fitted densities on the histogram.</li>
+<li>ECDF with the best fit, and Kolmogorov–Smirnov tests against all four.</li>
+<li><span class="math inline">\(P(\mathrm{hr} &gt; 2)\)</span>, median and 90 % quantile, compared with the data.</li>
+<li>Mean versus median of the log-normal distribution.</li>
+</ol>
+<section id="answer-2" class="level2">
+<h2 class="anchored" data-anchor-id="answer-2">Answer</h2>
+<p><strong>(a)</strong></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>hr <span class="ot">&lt;-</span> HRData<span class="sc">$</span>HRsize <span class="sc">/</span> <span class="dv">1000</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(hr, <span class="at">probability =</span> <span class="cn">TRUE</span>, <span class="at">breaks =</span> <span class="dv">30</span>, <span class="at">las =</span> <span class="dv">1</span>, <span class="at">main =</span> <span class="st">""</span>, <span class="at">xlab =</span> <span class="st">"home range (km²)"</span>)</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">density</span>(hr), <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(<span class="fu">log</span>(hr), <span class="at">probability =</span> <span class="cn">TRUE</span>, <span class="at">breaks =</span> <span class="dv">30</span>, <span class="at">las =</span> <span class="dv">1</span>, <span class="at">main =</span> <span class="st">""</span>, <span class="at">xlab =</span> <span class="st">"log(home range)"</span>)</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">density</span>(<span class="fu">log</span>(hr)), <span class="at">lwd =</span> <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="QSBS_6_mixed_answers_files/figure-html/ex3a-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Home-range size of wolves on the original scale (left) and after log-transformation (right).</figcaption>
+</figure>
+</div>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>skewness <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="fu">mean</span>((x <span class="sc">-</span> <span class="fu">mean</span>(x))<span class="sc">^</span><span class="dv">3</span>) <span class="sc">/</span> <span class="fu">sd</span>(x)<span class="sc">^</span><span class="dv">3</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">skew_hr =</span> <span class="fu">skewness</span>(hr), <span class="at">skew_log_hr =</span> <span class="fu">skewness</span>(<span class="fu">log</span>(hr)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>    skew_hr skew_log_hr 
+ 3.56064400  0.03489163 </code></pre>
+</div>
+</div>
+<p>On the original scale the distribution is strongly right-skewed (skewness 3.56): a peak below 1 km² and a tail out to 16 km². After taking logs it is almost perfectly symmetric and bell-shaped (skewness 0.03). That is the signature of a <strong>log-normal</strong> distribution; a gamma or Weibull distribution (also positive and right-skewed) are the other candidates.</p>
+<p><strong>(b)</strong></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>fits <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">normal    =</span> <span class="fu">fitdistr</span>(hr, <span class="st">"normal"</span>),</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">lognormal =</span> <span class="fu">fitdistr</span>(hr, <span class="st">"lognormal"</span>),</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">gamma     =</span> <span class="fu">fitdistr</span>(hr, <span class="st">"gamma"</span>),</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">weibull   =</span> <span class="fu">fitdistr</span>(hr, <span class="st">"weibull"</span>))</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">t</span>(<span class="fu">sapply</span>(fits, <span class="cf">function</span>(f) <span class="fu">c</span>(<span class="at">logLik =</span> <span class="fu">logLik</span>(f), <span class="at">AIC =</span> <span class="fu">AIC</span>(f), <span class="at">BIC =</span> <span class="fu">BIC</span>(f)))), <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>          logLik    AIC    BIC
+normal    -708.2 1420.4 1428.2
+lognormal -483.6  971.3  979.1
+gamma     -507.7 1019.4 1027.1
+weibull   -513.4 1030.8 1038.5</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lapply</span>(fits, <span class="cf">function</span>(f) <span class="fu">round</span>(f<span class="sc">$</span>estimate, <span class="dv">3</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>$normal
+ mean    sd 
+1.548 1.740 
+
+$lognormal
+meanlog   sdlog 
+  0.016   0.916 
+
+$gamma
+shape  rate 
+1.329 0.858 
+
+$weibull
+shape scale 
+1.091 1.609 </code></pre>
+</div>
+</div>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>distribution</th>
+<th>log-likelihood</th>
+<th>AIC</th>
+<th>BIC</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>normal</td>
+<td>−708.2</td>
+<td>1420.4</td>
+<td>1428.2</td>
+</tr>
+<tr class="even">
+<td><strong>log-normal</strong></td>
+<td><strong>−483.6</strong></td>
+<td><strong>971.3</strong></td>
+<td><strong>979.1</strong></td>
+</tr>
+<tr class="odd">
+<td>gamma</td>
+<td>−507.7</td>
+<td>1019.4</td>
+<td>1027.1</td>
+</tr>
+<tr class="even">
+<td>Weibull</td>
+<td>−513.4</td>
+<td>1030.8</td>
+<td>1038.5</td>
+</tr>
+</tbody>
+</table>
+<p>The log-normal distribution wins by a wide margin: 48 AIC units better than the gamma and 449 better than the normal. All four fits use two parameters, so the log-likelihood, AIC and BIC give exactly the same ranking (they differ only by a constant penalty). The fitted parameters are meanlog = 0.016 and sdlog = 0.916.</p>
+<p><strong>(c)</strong></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(hr, <span class="at">probability =</span> <span class="cn">TRUE</span>, <span class="at">breaks =</span> <span class="dv">30</span>, <span class="at">las =</span> <span class="dv">1</span>, <span class="at">main =</span> <span class="st">""</span>,</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"home range (km²)"</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.55</span>))</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">density</span>(hr), <span class="at">lwd =</span> <span class="dv">3</span>, <span class="at">col =</span> <span class="st">"grey60"</span>)</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">dnorm</span>(x, fits<span class="sc">$</span>normal<span class="sc">$</span>estimate[<span class="dv">1</span>], fits<span class="sc">$</span>normal<span class="sc">$</span>estimate[<span class="dv">2</span>]), <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">"black"</span>)</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">dlnorm</span>(x, fits<span class="sc">$</span>lognormal<span class="sc">$</span>estimate[<span class="dv">1</span>], fits<span class="sc">$</span>lognormal<span class="sc">$</span>estimate[<span class="dv">2</span>]), <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">"firebrick"</span>)</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">dgamma</span>(x, fits<span class="sc">$</span>gamma<span class="sc">$</span>estimate[<span class="dv">1</span>], fits<span class="sc">$</span>gamma<span class="sc">$</span>estimate[<span class="dv">2</span>]), <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">"steelblue"</span>)</span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">dweibull</span>(x, fits<span class="sc">$</span>weibull<span class="sc">$</span>estimate[<span class="dv">1</span>], fits<span class="sc">$</span>weibull<span class="sc">$</span>estimate[<span class="dv">2</span>]), <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">"darkgreen"</span>)</span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>, <span class="at">bty =</span> <span class="st">"n"</span>, <span class="at">lwd =</span> <span class="dv">2</span>,</span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"grey60"</span>, <span class="st">"black"</span>, <span class="st">"firebrick"</span>, <span class="st">"steelblue"</span>, <span class="st">"darkgreen"</span>),</span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"empirical density"</span>, <span class="st">"normal"</span>, <span class="st">"log-normal"</span>, <span class="st">"gamma"</span>, <span class="st">"Weibull"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="QSBS_6_mixed_answers_files/figure-html/ex3c-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Four fitted distributions on top of the density histogram of home-range size.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The normal distribution is hopeless: it is symmetric, puts its maximum near the mean of 1.55 km² instead of near 0.6, and assigns substantial probability to <em>negative</em> home ranges. The gamma and the Weibull have the right general shape but both rise too slowly near zero and are too low at the peak: their mode is far too flat, and they cannot reproduce both the sharp peak below 1 km² and the long tail. The log-normal follows the empirical density closely over the whole range.</p>
+<p><strong>(d)</strong></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>ml <span class="ot">&lt;-</span> fits<span class="sc">$</span>lognormal<span class="sc">$</span>estimate</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">ecdf</span>(hr), <span class="at">verticals =</span> <span class="cn">TRUE</span>, <span class="at">pch =</span> <span class="st">""</span>, <span class="at">las =</span> <span class="dv">1</span>, <span class="at">main =</span> <span class="st">""</span>,</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"home range (km²)"</span>, <span class="at">ylab =</span> <span class="st">"cumulative probability"</span>)</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">plnorm</span>(x, ml[<span class="dv">1</span>], ml[<span class="dv">2</span>]), <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">col =</span> <span class="st">"firebrick"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="QSBS_6_mixed_answers_files/figure-html/ex3d-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Empirical cumulative distribution function of home-range size with the fitted log-normal cdf (red).</figcaption>
+</figure>
+</div>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>ks <span class="ot">&lt;-</span> <span class="fu">rbind</span>(</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">normal    =</span> <span class="fu">unlist</span>(<span class="fu">ks.test</span>(hr, <span class="st">"pnorm"</span>,    fits<span class="sc">$</span>normal<span class="sc">$</span>estimate[<span class="dv">1</span>],    fits<span class="sc">$</span>normal<span class="sc">$</span>estimate[<span class="dv">2</span>])[<span class="fu">c</span>(<span class="st">"statistic"</span>, <span class="st">"p.value"</span>)]),</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">lognormal =</span> <span class="fu">unlist</span>(<span class="fu">ks.test</span>(hr, <span class="st">"plnorm"</span>,   ml[<span class="dv">1</span>], ml[<span class="dv">2</span>])[<span class="fu">c</span>(<span class="st">"statistic"</span>, <span class="st">"p.value"</span>)]),</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">gamma     =</span> <span class="fu">unlist</span>(<span class="fu">ks.test</span>(hr, <span class="st">"pgamma"</span>,   fits<span class="sc">$</span>gamma<span class="sc">$</span>estimate[<span class="dv">1</span>],     fits<span class="sc">$</span>gamma<span class="sc">$</span>estimate[<span class="dv">2</span>])[<span class="fu">c</span>(<span class="st">"statistic"</span>, <span class="st">"p.value"</span>)]),</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">weibull   =</span> <span class="fu">unlist</span>(<span class="fu">ks.test</span>(hr, <span class="st">"pweibull"</span>, fits<span class="sc">$</span>weibull<span class="sc">$</span>estimate[<span class="dv">1</span>],   fits<span class="sc">$</span>weibull<span class="sc">$</span>estimate[<span class="dv">2</span>])[<span class="fu">c</span>(<span class="st">"statistic"</span>, <span class="st">"p.value"</span>)]))</span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(ks, <span class="dv">4</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>          statistic.D p.value
+normal         0.1996  0.0000
+lognormal      0.0280  0.9418
+gamma          0.0760  0.0315
+weibull        0.0728  0.0444</code></pre>
+</div>
+</div>
+<p>The fitted log-normal cdf runs through the ECDF almost everywhere. The KS tests agree with the AIC ranking: log-normal <span class="math inline">\(D = 0.028\)</span>, <span class="math inline">\(p = 0.94\)</span> (no evidence of any discrepancy), gamma <span class="math inline">\(D = 0.077\)</span>, <span class="math inline">\(p = 0.03\)</span> and Weibull <span class="math inline">\(D = 0.074\)</span>, <span class="math inline">\(p = 0.04\)</span> (both rejected at the 5 % level), normal <span class="math inline">\(D = 0.22\)</span>, <span class="math inline">\(p &lt; 10^{-15}\)</span>. Note that the KS test is <em>conservative</em> here because the parameters were estimated from the same data, so the p-values are if anything too large — which makes the rejection of the gamma and the Weibull all the more convincing.</p>
+<p><strong>(e)</strong></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">p_above_2   =</span> <span class="fu">plnorm</span>(<span class="dv">2</span>, ml[<span class="dv">1</span>], ml[<span class="dv">2</span>], <span class="at">lower.tail =</span> <span class="cn">FALSE</span>),</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">observed    =</span> <span class="fu">mean</span>(hr <span class="sc">&gt;</span> <span class="dv">2</span>),</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">median_fit  =</span> <span class="fu">qlnorm</span>(<span class="fl">0.5</span>, ml[<span class="dv">1</span>], ml[<span class="dv">2</span>]),</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">median_obs  =</span> <span class="fu">median</span>(hr),</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">q90_fit     =</span> <span class="fu">qlnorm</span>(<span class="fl">0.90</span>, ml[<span class="dv">1</span>], ml[<span class="dv">2</span>]),</span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">q90_obs     =</span> <span class="fu">unname</span>(<span class="fu">quantile</span>(hr, <span class="fl">0.90</span>)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code> p_above_2   observed median_fit median_obs    q90_fit    q90_obs 
+ 0.2298749  0.2311978  1.0160808  1.0519058  3.2867907  3.1523010 </code></pre>
+</div>
+</div>
+<p>The fitted log-normal gives <span class="math inline">\(P(\mathrm{hr} &gt; 2\ \mathrm{km}^2) = 0.230\)</span> against an observed proportion of 0.231; a median of 1.016 km² against an observed 1.052; and a 90 % quantile of 3.29 km² against an observed 3.15. All three agree closely — the fitted distribution reproduces the centre as well as the upper tail of the data.</p>
+<p><strong>(f)</strong></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">lognormal_mean   =</span> <span class="fu">exp</span>(ml[<span class="dv">1</span>] <span class="sc">+</span> ml[<span class="dv">2</span>]<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> <span class="dv">2</span>),</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">observed_mean    =</span> <span class="fu">mean</span>(hr),</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">lognormal_median =</span> <span class="fu">exp</span>(ml[<span class="dv">1</span>]),</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">observed_median  =</span> <span class="fu">median</span>(hr))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>  lognormal_mean.meanlog            observed_mean lognormal_median.meanlog 
+                1.545770                 1.548324                 1.016081 
+         observed_median 
+                1.051906 </code></pre>
+</div>
+</div>
+<p>The fitted mean is <span class="math inline">\(e^{0.016 + 0.916^2/2} = 1.546\)</span> km² (observed 1.548) and the fitted median <span class="math inline">\(e^{0.016} = 1.016\)</span> km² (observed 1.052). The mean is 50 % larger than the median because the distribution is right-skewed: exponentiating a symmetric distribution on the log scale stretches the upper half much more than the lower half, so a minority of very large home ranges pulls the mean away from the typical value. <code>exp(meanlog)</code> is the median, never the mean — a classic pitfall when back-transforming from a log scale.</p>
+</section>
+</section>
+<section id="exercise-4-a-generalised-linear-model" class="level1">
+<h1>Exercise 4 — A generalised linear model</h1>
+<ol type="a">
+<li>Distribution and link for a 0/1 response; the model in <span class="math inline">\(y \sim \mathrm{Dist}(\ldots)\)</span> notation.</li>
+<li>Fit and report the coefficients; on which scale?</li>
+<li>Back-transform: probability in forest at the road, odds ratio per 1000 m, odds ratio open vs forest.</li>
+<li>Predicted probabilities at 0, 1000 and 3000 m, by hand and with <code>predict()</code>.</li>
+<li>Fitted curves per habitat with 95 % confidence bands and a rug.</li>
+<li>Interaction model: <code>anova()</code> and AIC.</li>
+</ol>
+<section id="answer-3" class="level2">
+<h2 class="anchored" data-anchor-id="answer-3">Answer</h2>
+<p><strong>(a)</strong> A 0/1 response is a single Bernoulli trial, i.e.&nbsp;a binomial variable with <code>size = 1</code>. The canonical link is the <strong>logit</strong>, which maps the probability from <span class="math inline">\([0,1]\)</span> onto the whole real line so that the linear predictor can take any value:</p>
+<p><span class="math display">\[\mathrm{presence} \sim \mathrm{Bern}(p), \qquad \mathrm{logit}(p) = \ln\frac{p}{1-p} = a + b \cdot \mathrm{dist\_roads} + c \cdot [\mathrm{habitat} = \mathrm{open}].\]</span></p>
+<p><strong>(b)</strong></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>fe <span class="ot">&lt;-</span> <span class="fu">glm</span>(presence <span class="sc">~</span> dist_roads <span class="sc">+</span> habitat, <span class="at">family =</span> binomial, <span class="at">data =</span> elk_data)</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">summary</span>(fe)<span class="sc">$</span>coefficients, <span class="dv">6</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>             Estimate Std. Error   z value Pr(&gt;|z|)
+(Intercept) -0.686275   0.099293 -6.911638 0.000000
+dist_roads   0.000319   0.000040  8.021506 0.000000
+habitatopen  0.325652   0.092302  3.528100 0.000419</code></pre>
+</div>
+</div>
+<p>Intercept <span class="math inline">\(-0.686 \pm 0.099\)</span>, <code>dist_roads</code> <span class="math inline">\(0.000319 \pm 0.000040\)</span>, <code>habitatopen</code> <span class="math inline">\(0.326 \pm 0.092\)</span>; all three are highly significant. These numbers are on the <strong>link (logit) scale</strong>: they are changes in the log-odds of elk presence, not in the probability.</p>
+<p><strong>(c)</strong></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">p_forest_at_road =</span> <span class="fu">plogis</span>(<span class="fu">coef</span>(fe)[<span class="dv">1</span>]),</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">OR_per_1000m     =</span> <span class="fu">exp</span>(<span class="dv">1000</span> <span class="sc">*</span> <span class="fu">coef</span>(fe)[<span class="st">"dist_roads"</span>]),</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">OR_open_vs_forest =</span> <span class="fu">exp</span>(<span class="fu">coef</span>(fe)[<span class="st">"habitatopen"</span>]))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code> p_forest_at_road.(Intercept)       OR_per_1000m.dist_roads 
+                    0.3348622                     1.3760798 
+OR_open_vs_forest.habitatopen 
+                    1.3849330 </code></pre>
+</div>
+</div>
+<p><span class="math inline">\(\mathrm{plogis}(-0.686) = 0.33\)</span>: at the road itself, in forest, the fitted probability of elk presence is 33 %. Per 1000 m away from the nearest road the odds of presence are multiplied by <span class="math inline">\(e^{1000 \times 0.000319} = 1.38\)</span>, i.e.&nbsp;+38 % per kilometre. At a given distance the odds in open habitat are <span class="math inline">\(e^{0.326} = 1.38\)</span> times those in forest — coincidentally the same factor, so being in open habitat is worth about one kilometre from the road.</p>
+<p><strong>(d)</strong></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>eta <span class="ot">&lt;-</span> <span class="fu">coef</span>(fe)[<span class="dv">1</span>] <span class="sc">+</span> <span class="fu">coef</span>(fe)[<span class="st">"dist_roads"</span>] <span class="sc">*</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1000</span>, <span class="dv">3000</span>)</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>by_hand <span class="ot">&lt;-</span> <span class="fu">exp</span>(eta) <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">+</span> <span class="fu">exp</span>(eta))</span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>by_predict <span class="ot">&lt;-</span> <span class="fu">predict</span>(fe, <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">dist_roads =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1000</span>, <span class="dv">3000</span>), <span class="at">habitat =</span> <span class="st">"forest"</span>),</span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">type =</span> <span class="st">"response"</span>)</span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">rbind</span>(by_hand, by_predict), <span class="dv">4</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                1      2      3
+by_hand    0.3349 0.4093 0.5674
+by_predict 0.3349 0.4093 0.5674</code></pre>
+</div>
+</div>
+<p>0.335, 0.409 and 0.567 at 0, 1000 and 3000 m in forest. Note that the <em>same</em> 1000 m step changes the probability by 7.4 points between 0 and 1000 m but by 8 points between 2000 and 3000 m: the effect on the probability scale depends on where you are on the curve, whereas the effect on the odds scale is constant.</p>
+<p><strong>(e)</strong></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>dnew <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="fu">max</span>(elk_data<span class="sc">$</span>dist_roads), <span class="at">length =</span> <span class="dv">200</span>)</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>cols <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">forest =</span> <span class="st">"darkgreen"</span>, <span class="at">open =</span> <span class="st">"darkorange"</span>)</span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="cn">NA</span>, <span class="at">xlim =</span> <span class="fu">range</span>(dnew), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">las =</span> <span class="dv">1</span>,</span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"distance to nearest road (m)"</span>, <span class="at">ylab =</span> <span class="st">"P(elk present)"</span>)</span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (hb <span class="cf">in</span> <span class="fu">c</span>(<span class="st">"forest"</span>, <span class="st">"open"</span>)) {</span>
+<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a>  pr <span class="ot">&lt;-</span> <span class="fu">predict</span>(fe, <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">dist_roads =</span> dnew, <span class="at">habitat =</span> hb), <span class="at">se.fit =</span> <span class="cn">TRUE</span>)  <span class="co"># link scale</span></span>
+<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">matlines</span>(dnew, <span class="fu">plogis</span>(<span class="fu">cbind</span>(pr<span class="sc">$</span>fit, pr<span class="sc">$</span>fit <span class="sc">-</span> <span class="dv">2</span> <span class="sc">*</span> pr<span class="sc">$</span>se.fit, pr<span class="sc">$</span>fit <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> pr<span class="sc">$</span>se.fit)),</span>
+<span id="cb50-9"><a href="#cb50-9" aria-hidden="true" tabindex="-1"></a>           <span class="at">lty =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>), <span class="at">lwd =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>), <span class="at">col =</span> cols[hb])</span>
+<span id="cb50-10"><a href="#cb50-10" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb50-11"><a href="#cb50-11" aria-hidden="true" tabindex="-1"></a><span class="fu">rug</span>(elk_data<span class="sc">$</span>dist_roads[elk_data<span class="sc">$</span>presence <span class="sc">==</span> <span class="dv">1</span>], <span class="at">side =</span> <span class="dv">3</span>, <span class="at">col =</span> <span class="st">"grey40"</span>)</span>
+<span id="cb50-12"><a href="#cb50-12" aria-hidden="true" tabindex="-1"></a><span class="fu">rug</span>(elk_data<span class="sc">$</span>dist_roads[elk_data<span class="sc">$</span>presence <span class="sc">==</span> <span class="dv">0</span>], <span class="at">side =</span> <span class="dv">1</span>, <span class="at">col =</span> <span class="st">"grey40"</span>)</span>
+<span id="cb50-13"><a href="#cb50-13" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"bottomright"</span>, <span class="at">bty =</span> <span class="st">"n"</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">col =</span> cols, <span class="at">legend =</span> <span class="fu">names</span>(cols))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="QSBS_6_mixed_answers_files/figure-html/ex4e-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Fitted probability of elk presence against distance to the nearest road, for forest (green) and open habitat (orange), with 95 % confidence bands. The rug shows the observed distances for presences (top) and absences (bottom).</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The bands are narrow in the middle of the data (a few hundred to about 2500 m, where most observations are) and widen beyond 3000 m, where few locations were sampled. The two rugs show the mechanism directly: presences are on average farther from roads (1391 m) than absences (1174 m).</p>
+<p><strong>(f)</strong></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>fe2 <span class="ot">&lt;-</span> <span class="fu">glm</span>(presence <span class="sc">~</span> dist_roads <span class="sc">*</span> habitat, <span class="at">family =</span> binomial, <span class="at">data =</span> elk_data)</span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(fe, fe2, <span class="at">test =</span> <span class="st">"Chisq"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Deviance Table
+
+Model 1: presence ~ dist_roads + habitat
+Model 2: presence ~ dist_roads * habitat
+  Resid. Df Resid. Dev Df Deviance Pr(&gt;Chi)  
+1      3845     5255.5                       
+2      3844     5252.6  1   2.9503  0.08586 .
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(fe, fe2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>    df      AIC
+fe   3 5261.537
+fe2  4 5260.586</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">summary</span>(fe2)<span class="sc">$</span>coefficients, <span class="dv">6</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                        Estimate Std. Error   z value Pr(&gt;|z|)
+(Intercept)            -0.498568   0.146505 -3.403092 0.000666
+dist_roads              0.000172   0.000094  1.825534 0.067921
+habitatopen             0.097631   0.160782  0.607224 0.543702
+dist_roads:habitatopen  0.000179   0.000104  1.722556 0.084969</code></pre>
+</div>
+</div>
+<p>The interaction reduces the deviance by 2.95 on 1 df, <span class="math inline">\(p = 0.086\)</span> — not significant at the 5 % level — while the AIC drops marginally, from 5261.5 to 5260.6 (0.95 units). The two criteria point in slightly different directions, which is typical for a term that improves the fit by about 3 units of deviance: AIC keeps anything that gains more than 2, the likelihood-ratio test asks for about 3.84. A difference of 1 AIC unit is not substantial (the rule of thumb is 2), and the interaction coefficient is not significant, so I would report the <strong>additive model</strong>: the effect of distance to roads is estimated to be somewhat stronger in open habitat, but with 3848 observations the data still cannot establish that difference, and the simpler model is easier to interpret.</p>
+</section>
+</section>
+<section id="exercise-5-regression-diagnostics" class="level1">
+<h1>Exercise 5 — Regression diagnostics</h1>
+<ol type="a">
+<li>Binomial GLM of damage on species; back-transform the intercept; fitted versus mean per-plant proportions.</li>
+<li>Dispersion, both versions; over- or underdispersed, and why.</li>
+<li>Quasi-binomial refit; SE × <span class="math inline">\(\sqrt{\hat\phi}\)</span>; p-value of <code>SpeciesSV</code>.</li>
+<li>Cook’s distance and the most influential plant.</li>
+<li>Residuals against the linear predictor and against <code>Location</code>; extend the model.</li>
+<li>The diagnostic paragraph.</li>
+</ol>
+<section id="answer-4" class="level2">
+<h2 class="anchored" data-anchor-id="answer-4">Answer</h2>
+<p><strong>(a)</strong></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>ph <span class="ot">&lt;-</span> plantherb[plantherb<span class="sc">$</span>Dissected <span class="sc">&gt;</span> <span class="dv">0</span>, ]</span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>fp <span class="ot">&lt;-</span> <span class="fu">glm</span>(<span class="fu">cbind</span>(Damaged, Dissected <span class="sc">-</span> Damaged) <span class="sc">~</span> Species, <span class="at">family =</span> binomial, <span class="at">data =</span> ph)</span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">summary</span>(fp)<span class="sc">$</span>coefficients, <span class="dv">4</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>            Estimate Std. Error  z value Pr(&gt;|z|)
+(Intercept)  -1.9572     0.0297 -65.8291        0
+SpeciesSL     1.9337     0.0468  41.2828        0
+SpeciesSP    -3.1284     0.0563 -55.5564        0
+SpeciesSV     0.4993     0.0645   7.7472        0</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>fitted_props <span class="ot">&lt;-</span> <span class="fu">plogis</span>(<span class="fu">c</span>(<span class="at">SI =</span> <span class="fu">coef</span>(fp)[<span class="dv">1</span>], <span class="fu">coef</span>(fp)[<span class="dv">1</span>] <span class="sc">+</span> <span class="fu">coef</span>(fp)[<span class="sc">-</span><span class="dv">1</span>]))</span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(fitted_props) <span class="ot">&lt;-</span> <span class="fu">levels</span>(<span class="fu">factor</span>(ph<span class="sc">$</span>Species))</span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">rbind</span>(<span class="at">fitted_by_model =</span> fitted_props,</span>
+<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_of_per_plant_proportions =</span> <span class="fu">tapply</span>(ph<span class="sc">$</span>Damaged <span class="sc">/</span> ph<span class="sc">$</span>Dissected, ph<span class="sc">$</span>Species, mean),</span>
+<span id="cb59-5"><a href="#cb59-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">pooled =</span> <span class="fu">tapply</span>(ph<span class="sc">$</span>Damaged, ph<span class="sc">$</span>Species, sum) <span class="sc">/</span> <span class="fu">tapply</span>(ph<span class="sc">$</span>Dissected, ph<span class="sc">$</span>Species, sum)), <span class="dv">4</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                                  SI     SL     SP     SV
+fitted_by_model               0.1238 0.4941 0.0061 0.1888
+mean_of_per_plant_proportions 0.1304 0.3606 0.0230 0.0472
+pooled                        0.1238 0.4941 0.0061 0.1888</code></pre>
+</div>
+</div>
+<p><code>plogis(-1.957) = 0.124</code>: in the reference species SI, 12.4 % of the dissected flower heads were damaged. The fitted proportions are 0.124 (SI), 0.494 (SL), 0.006 (SP) and 0.189 (SV).</p>
+<p>They differ from the average of the per-plant proportions (0.130, 0.361, 0.023, 0.047) because a binomial GLM weights each plant by the number of heads dissected: the model estimates the <strong>pooled</strong> proportion (total damaged / total dissected per species), which the third row of the table reproduces exactly. A plant with 9856 dissected heads counts thousands of times more heavily than a plant with one head, whereas the mean of the per-plant proportions gives every plant the same weight. For SV the difference is dramatic (0.189 vs 0.047): a few large, heavily damaged plants dominate the pooled proportion. Which of the two is the quantity of interest is a biological question — “what fraction of heads is damaged” (pooled) is not the same as “what fraction of its heads does a typical plant lose” (per-plant average).</p>
+<p><strong>(b)</strong></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">deviance_ratio =</span> <span class="fu">deviance</span>(fp) <span class="sc">/</span> <span class="fu">df.residual</span>(fp),</span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">pearson_ratio  =</span> <span class="fu">sum</span>(<span class="fu">residuals</span>(fp, <span class="at">type =</span> <span class="st">"pearson"</span>)<span class="sc">^</span><span class="dv">2</span>) <span class="sc">/</span> <span class="fu">df.residual</span>(fp))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>deviance_ratio  pearson_ratio 
+      15.06763       67.23799 </code></pre>
+</div>
+</div>
+<p>Deviance / df = 15.1 and Pearson <span class="math inline">\(\chi^2\)</span> / df = 67.2, both enormously above 1: the data are <strong>massively overdispersed</strong> (the two versions differ a lot because a few plants with huge counts dominate the Pearson statistic).</p>
+<p>Biologically this is exactly what one expects. The heads of one plant are not independent trials with a species-wide probability: a plant that is found by a herbivore loses many heads, a plant that is not found loses none. Plants also differ in size, phenology, position and exposure, and they sit in six locations with different herbivore densities. All of this extra-binomial variation between plants inflates the variance far beyond <span class="math inline">\(np(1-p)\)</span>.</p>
+<p><strong>(c)</strong></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>fq <span class="ot">&lt;-</span> <span class="fu">update</span>(fp, <span class="at">family =</span> quasibinomial)</span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>phi <span class="ot">&lt;-</span> <span class="fu">summary</span>(fq)<span class="sc">$</span>dispersion</span>
+<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a>phi</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 67.23825</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rbind</span>(<span class="at">binomial_se =</span> <span class="fu">summary</span>(fp)<span class="sc">$</span>coefficients[, <span class="dv">2</span>],</span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>      <span class="at">binomial_se_x_sqrt_phi =</span> <span class="fu">summary</span>(fp)<span class="sc">$</span>coefficients[, <span class="dv">2</span>] <span class="sc">*</span> <span class="fu">sqrt</span>(phi),</span>
+<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">quasibinomial_se =</span> <span class="fu">summary</span>(fq)<span class="sc">$</span>coefficients[, <span class="dv">2</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                       (Intercept)  SpeciesSL  SpeciesSP  SpeciesSV
+binomial_se             0.02973218 0.04683954 0.05630965 0.06445003
+binomial_se_x_sqrt_phi  0.24380070 0.38407920 0.46173315 0.52848337
+quasibinomial_se        0.24380070 0.38407920 0.46173315 0.52848337</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">summary</span>(fq)<span class="sc">$</span>coefficients, <span class="dv">4</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>            Estimate Std. Error t value Pr(&gt;|t|)
+(Intercept)  -1.9572     0.2438 -8.0280   0.0000
+SpeciesSL     1.9337     0.3841  5.0346   0.0000
+SpeciesSP    -3.1284     0.4617 -6.7753   0.0000
+SpeciesSV     0.4993     0.5285  0.9448   0.3453</code></pre>
+</div>
+</div>
+<p><span class="math inline">\(\hat\phi = 67.2\)</span> (the Pearson ratio), so all standard errors are multiplied by <span class="math inline">\(\sqrt{67.2} = 8.2\)</span> — the middle and bottom rows of the table are identical. The estimates and the fitted curve are unchanged.</p>
+<p>The consequence for <code>SpeciesSV</code> is decisive: in the binomial model the contrast is <span class="math inline">\(0.499 \pm 0.064\)</span>, <span class="math inline">\(z = 7.7\)</span>, <span class="math inline">\(p = 9 \times 10^{-15}\)</span>; in the quasi-binomial model it is <span class="math inline">\(0.499 \pm 0.528\)</span>, <span class="math inline">\(t = 0.94\)</span>, <span class="math inline">\(p = 0.35\)</span>. What looked like an overwhelmingly significant difference between SV and SI is not supported once the between-plant variation is accounted for. (SL and SP remain highly significant, <span class="math inline">\(p &lt; 10^{-6}\)</span>.) The quasi-binomial model is the one to report; the binomial p-values are meaningless here.</p>
+<p><strong>(d)</strong></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>cd <span class="ot">&lt;-</span> <span class="fu">cooks.distance</span>(fp)</span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(cd, <span class="at">type =</span> <span class="st">"h"</span>, <span class="at">lwd =</span> <span class="dv">1</span>, <span class="at">las =</span> <span class="dv">1</span>, <span class="at">xlab =</span> <span class="st">"plant (row number)"</span>, <span class="at">ylab =</span> <span class="st">"Cook's distance"</span>)</span>
+<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">1</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="QSBS_6_mixed_answers_files/figure-html/ex5d-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Cook’s distance for the binomial model of herbivore damage.</figcaption>
+</figure>
+</div>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>i <span class="ot">&lt;-</span> <span class="fu">which.max</span>(cd)</span>
+<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">row =</span> i, <span class="at">cooks =</span> cd[i], <span class="at">n_above_1 =</span> <span class="fu">sum</span>(cd <span class="sc">&gt;</span> <span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>  row.307 cooks.307 n_above_1 
+297.00000  29.95955  12.00000 </code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>ph[i, ]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>    Subject Location Species Damaged Dissected Total_heads
+307    SP11       FM      SP     230       366         366</code></pre>
+</div>
+</div>
+<p>Twelve plants have a Cook’s distance above 1; the most influential is row 307 (subject SP11, location FM, species SP), with <span class="math inline">\(D = 30\)</span>. The reason is the combination of an extreme weight and an extreme residual: this plant had <strong>366 heads dissected</strong> while the model, driven by the other SP plants, predicts a damage probability of only 0.006 for that species — yet 230 of its 366 heads (63 %) were damaged. In a binomial GLM the weight of an observation is its number of trials, so a plant with 366 heads and a proportion 100 times higher than expected single-handedly pulls the SP estimate. This is the same overdispersion of (b) seen from the other side.</p>
+<p><strong>(e)</strong></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a>rSD <span class="ot">&lt;-</span> <span class="fu">rstandard</span>(fq)</span>
+<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a>eta <span class="ot">&lt;-</span> <span class="fu">predict</span>(fq, <span class="at">type =</span> <span class="st">"link"</span>)</span>
+<span id="cb74-3"><a href="#cb74-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-4"><a href="#cb74-4" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb74-5"><a href="#cb74-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(eta, rSD, <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">col =</span> <span class="st">"grey40"</span>, <span class="at">las =</span> <span class="dv">1</span>,</span>
+<span id="cb74-6"><a href="#cb74-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="fu">expression</span>(<span class="fu">hat</span>(eta)), <span class="at">ylab =</span> <span class="st">"standardised deviance residual"</span>)</span>
+<span id="cb74-7"><a href="#cb74-7" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">0</span>, <span class="at">lty =</span> <span class="dv">3</span>); <span class="fu">lines</span>(<span class="fu">lowess</span>(eta, rSD), <span class="at">col =</span> <span class="st">"firebrick"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb74-8"><a href="#cb74-8" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(rSD <span class="sc">~</span> ph<span class="sc">$</span>Location, <span class="at">las =</span> <span class="dv">1</span>, <span class="at">xlab =</span> <span class="st">"location"</span>, <span class="at">ylab =</span> <span class="st">"standardised deviance residual"</span>)</span>
+<span id="cb74-9"><a href="#cb74-9" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">0</span>, <span class="at">lty =</span> <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="QSBS_6_mixed_answers_files/figure-html/ex5e-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Standardised deviance residuals of the quasi-binomial model against the linear predictor (left) and per location (right).</figcaption>
+</figure>
+</div>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-3"><a href="#cb75-3" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">tapply</span>(rSD, ph<span class="sc">$</span>Location, mean), <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>   CB    CP    CT    FM    SS    VF 
+ 0.02 -0.10 -0.01  0.19 -0.19  0.13 </code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a>fq2 <span class="ot">&lt;-</span> <span class="fu">glm</span>(<span class="fu">cbind</span>(Damaged, Dissected <span class="sc">-</span> Damaged) <span class="sc">~</span> Species <span class="sc">+</span> Location, <span class="at">family =</span> quasibinomial, <span class="at">data =</span> ph)</span>
+<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(fq, fq2, <span class="at">test =</span> <span class="st">"F"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Deviance Table
+
+Model 1: cbind(Damaged, Dissected - Damaged) ~ Species
+Model 2: cbind(Damaged, Dissected - Damaged) ~ Species + Location
+  Resid. Df Resid. Dev Df Deviance      F   Pr(&gt;F)   
+1       458     6901.0                               
+2       453     6140.4  5   760.62 3.6727 0.002872 **
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">dispersion_species_only =</span> <span class="fu">deviance</span>(fq) <span class="sc">/</span> <span class="fu">df.residual</span>(fq),</span>
+<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">dispersion_with_location =</span> <span class="fu">deviance</span>(fq2) <span class="sc">/</span> <span class="fu">df.residual</span>(fq2))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code> dispersion_species_only dispersion_with_location 
+                15.06763                 13.55488 </code></pre>
+</div>
+</div>
+<p>Against the linear predictor the residuals form a wide but fairly structureless cloud — there is no obvious curvature, only the huge spread that the quasi-likelihood has already absorbed. Against <code>Location</code> there is a systematic pattern: the mean residual is +0.19 at FM and +0.13 at VF but −0.19 at SS and −0.10 at CP, i.e.&nbsp;plants at some locations are damaged consistently more than the species effect predicts.</p>
+<p>Adding <code>Location</code> confirms this: <span class="math inline">\(F = 3.67\)</span> on 5 and 453 df, <span class="math inline">\(p = 0.003\)</span>, and the deviance ratio falls from 15.1 to 13.6. So part of what looked like pure overdispersion is in fact a missing predictor — the classic interaction between the diagnostic steps (Dormann Sect. 9.1). The dispersion remains far above 1, however, so the quasi-likelihood correction is still needed even after adding <code>Location</code>; between-plant variation within a location remains large.</p>
+<p><strong>(f)</strong> A possible methods paragraph:</p>
+<blockquote class="blockquote">
+<p>“The proportion of damaged flower heads was modelled with a binomial GLM with logit link. The data were strongly overdispersed (Pearson <span class="math inline">\(\chi^2\)</span>/df = 67), so all inference is based on a quasi-binomial model, in which the standard errors are multiplied by <span class="math inline">\(\sqrt{\hat\phi} = 8.2\)</span>; this changed the conclusion for one of the three species contrasts. Adding sampling location improved the model (<span class="math inline">\(F_{5,453} = 3.67\)</span>, <span class="math inline">\(p = 0.003\)</span>) and reduced the dispersion, indicating that part of the extra variation is between locations. Twelve plants had a Cook’s distance above 1, all of them plants with an unusually large number of dissected heads; the results did not change qualitatively when they were omitted, and all plants were retained.”</p>
+</blockquote>
+</section>
+</section>
+<section id="exercise-6-multiple-regression-with-two-categorical-predictors" class="level1">
+<h1>Exercise 6 — Multiple regression with two categorical predictors</h1>
+<ol type="a">
+<li>Table of the six group means and a figure.</li>
+<li>Additive and interaction model; coefficients; reference group.</li>
+<li>Reconstruct the six fitted means; how many parameters?</li>
+<li>Is the interaction needed? <code>anova()</code>, AIC, degrees of freedom, interpretation.</li>
+<li>Why is the <code>DayNightNight</code> coefficient positive?</li>
+<li>Add <code>Sex</code>.</li>
+</ol>
+<section id="answer-5" class="level2">
+<h2 class="anchored" data-anchor-id="answer-5">Answer</h2>
+<p><strong>(a)</strong></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a>bearmove<span class="sc">$</span>Season <span class="ot">&lt;-</span> <span class="fu">factor</span>(bearmove<span class="sc">$</span>Season, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Spring"</span>, <span class="st">"Summer"</span>, <span class="st">"Fall"</span>))</span>
+<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a>m  <span class="ot">&lt;-</span> <span class="fu">tapply</span>(bearmove<span class="sc">$</span>log.move, <span class="fu">list</span>(bearmove<span class="sc">$</span>Season, bearmove<span class="sc">$</span>DayNight), mean)</span>
+<span id="cb81-3"><a href="#cb81-3" aria-hidden="true" tabindex="-1"></a>se <span class="ot">&lt;-</span> <span class="fu">tapply</span>(bearmove<span class="sc">$</span>log.move, <span class="fu">list</span>(bearmove<span class="sc">$</span>Season, bearmove<span class="sc">$</span>DayNight),</span>
+<span id="cb81-4"><a href="#cb81-4" aria-hidden="true" tabindex="-1"></a>             <span class="cf">function</span>(x) <span class="fu">sd</span>(x) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="fu">length</span>(x)))</span>
+<span id="cb81-5"><a href="#cb81-5" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(m, <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>         Day Night
+Spring 3.862 2.738
+Summer 4.931 2.879
+Fall   4.123 4.528</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(bearmove<span class="sc">$</span>Season, bearmove<span class="sc">$</span>DayNight)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>        
+         Day Night
+  Spring 620   541
+  Summer 474   441
+  Fall   361   331</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a>cols <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">Day =</span> <span class="st">"darkorange"</span>, <span class="at">Night =</span> <span class="st">"navy"</span>)</span>
+<span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb85-3"><a href="#cb85-3" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(log.move <span class="sc">~</span> DayNight <span class="sc">+</span> Season, <span class="at">data =</span> bearmove, <span class="at">las =</span> <span class="dv">2</span>, <span class="at">col =</span> cols,</span>
+<span id="cb85-4"><a href="#cb85-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab =</span> <span class="st">""</span>, <span class="at">ylab =</span> <span class="st">"log(daily movement)"</span>, <span class="at">cex.axis =</span> <span class="fl">0.8</span>)</span>
+<span id="cb85-5"><a href="#cb85-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="cn">NA</span>, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="fl">0.8</span>, <span class="fl">3.2</span>), <span class="at">ylim =</span> <span class="fu">range</span>(m), <span class="at">xaxt =</span> <span class="st">"n"</span>, <span class="at">las =</span> <span class="dv">1</span>,</span>
+<span id="cb85-6"><a href="#cb85-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"season"</span>, <span class="at">ylab =</span> <span class="st">"mean log(daily movement)"</span>)</span>
+<span id="cb85-7"><a href="#cb85-7" aria-hidden="true" tabindex="-1"></a><span class="fu">axis</span>(<span class="dv">1</span>, <span class="at">at =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">labels =</span> <span class="fu">levels</span>(bearmove<span class="sc">$</span>Season))</span>
+<span id="cb85-8"><a href="#cb85-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (dn <span class="cf">in</span> <span class="fu">c</span>(<span class="st">"Day"</span>, <span class="st">"Night"</span>)) {</span>
+<span id="cb85-9"><a href="#cb85-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lines</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, m[, dn], <span class="at">type =</span> <span class="st">"b"</span>, <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">col =</span> cols[dn])</span>
+<span id="cb85-10"><a href="#cb85-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrows</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, m[, dn] <span class="sc">-</span> se[, dn], <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, m[, dn] <span class="sc">+</span> se[, dn], <span class="at">angle =</span> <span class="dv">90</span>, <span class="at">code =</span> <span class="dv">3</span>,</span>
+<span id="cb85-11"><a href="#cb85-11" aria-hidden="true" tabindex="-1"></a>         <span class="at">length =</span> <span class="fl">0.05</span>, <span class="at">col =</span> cols[dn])</span>
+<span id="cb85-12"><a href="#cb85-12" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb85-13"><a href="#cb85-13" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topleft"</span>, <span class="at">bty =</span> <span class="st">"n"</span>, <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">col =</span> cols, <span class="at">legend =</span> <span class="fu">names</span>(cols))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="QSBS_6_mixed_answers_files/figure-html/ex6a-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Daily movement distance of black bears (log scale) by season and time of day. Left: boxplots per combination. Right: interaction plot of the six group means ± 1 standard error.</figcaption>
+</figure>
+</div>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>The six means are 3.86 (Spring day), 2.74 (Spring night), 4.93 (Summer day), 2.88 (Summer night), 4.12 (Fall day) and 4.53 (Fall night). In spring and summer bears move much less at night than during the day (a difference of 1.1 and 2.1 units on the log scale), but in autumn the pattern <em>reverses</em>: they move slightly more at night. In the interaction plot the two lines are clearly not parallel — they even cross between summer and autumn. That is the visual signature of an interaction.</p>
+<p><strong>(b)</strong></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a>fb_add <span class="ot">&lt;-</span> <span class="fu">lm</span>(log.move <span class="sc">~</span> Season <span class="sc">+</span> DayNight, <span class="at">data =</span> bearmove)</span>
+<span id="cb87-2"><a href="#cb87-2" aria-hidden="true" tabindex="-1"></a>fb_int <span class="ot">&lt;-</span> <span class="fu">lm</span>(log.move <span class="sc">~</span> Season <span class="sc">*</span> DayNight, <span class="at">data =</span> bearmove)</span>
+<span id="cb87-3"><a href="#cb87-3" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">summary</span>(fb_int)<span class="sc">$</span>coefficients, <span class="dv">4</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                           Estimate Std. Error  t value Pr(&gt;|t|)
+(Intercept)                  3.8620     0.0752  51.3696   0.0000
+SeasonSummer                 1.0685     0.1142   9.3552   0.0000
+SeasonFall                   0.2605     0.1239   2.1018   0.0357
+DayNightNight               -1.1243     0.1101 -10.2087   0.0000
+SeasonSummer:DayNightNight  -0.9268     0.1657  -5.5918   0.0000
+SeasonFall:DayNightNight     1.5302     0.1801   8.4982   0.0000</code></pre>
+</div>
+</div>
+<p>The reference group is <strong>Spring, Day</strong>: <code>Season</code> was releveled with Spring first and <code>DayNight</code> has Day as its first level, so the intercept (3.86) is the mean log movement of a spring day. (With the original alphabetical ordering the reference would have been Fall/Day; the fit is identical, only the labels of the contrasts change.)</p>
+<p><strong>(c)</strong></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb89"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a>cf <span class="ot">&lt;-</span> <span class="fu">unname</span>(<span class="fu">coef</span>(fb_int)); <span class="fu">names</span>(cf) <span class="ot">&lt;-</span> <span class="fu">names</span>(<span class="fu">coef</span>(fb_int))</span>
+<span id="cb89-2"><a href="#cb89-2" aria-hidden="true" tabindex="-1"></a>reconstructed <span class="ot">&lt;-</span> <span class="fu">rbind</span>(</span>
+<span id="cb89-3"><a href="#cb89-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Day   =</span> <span class="fu">c</span>(<span class="at">Spring =</span> cf[<span class="dv">1</span>], <span class="at">Summer =</span> cf[<span class="dv">1</span>] <span class="sc">+</span> cf[<span class="st">"SeasonSummer"</span>], <span class="at">Fall =</span> cf[<span class="dv">1</span>] <span class="sc">+</span> cf[<span class="st">"SeasonFall"</span>]),</span>
+<span id="cb89-4"><a href="#cb89-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">Night =</span> <span class="fu">c</span>(<span class="at">Spring =</span> cf[<span class="dv">1</span>] <span class="sc">+</span> cf[<span class="st">"DayNightNight"</span>],</span>
+<span id="cb89-5"><a href="#cb89-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">Summer =</span> cf[<span class="dv">1</span>] <span class="sc">+</span> cf[<span class="st">"SeasonSummer"</span>] <span class="sc">+</span> cf[<span class="st">"DayNightNight"</span>] <span class="sc">+</span> cf[<span class="st">"SeasonSummer:DayNightNight"</span>],</span>
+<span id="cb89-6"><a href="#cb89-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">Fall   =</span> cf[<span class="dv">1</span>] <span class="sc">+</span> cf[<span class="st">"SeasonFall"</span>]   <span class="sc">+</span> cf[<span class="st">"DayNightNight"</span>] <span class="sc">+</span> cf[<span class="st">"SeasonFall:DayNightNight"</span>]))</span>
+<span id="cb89-7"><a href="#cb89-7" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">t</span>(reconstructed), <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                     Day Night
+Spring.(Intercept) 3.862 2.738
+Summer.(Intercept) 4.931 2.879
+Fall.(Intercept)   4.123 4.528</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb91"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(m, <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>         Day Night
+Spring 3.862 2.738
+Summer 4.931 2.879
+Fall   4.123 4.528</code></pre>
+</div>
+</div>
+<p>The reconstructed values reproduce the six group means exactly. The interaction model uses six parameters (intercept + 2 season contrasts + 1 day/night contrast + 2 interaction terms) for six group means, so it is the <em>saturated</em> model for this design: it can reproduce any set of six means. The additive model uses only four and forces the day–night difference to be the same in all seasons.</p>
+<p><strong>(d)</strong></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb93"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(fb_add, fb_int)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Variance Table
+
+Model 1: log.move ~ Season + DayNight
+Model 2: log.move ~ Season * DayNight
+  Res.Df     RSS Df Sum of Sq      F    Pr(&gt;F)    
+1   2764 10275.7                                  
+2   2762  9679.1  2    596.58 85.119 &lt; 2.2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb95"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(fb_add, fb_int)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>       df      AIC
+fb_add  5 11495.91
+fb_int  7 11334.35</code></pre>
+</div>
+</div>
+<p>Yes, emphatically. The interaction reduces the residual sum of squares by 597 (<span class="math inline">\(F = 85.1\)</span> on 2 and 2762 df, <span class="math inline">\(p &lt; 2 \times 10^{-16}\)</span>) and the AIC by 162 units (11496 → 11334). The test has <strong>2 degrees of freedom</strong> because a factor with three levels crossed with a factor with two levels adds two interaction coefficients (one per non-reference season); <code>anova()</code> tests them jointly, which is the correct way to ask whether “the interaction” is needed.</p>
+<p>In words: the effect of time of day depends strongly on the season. In spring bears move about 1.1 units (on the log scale) less at night than by day and in summer about 2.1 units less, but in autumn they move 0.4 units <em>more</em> at night. Equivalently, the seasonal pattern differs between day and night: by day movement peaks in summer, by night it peaks in autumn — consistent with bears foraging at night during the autumn hyperphagia before hibernation.</p>
+<p><strong>(e)</strong> In the interaction model <code>DayNightNight</code> is <strong>not</strong> the average night effect. It is the day–night difference <em>in the reference season only</em>, i.e.&nbsp;in Spring… but note that the sign here depends on the reference level: with Spring as reference the coefficient is <span class="math inline">\(-1.12\)</span> (negative, as expected), while with the original Fall reference it is <span class="math inline">\(+0.41\)</span>, the day–night difference in <em>autumn</em>, the one season in which bears move more at night.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb97"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">coef</span>(<span class="fu">lm</span>(log.move <span class="sc">~</span> <span class="fu">relevel</span>(Season, <span class="st">"Fall"</span>) <span class="sc">*</span> DayNight, <span class="at">data =</span> bearmove)), <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                                (Intercept) 
+                                      4.123 
+              relevel(Season, "Fall")Spring 
+                                     -0.260 
+              relevel(Season, "Fall")Summer 
+                                      0.808 
+                              DayNightNight 
+                                      0.406 
+relevel(Season, "Fall")Spring:DayNightNight 
+                                     -1.530 
+relevel(Season, "Fall")Summer:DayNightNight 
+                                     -2.457 </code></pre>
+</div>
+</div>
+<p>So a positive <code>DayNightNight</code> coefficient is not a contradiction: it describes a single season, not the overall pattern. A main effect in the presence of an interaction is always a <em>conditional</em> effect at the reference level of the other factor, and a statement about “the” night effect is simply not available from one coefficient — you need all six group means, or the figure from (a).</p>
+<p><strong>(f)</strong></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb99"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a>fb_sex <span class="ot">&lt;-</span> <span class="fu">lm</span>(log.move <span class="sc">~</span> Season <span class="sc">*</span> DayNight <span class="sc">+</span> Sex, <span class="at">data =</span> bearmove)</span>
+<span id="cb99-2"><a href="#cb99-2" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(fb_int, fb_sex)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Variance Table
+
+Model 1: log.move ~ Season * DayNight
+Model 2: log.move ~ Season * DayNight + Sex
+  Res.Df    RSS Df Sum of Sq      F    Pr(&gt;F)    
+1   2762 9679.1                                  
+2   2761 9222.3  1    456.77 136.75 &lt; 2.2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb101"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(fb_int, fb_sex)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>       df      AIC
+fb_int  7 11334.35
+fb_sex  8 11202.54</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb103"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb103-1"><a href="#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">cbind</span>(<span class="at">without_Sex =</span> <span class="fu">c</span>(<span class="fu">coef</span>(fb_int), <span class="at">Sex =</span> <span class="cn">NA</span>), <span class="at">with_Sex =</span> <span class="fu">coef</span>(fb_sex)[<span class="fu">names</span>(<span class="fu">c</span>(<span class="fu">coef</span>(fb_int), <span class="at">SexM =</span> <span class="dv">0</span>))]), <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                           without_Sex with_Sex
+(Intercept)                      3.862    3.442
+SeasonSummer                     1.069    1.137
+SeasonFall                       0.260    0.377
+DayNightNight                   -1.124   -1.100
+SeasonSummer:DayNightNight      -0.927   -0.927
+SeasonFall:DayNightNight         1.530    1.504
+Sex                                 NA    0.824</code></pre>
+</div>
+</div>
+<p><code>Sex</code> matters a great deal: adding it reduces the residual sum of squares by 457 (<span class="math inline">\(F = 136.8\)</span> on 1 and 2761 df, <span class="math inline">\(p &lt; 2 \times 10^{-16}\)</span>) and the AIC by 135 units. Males move considerably more than females (<span class="math inline">\(+0.82\)</span> on the log scale, i.e.&nbsp;a factor <span class="math inline">\(e^{0.82} = 2.3\)</span> in distance).</p>
+<p>The interaction coefficients barely change when <code>Sex</code> enters the model (<span class="math inline">\(-0.927 \to -0.927\)</span> and <span class="math inline">\(+1.530 \to +1.504\)</span>), and the day/night contrast moves only slightly (<span class="math inline">\(-1.124 \to -1.100\)</span>); only the intercept drops, because it now refers to a female bear. That tells us that <code>Sex</code> is close to <em>orthogonal</em> to the other two predictors: males and females are distributed over seasons and over day/night in nearly the same proportions, so the sex effect and the season × day/night pattern estimate different, non-overlapping parts of the variation. Had the design been unbalanced — for instance if the night observations had come mostly from males — the interaction coefficients would have shifted substantially when <code>Sex</code> was added, as in the grazing/root-size example of Practical 5.</p>
+<p>A caveat worth stating: the 2768 observations come from only seven bears, so the measurements are not independent (repeated measures on the same individual). The p-values above are therefore far too optimistic; a proper analysis would use a mixed model with bear identity as a random effect, which is beyond this course.</p>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
